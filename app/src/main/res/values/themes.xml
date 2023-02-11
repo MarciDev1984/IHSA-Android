@@ -30,19 +30,19 @@
     </style>
 
     <!--Custom Style For Buttons-->
-    <style name="buttonCustom" parent="Widget.Material3.Button">
+    <style name="buttonCustom" parent="Widget.Material3.Button.ElevatedButton">
         <!--Text Attributes-->
-        <item name="android:text"></item>
+        <!--<item name="android:text">Button</item>-->
         <item name="android:textColor">@color/red_main</item>
-        <item name="android:textAppearance">@style/TA_button</item>
+        <!--<item name="android:textAppearance">@style/TA_button</item>-->
 
         <!--Container Attributes-->
-        <item name="backgroundTint">@color/transparent</item>
+        <item name="backgroundTint">@color/white</item>
         <item name="strokeColor">@color/red_main</item>
-        <item name="strokeWidth">1dp</item>
+        <item name="strokeWidth">2dp</item>
         <item name="shapeAppearance">@style/smallShapeAppearance</item>
-        <item name="elevation">1dp</item>
-        <item name="rippleColor">@color/blue_light</item>
+        <item name="elevation">50dp</item>
+        <item name="rippleColor">@color/red_light</item>
 
         <!--Icon Attributes-->
         <item name="icon">@drawable/button_icon</item>

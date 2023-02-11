@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private showAdapter showServer;
 
     @Override
@@ -24,6 +23,5 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager myManager = new LinearLayoutManager(this);
         showRecycler.setLayoutManager(myManager);
-
     }
 }

@@ -62,7 +62,5 @@ public class MainActivity extends AppCompatActivity {
                         return detector.onTouchEvent(e);
                     }
                 });
-
-
     }
 }

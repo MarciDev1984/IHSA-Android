@@ -1,10 +1,16 @@
 package com.example.ihsastable;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity
@@ -12,6 +18,7 @@ public class MainActivity extends AppCompatActivity
     //Vars for ViewPager
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
+    private MaterialToolbar materialToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,6 +57,18 @@ public class MainActivity extends AppCompatActivity
             {
                 super.onPageSelected(position);
                 tabLayout.getTabAt(position).select();
+            }
+        });
+
+        //AppBarLayout code
+        materialToolbar = findViewById(R.id.mt);
+        materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
+        {
+            @Override
+            public boolean onMenuItemClick(MenuItem item)
+            {
+                Log.d("TAG", "DATA");
+                return false;
             }
         });
     }

@@ -40,29 +40,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener {
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            RecyclerView showRV = findViewById(R.id.showsRV);
-            View view = showRV.findChildViewUnder(e.getX(), e.getY());
-            Log.d("click", "click happened");
-
-            if (view != null) {
-                RecyclerView.ViewHolder holder = showRV.getChildViewHolder(view);
-
-                if (holder instanceof showAdapter.showViewHolder) {
-                    int position = holder.getAdapterPosition();
-
-                    Log.d("click", "single tap clicked on item " + position);
-                    //Intent goToNextActivity = new Intent(getApplicationContext(), testActivity.class);
-                    //startActivity(goToNextActivity);
-                    Log.d("click", "Going to show");
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
     private showAdapter showServer;
 
     @Override

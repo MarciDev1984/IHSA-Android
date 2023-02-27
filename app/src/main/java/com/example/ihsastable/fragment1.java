@@ -1,5 +1,6 @@
 package com.example.ihsastable;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.view.GestureDetectorCompat;
@@ -49,6 +50,12 @@ public class fragment1 extends Fragment
         return view;
     }
 
+    public void openSchedule(int pos){
+        Intent opSched = new Intent(view.getContext(), scheduleActivity.class);
+        opSched.putExtra("POS", String.valueOf(pos + 1));
+        startActivity(opSched);
+    }
+
     //This class handles taps on the recycler view items
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
@@ -66,8 +73,7 @@ public class fragment1 extends Fragment
                 {
                     int position = holder.getAdapterPosition();
                     Log.d("click", "single tap clicked on item " + position);
-                    //Intent goToNextActivity = new Intent(getApplicationContext(), testActivity.class);
-                    //startActivity(goToNextActivity);
+                    openSchedule(position);
                     Log.d("click", "Going to show");
                     return true;
                 }

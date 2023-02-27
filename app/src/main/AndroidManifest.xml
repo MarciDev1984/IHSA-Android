@@ -12,6 +12,12 @@
         android:theme="@style/Theme.IHSAStable"
         tools:targetApi="31">
         <activity
+            android:name=".scheduleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_schedule"
+            android:theme="@style/Theme.IHSAStable.Fullscreen" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

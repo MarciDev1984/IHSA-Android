@@ -30,7 +30,7 @@ public class fragment1 extends Fragment
         view = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
         //Recycler view default code (Very fragile)
-        showServer = new showAdapter();
+        showServer = new showAdapter(0);
         RecyclerView showRecycler = view.findViewById(R.id.showsRV);
         showRecycler.setAdapter(showServer);
 

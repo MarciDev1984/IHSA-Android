@@ -18,10 +18,13 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
         }
     }
 
-    private showModel model = showModel.getSingleton();
-    public showAdapter ()
+    private int current;
+    private showModel modelShow = showModel.getSingleton();
+    private classModel modelClass = classModel.getSingleton();
+    public showAdapter (int key)
     {
         super();
+        current = key;
     }
 
     @NonNull
@@ -37,12 +40,23 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
     public void onBindViewHolder(@NonNull showViewHolder holder, int position)
     {
         TextView showTV = holder.itemView.findViewById(R.id.showTV);
-        showTV.setText(model.getTaskArray().get(position).getShow());
+        if(current == 0){
+            showTV.setText(modelShow.getTaskArray().get(position).getShow());
+        }
+        if(current == 1){
+            showTV.setText(modelClass.getSchedArray().get(position).getClassModel());
+            TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
+            dateTV.setText("");
+        }
+
     }
 
     @Override
     public int getItemCount()
     {
-        return model.getTaskArray().size();
+        if(current == 1) {
+            return modelClass.getSchedArray().size();
+        }
+        return modelShow.getTaskArray().size();
     }
 }

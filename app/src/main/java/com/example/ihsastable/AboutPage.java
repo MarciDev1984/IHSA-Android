@@ -12,7 +12,7 @@ public class AboutPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.about_page);
         link = findViewById(R.id.textView3);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setLinkTextColor(Color.BLUE);

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@color/secondary_light">
 
     <TextView
         android:id="@+id/showTV"
@@ -11,6 +13,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:text="Jim Beloushio"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -24,6 +27,7 @@
         android:layout_height="30dp"
         android:layout_marginEnd="10dp"
         android:text="Details"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

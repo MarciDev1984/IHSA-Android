@@ -14,19 +14,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class fragment1 extends Fragment
+public class scheduleFragment extends Fragment
 {
     //Vars for RecyclerView
     private showAdapter showServer;
     private View view;
 
-    public fragment1() {}
+    public scheduleFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
-        view = inflater.inflate(R.layout.fragment_fragment1, container, false);
+        view = inflater.inflate(R.layout.schedule_fragment, container, false);
 
         //Recycler view default code (Very fragile)
         showServer = new showAdapter();

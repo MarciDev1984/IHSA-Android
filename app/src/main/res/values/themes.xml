@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.IHSAStable" parent="Theme.Material3.Light">
+    <style name="Theme.IHSAStable" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_light</item>
@@ -14,19 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <!--Custom Style For Toolbars-->
-    <style name="toolbarCustom">
+    <!--Custom AppBar Style (Must be applied directly)-->
+    <style name="customAppBar" parent="Widget.Material3.AppBarLayout">
         <!--Container Attributes-->
-        <item name="android:background">@color/primary</item>
-        <item name="android:elevation">8dp</item>
+        <item name="android:background">@color/primary_light</item>
 
-        <!--Title Attributes-->
-        <item name="title">Custom Tool/ActionBar</item>
-        <item name="subtitle">Cool Subtitle</item>
-        <item name="titleTextColor">@color/white</item>
-        <item name="subtitleTextColor">@color/white</item>
-        <item name="titleTextAppearance">@style/TA_ToolbarTitle</item>
-        <item name="subtitleTextAppearance">@style/TA_ToolbarSubtitle</item>
     </style>
 
     <!--Custom Style For Buttons-->
@@ -111,7 +103,6 @@
     </style>
 
 
-
     <!--I cannot get this to function properly, the cornerFamily works, but I cant figure out how to tweak the corner size.-->
     <style name="smallShapeAppearance" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
@@ -124,5 +115,17 @@
         <item name="android:popupBackground">@color/primary</item>
         <item name="android:popupElevation">20dp</item>
         <item name="textAppearanceLargePopupMenu">@font/roboto_mono</item>
+    </style>
+
+    <style name="Theme.IHSAStable.Fullscreen" parent="Theme.IHSAStable">
+        <item name="android:actionBarStyle">@style/Widget.Theme.IHSAStable.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.IHSAStable.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>

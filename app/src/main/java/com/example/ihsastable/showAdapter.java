@@ -21,6 +21,8 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
     private int current;
     private showModel modelShow = showModel.getSingleton();
     private classModel modelClass = classModel.getSingleton();
+    private riderModel modelRider = riderModel.getSingleton();
+
     public showAdapter (int key)
     {
         super();
@@ -40,15 +42,18 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
     public void onBindViewHolder(@NonNull showViewHolder holder, int position)
     {
         TextView showTV = holder.itemView.findViewById(R.id.showTV);
+        TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
         if(current == 0){
             showTV.setText(modelShow.getTaskArray().get(position).getShow());
         }
         if(current == 1){
             showTV.setText(modelClass.getSchedArray().get(position).getClassModel());
-            TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
             dateTV.setText("");
         }
-
+        if(current == 2){
+            showTV.setText(modelRider.getOrderArray().get(position).getOrder());
+            dateTV.setText(modelRider.getOrderArray().get(position).getHorse());
+        }
     }
 
     @Override
@@ -56,6 +61,8 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
     {
         if(current == 1) {
             return modelClass.getSchedArray().size();
+        } else if (current == 2) {
+            return modelRider.getOrderArray().size();
         }
         return modelShow.getTaskArray().size();
     }

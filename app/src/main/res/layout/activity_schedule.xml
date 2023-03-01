@@ -2,17 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/showHeaderTV"
+    android:id="@+id/scheduleCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".scheduleActivity">
 
     <TextView
         android:id="@+id/scheduleHeaderTV"
         android:layout_width="316dp"
         android:layout_height="70dp"
-        android:text="vacantUntilCreate"
+        android:hint="nullUntilCreate"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

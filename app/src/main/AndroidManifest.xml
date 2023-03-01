@@ -15,6 +15,9 @@
             android:name=".riderActivity"
             android:exported="false" />
         <activity
+            android:name=".AboutPage"
+            android:exported="false" />
+        <activity
             android:name=".scheduleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"

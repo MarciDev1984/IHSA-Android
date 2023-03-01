@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/white"
+
     tools:context=".MainActivity">
 
     <!--    <TextView-->
@@ -46,9 +48,16 @@
         android:layout_marginTop="50sp"
         android:layout_marginEnd="10sp"
         android:layout_marginBottom="10sp"
+
         android:paddingStart="20sp"
         android:paddingTop="20sp"
         android:paddingEnd="20sp"
+
+        android:paddingLeft="20sp"
+        android:paddingTop="20sp"
+        android:paddingEnd="20sp"
+        android:paddingRight="20sp"
+
         android:paddingBottom="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +84,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="23sp"
                 android:layout_marginStart="16dp"
+
                 android:fontFamily="@font/arvo_font"
+
+                android:fontFamily="@font/arvo_bold"
+
                 android:scrollbarSize="4sp"
                 android:text="About IHSA "
                 android:textAlignment="center"

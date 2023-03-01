@@ -9,35 +9,6 @@
 
     tools:context=".MainActivity">
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/linktext"-->
-    <!--        android:layout_width="220dp"-->
-    <!--        android:layout_height="38dp"-->
-    <!--        android:layout_marginTop="70sp"-->
-    <!--        android:layout_marginEnd="176sp"-->
-    <!--        android:text="@string/textview"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.995"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.946" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView2"-->
-    <!--        android:layout_width="344sp"-->
-    <!--        android:layout_height="136sp"-->
-    <!--        android:layout_marginStart="3sp"-->
-    <!--        android:layout_marginEnd="64sp"-->
-    <!--        android:fontFamily="@font/arvo_bold"-->
-    <!--        android:text="IHSA MISSION:\nThe mission of the IHSA is to provide equestrian competition for all college and university students regardless of riding level, gender, race, sexual  orientation or financial status. The IHSA is dedicated to promoting sportsmanship, horsemanship and academic excellence."-->
-    <!--        android:textColor="@color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/imageView"-->
-    <!--        app:layout_constraintVertical_bias="0.094" />-->
 
     <ScrollView
         android:id="@+id/scrollView5"
@@ -52,12 +23,6 @@
         android:paddingStart="20sp"
         android:paddingTop="20sp"
         android:paddingEnd="20sp"
-
-        android:paddingLeft="20sp"
-        android:paddingTop="20sp"
-        android:paddingEnd="20sp"
-        android:paddingRight="20sp"
-
         android:paddingBottom="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +42,7 @@
                 android:layout_height="64sp"
                 android:layout_marginTop="8sp"
                 android:layout_marginEnd="1sp"
+                android:contentDescription="@string/app_logo_desc"
                 app:srcCompat="@drawable/logo" />
 
             <TextView
@@ -86,8 +52,6 @@
                 android:layout_marginStart="16dp"
 
                 android:fontFamily="@font/arvo_font"
-
-                android:fontFamily="@font/arvo_bold"
 
                 android:scrollbarSize="4sp"
                 android:text="About IHSA "

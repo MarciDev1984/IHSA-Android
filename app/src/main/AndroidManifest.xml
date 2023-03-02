@@ -12,14 +12,18 @@
         android:theme="@style/Theme.IHSAStable"
         tools:targetApi="31">
         <activity
+            android:name=".riderProfile"
+            android:exported="false" />
+        <activity
             android:name=".riderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AboutPage"
             android:exported="false" />
         <activity
             android:name=".scheduleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/Theme.IHSAStable.Fullscreen" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -29,6 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

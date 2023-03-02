@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +21,6 @@ public class scheduleActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-
-
 
         String pos = getIntent().getStringExtra("POS");
 
@@ -54,7 +50,7 @@ public class scheduleActivity extends AppCompatActivity {
     }
 
 
-    //This is almost directly Kooper Young's implementation
+    //This is almost directly Jacob Pickman's implementation
     //-----
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {

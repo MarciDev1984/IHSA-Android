@@ -15,19 +15,27 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class fragment1 extends Fragment
+/*
+ * This is Fragment_Home
+ * This is the first tab in the tabbed layout
+ * This contains the upcoming shows
+ * Clicking a show will take you to scheduleActivity
+ *
+ * Author: Kooper Young
+ */
+
+public class Fragment_Home extends Fragment
 {
     //Vars for RecyclerView
     private showAdapter showServer;
     private View view;
 
-    public fragment1() {}
+    public Fragment_Home() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
-        view = inflater.inflate(R.layout.fragment_fragment1, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Recycler view default code (Very fragile)
         showServer = new showAdapter(0);
@@ -50,12 +58,6 @@ public class fragment1 extends Fragment
         return view;
     }
 
-    public void openSchedule(int pos){
-        Intent opSched = new Intent(view.getContext(), scheduleActivity.class);
-        opSched.putExtra("POS", String.valueOf(pos + 1));
-        startActivity(opSched);
-    }
-
     //This class handles taps on the recycler view items
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
@@ -63,7 +65,7 @@ public class fragment1 extends Fragment
         {
             RecyclerView showRV = view.findViewById(R.id.showsRV);
             View view = showRV.findChildViewUnder(e.getX(), e.getY());
-            Log.d("click", "click happened");
+            Log.d("click", "click happened in frag1");
 
             if (view != null)
             {
@@ -80,5 +82,11 @@ public class fragment1 extends Fragment
             }
             return false;
         }
+    }
+
+    public void openSchedule(int pos){
+        Intent opSched = new Intent(view.getContext(), scheduleActivity.class);
+        opSched.putExtra("POS", String.valueOf(pos + 1));
+        startActivity(opSched);
     }
 }

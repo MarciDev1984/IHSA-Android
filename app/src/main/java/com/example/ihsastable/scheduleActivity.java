@@ -58,7 +58,7 @@ public class scheduleActivity extends AppCompatActivity {
         {
             RecyclerView riderRV = findViewById(R.id.riderRV);
             View view = riderRV.findChildViewUnder(e.getX(), e.getY());
-            Log.d("click", "click happened");
+            Log.d("click", "click happened in sa");
 
             if (view != null)
             {

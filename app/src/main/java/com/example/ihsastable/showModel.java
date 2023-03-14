@@ -26,21 +26,21 @@ public class showModel
     }
 
     public void loadInitialTasks() {
-        Show item1 = new Show("Show 1");
-        Show item2 = new Show("Show 2");
-        Show item3 = new Show("Show 3");
-        Show item4 = new Show("Show 4");
-        Show item5 = new Show("Show 5");
-        Show item6 = new Show("Show 6");
-        Show item7 = new Show("Show 7");
-        Show item8 = new Show("Show 8");
-        Show item9 = new Show("Show 9");
-        Show item10 = new Show("Show 10");
-        Show item11 = new Show("Show 11");
-        Show item12 = new Show("Show 12");
-        Show item13 = new Show("Show 13");
-        Show item14 = new Show("Show 14");
-        Show item15 = new Show("Show 15");
+        Show item1 = new Show("Butler Equestrian");
+        Show item2 = new Show("Albion College Hunt Seat Show I");
+        Show item3 = new Show("Albion College Hunt Seat SHow II");
+        Show item4 = new Show("St. Andrews Hunter Seat Show");
+        Show item5 = new Show("University of Louisville Hunt Seat Saturday Show");
+        Show item6 = new Show("Vassar College Qualifying Show ");
+        Show item7 = new Show("Scranton IHSA Show");
+        Show item8 = new Show("Sewanee Fall Show Saturday");
+        Show item9 = new Show("Iowa State Western Show");
+        Show item10 = new Show("Alfred University IHSA Western Horse Show 1");
+        Show item11 = new Show("Purdue Fall Season Starter Show 1");
+        Show item12 = new Show("Alfred University IHSA Western Horse Show II");
+        Show item13 = new Show("College of William & Mary");
+        Show item14 = new Show("Sewanee Fall Show Sunday");
+        Show item15 = new Show("Iowa State Western Show");
         showList.add(item1);
         showList.add(item2);
         showList.add(item3);

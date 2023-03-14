@@ -10,8 +10,8 @@
 
     <ScrollView
         android:id="@+id/scrollView5"
-        android:layout_width="419dp"
-        android:layout_height="733dp"
+        android:layout_width="411dp"
+        android:layout_height="736dp"
         android:layout_margin="0sp"
         android:layout_marginStart="0sp"
         android:layout_marginTop="50sp"

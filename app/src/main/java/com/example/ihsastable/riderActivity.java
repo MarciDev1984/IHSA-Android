@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.URL;
 
 public class riderActivity extends AppCompatActivity {
 
@@ -46,6 +50,21 @@ public class riderActivity extends AppCompatActivity {
         Intent opSched = new Intent(this, riderProfile.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
+    }
+
+    public void openPDF(View v) {
+        URL pdfLink;
+        Uri pdfURI;
+        try {
+            pdfLink = new URL("https://assets.website-files.com/603d0d2db8ec32ba7d44fffe/603d0e327eb2748c8ab1053f_loremipsum.pdf");
+            pdfURI = Uri.parse(pdfLink.toURI().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Unknown Error Occurred!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Log.d("URI", String.valueOf(pdfURI));
+        startActivity(new Intent(Intent.ACTION_VIEW, pdfURI));
     }
 
     //This is almost directly Jacob Pickman's implementation

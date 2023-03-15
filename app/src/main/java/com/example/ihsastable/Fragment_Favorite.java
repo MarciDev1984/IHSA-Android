@@ -8,13 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class fragment3 extends Fragment
+/*
+ * This is Fragment_Favorite
+ * This is where the riders you have chose to follow will be displayed
+ *
+ * Author: Kooper Young
+ */
+
+public class Fragment_Favorite extends Fragment
 {
-    public fragment3() {}
+    public Fragment_Favorite() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_fragment3, container, false);
+        return inflater.inflate(R.layout.fragment_favorite, container, false);
     }
 }

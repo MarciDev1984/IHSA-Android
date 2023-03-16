@@ -25,7 +25,13 @@ public class scheduleActivity extends AppCompatActivity {
         String pos = getIntent().getStringExtra("POS");
 
         TextView schedHead = findViewById(R.id.scheduleHeaderTV);
-        schedHead.setText("Show " + pos + " Schedule");
+        System.out.println(pos);
+        if(pos.equals("1") ){
+            schedHead.setText("Butler Equestrian");
+        }
+        else{
+            schedHead.setText("Show " + pos + " Schedule");
+        }
 
         riderRV = new showAdapter(1);
         RecyclerView riderRecycler = findViewById(R.id.riderRV);

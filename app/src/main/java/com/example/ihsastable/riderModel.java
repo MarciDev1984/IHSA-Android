@@ -28,14 +28,14 @@ public class riderModel {
     }
 
     public void loadOrder(){
-        orderList.add(new Order("Rider 1", "Horse A"));
-        orderList.add(new Order("Rider 2", "Horse B"));
-        orderList.add(new Order("Rider 3", "Horse C"));
-        orderList.add(new Order("Rider 4", "Horse D"));
-        orderList.add(new Order("Rider 5", "Horse E"));
-        orderList.add(new Order("Rider 6", "Horse F"));
-        orderList.add(new Order("Rider 7", "Horse G"));
-        orderList.add(new Order("Rider 8", "Horse H"));
+        orderList.add(new Order("Marci Devaughn", "Chip"));
+        orderList.add(new Order("Kevin Harris", "Dustin"));
+        orderList.add(new Order("Fisher Reese", "Felix"));
+        orderList.add(new Order("Kooper Young", "Fred"));
+        orderList.add(new Order("Jacob Pickman", "Henry"));
+        orderList.add(new Order("Christopher Burke", "Hooker"));
+        orderList.add(new Order("Gabriel Mura", "Sanchez"));
+        orderList.add(new Order("Daniel Omole", "Sheldon"));
     }
 
 

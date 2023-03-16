@@ -10,15 +10,58 @@
     <TextView
         android:id="@+id/scheduleHeaderTV"
         android:layout_width="316dp"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:hint="nullUntilCreate"
-        android:textSize="24sp"
+        android:textSize="32sp"
+        android:text="Butler Equestrian"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintVertical_bias="0.024" />
+
+    <TextView
+        android:id="@+id/zoneRegion"
+        android:layout_width="316dp"
+        android:layout_height="30dp"
+        android:hint="nullUntilCreate"
+        android:text="Zone 7 Region 1"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/showDateTime"
+        android:layout_width="316dp"
+        android:layout_height="22dp"
+        android:hint="nullUntilCreate"
+        android:text="Show Date: September 10, 2022 9:00 AM"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <TextView
+        android:id="@+id/showLocation"
+        android:layout_width="316dp"
+        android:layout_height="24dp"
+        android:hint="nullUntilCreate"
+        android:text="Location: Zionsville , IN"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.135" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/riderRV"
@@ -26,8 +69,8 @@
         android:layout_height="528dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.812" />
 </androidx.constraintlayout.widget.ConstraintLayout>

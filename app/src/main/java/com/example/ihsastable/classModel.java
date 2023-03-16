@@ -23,14 +23,14 @@ public class classModel {
     }
 
     public void loadSched(){
-        scheduleList.add(new Schedule("Class 1"));
-        scheduleList.add(new Schedule("Class 2"));
-        scheduleList.add(new Schedule("Class 3"));
-        scheduleList.add(new Schedule("Class 4"));
-        scheduleList.add(new Schedule("Class 5"));
-        scheduleList.add(new Schedule("Class 6"));
-        scheduleList.add(new Schedule("Class 7"));
-        scheduleList.add(new Schedule("Class 8"));
+        scheduleList.add(new Schedule("Show Class 1 Rider Class 8"));
+        scheduleList.add(new Schedule("Show Class 2 Rider Class 6"));
+        scheduleList.add(new Schedule("Show Class 3 Rider Class 4"));
+        scheduleList.add(new Schedule("Show Class 4 Rider Class 4"));
+        scheduleList.add(new Schedule("Show Class 5 Rider Class 7"));
+        scheduleList.add(new Schedule("Show Class 6 Rider Class 5"));
+        scheduleList.add(new Schedule("Show Class 7 Rider Class 3"));
+        scheduleList.add(new Schedule("Show Class 8 Rider Class 2B"));
     }
 
     public ArrayList<Schedule> getSchedArray(){

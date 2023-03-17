@@ -45,7 +45,7 @@ public class Fragment_Home extends Fragment
         show_schedule_rv = view.findViewById(R.id.show_schedule_rv);
 
         //Create a new adapter instance with a key as an identifier
-        RecyclerViewAdapter show_schedule_rv_adapter = new RecyclerViewAdapter(0);
+        RecyclerViewAdapter show_schedule_rv_adapter = new RecyclerViewAdapter("show_schedule_rv");
 
         //Create a LLM // was getActivity()
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
@@ -85,7 +85,7 @@ public class Fragment_Home extends Fragment
                 RecyclerView.ViewHolder holder = show_schedule_rv.getChildViewHolder(view);
 
                 //If the child was the right type
-                if (holder instanceof RecyclerViewAdapter.showViewHolder)
+                if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
                     Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- " +
                             "onSingleTapConfirmed * child confirmed * correct type at position: " + holder.getAdapterPosition());
@@ -99,7 +99,7 @@ public class Fragment_Home extends Fragment
 
     public void openSchedule(int pos)
     {
-        Intent opSched = new Intent(view.getContext(), scheduleActivity.class);
+        Intent opSched = new Intent(view.getContext(), Rider_Order_Activity.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
     }

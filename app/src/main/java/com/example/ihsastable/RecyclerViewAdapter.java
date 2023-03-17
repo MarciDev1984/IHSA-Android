@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder>
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.showViewHolder>
 {
     public static class showViewHolder extends RecyclerView.ViewHolder
     {
@@ -23,7 +23,7 @@ public class showAdapter extends RecyclerView.Adapter<showAdapter.showViewHolder
     private classModel modelClass = classModel.getSingleton();
     private riderModel modelRider = riderModel.getSingleton();
 
-    public showAdapter (int key)
+    public RecyclerViewAdapter(int key)
     {
         super();
         current = key;

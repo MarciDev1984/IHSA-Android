@@ -19,7 +19,7 @@ import java.net.URL;
 
 public class riderActivity extends AppCompatActivity {
 
-    private showAdapter orderRV;
+    private RecyclerViewAdapter orderRV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class riderActivity extends AppCompatActivity {
         TextView schedHead = findViewById(R.id.classTV);
         schedHead.setText("Class " + pos + " Order");
 
-        orderRV = new showAdapter(2);
+        orderRV = new RecyclerViewAdapter(2);
         RecyclerView riderRecycler = findViewById(R.id.orderRV);
         riderRecycler.setAdapter(orderRV);
 
@@ -81,7 +81,7 @@ public class riderActivity extends AppCompatActivity {
             {
                 RecyclerView.ViewHolder holder = orderRV.getChildViewHolder(view);
 
-                if (holder instanceof showAdapter.showViewHolder)
+                if (holder instanceof RecyclerViewAdapter.showViewHolder)
                 {
                     int position = holder.getAdapterPosition();
                     Log.d("click", "single tap clicked on item " + position);

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class scheduleActivity extends AppCompatActivity {
 
-    private showAdapter riderRV;
+    private RecyclerViewAdapter riderRV;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class scheduleActivity extends AppCompatActivity {
             schedHead.setText("Show " + pos + " Schedule");
         }
 
-        riderRV = new showAdapter(1);
+        riderRV = new RecyclerViewAdapter(1);
         RecyclerView riderRecycler = findViewById(R.id.riderRV);
         riderRecycler.setAdapter(riderRV);
 
@@ -70,7 +70,7 @@ public class scheduleActivity extends AppCompatActivity {
             {
                 RecyclerView.ViewHolder holder = riderRV.getChildViewHolder(view);
 
-                if (holder instanceof showAdapter.showViewHolder)
+                if (holder instanceof RecyclerViewAdapter.showViewHolder)
                 {
                     int position = holder.getAdapterPosition();
                     Log.d("click", "single tap clicked on item " + position);

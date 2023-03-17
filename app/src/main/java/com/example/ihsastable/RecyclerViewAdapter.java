@@ -8,6 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/*
+ * This is RecyclerViewAdapter
+ * This is a shared class between every instance of our RecyclerViews
+ * Not the most elegant solution, but we are working on it
+ * TODO - Work on a more elegant solution to this dumpster fire
+ *
+ * Author: Kooper Young
+ */
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.showViewHolder>
 {
     public static class showViewHolder extends RecyclerView.ViewHolder
@@ -19,18 +28,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     private int current;
-    private showModel modelShow = showModel.getSingleton();
+    private Show_Schedule_Model modelShow = Show_Schedule_Model.getSingleton();
     private classModel modelClass = classModel.getSingleton();
     private riderModel modelRider = riderModel.getSingleton();
 
+    //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
     public RecyclerViewAdapter(int key)
     {
         super();
         current = key;
     }
 
-    @NonNull
-    @Override
+
+    @NonNull @Override
     public showViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell, parent, false);

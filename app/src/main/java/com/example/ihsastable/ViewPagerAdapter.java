@@ -5,7 +5,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
+/*
+ * This is ViewPageAdapter
+ * This is the class that gives the tabbed functionality to the ViewPager in MainActivity
+ *
+ * Author: Kooper Young
+ */
+
+public class ViewPagerAdapter extends FragmentStateAdapter
+{
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity)
     {
@@ -18,8 +26,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     {
         switch (position)
         {
-            case 0:
-                return new Fragment_Home();
             case 1:
                 return new Fragment_Notification();
             case 2:

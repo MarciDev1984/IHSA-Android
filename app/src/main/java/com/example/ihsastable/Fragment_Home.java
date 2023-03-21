@@ -3,6 +3,7 @@ package com.example.ihsastable;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,57 +27,69 @@ import android.view.ViewGroup;
 
 public class Fragment_Home extends Fragment
 {
-    //Vars for RecyclerView
-    private showAdapter showServer;
     private View view;
+    private RecyclerView show_schedule_rv;
 
+    //Required empty constructor for fragments
     public Fragment_Home() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        //getActivity() or getContext() don't work in fragments.
+        //This is the work-around
+        //You can do view.getContext() if you need that
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //Recycler view default code (Very fragile)
-        showServer = new showAdapter(0);
-        RecyclerView showRecycler = view.findViewById(R.id.showsRV);
-        showRecycler.setAdapter(showServer);
+        //Bind the RV object to the XML
+        show_schedule_rv = view.findViewById(R.id.show_schedule_rv);
 
-        LinearLayoutManager myManager = new LinearLayoutManager(getActivity());
-        showRecycler.setLayoutManager(myManager);
+        //Create a new adapter instance with a key as an identifier
+        RecyclerViewAdapter show_schedule_rv_adapter = new RecyclerViewAdapter("show_schedule_rv");
 
-        GestureDetectorCompat detector = new GestureDetectorCompat(getActivity(), new RecyclerViewOnGestureListener());
-        showRecycler.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
+        //Create a LLM // was getActivity()
+        LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
+
+        //Create a gestureDetector
+        GestureDetectorCompat gestureDetector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+
+        //Set the adapter, LLM, and gestureDetector
+        show_schedule_rv.setAdapter(show_schedule_rv_adapter);
+        show_schedule_rv.setLayoutManager(LLM);
+        show_schedule_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
+            //This is the first thing called on a tap, it passes it to the RecyclerViewOnGestureListener
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e)
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent)
             {
-                return detector.onTouchEvent(e);
+                Log.d("RV GESTURE", "Fragment_Home --- onCreateView -- onInterceptTouchEvent");
+                return gestureDetector.onTouchEvent(motionEvent);
             }
         });
 
         return view;
     }
 
-    //This class handles taps on the recycler view items
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
         public boolean onSingleTapConfirmed(MotionEvent e)
         {
-            RecyclerView showRV = view.findViewById(R.id.showsRV);
-            View view = showRV.findChildViewUnder(e.getX(), e.getY());
-            Log.d("click", "click happened in frag1");
+            Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- onSingleTapConfirmed");
+            //Gets the coords of the tap and looks for a child at those coords
+            View view = show_schedule_rv.findChildViewUnder(e.getX(), e.getY());
 
+            //If there was a child
             if (view != null)
             {
-                RecyclerView.ViewHolder holder = showRV.getChildViewHolder(view);
+                Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- onSingleTapConfirmed * child confirmed");
+                RecyclerView.ViewHolder holder = show_schedule_rv.getChildViewHolder(view);
 
-                if (holder instanceof showAdapter.showViewHolder)
+                //If the child was the right type
+                if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
-                    int position = holder.getAdapterPosition();
-                    Log.d("click", "single tap clicked on item " + position);
-                    openSchedule(position);
-                    Log.d("click", "Going to show");
+                    Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- " +
+                            "onSingleTapConfirmed * child confirmed * correct type at position: " + holder.getAdapterPosition());
+                    openSchedule(holder.getAdapterPosition());
                     return true;
                 }
             }
@@ -84,8 +97,9 @@ public class Fragment_Home extends Fragment
         }
     }
 
-    public void openSchedule(int pos){
-        Intent opSched = new Intent(view.getContext(), scheduleActivity.class);
+    public void openSchedule(int pos)
+    {
+        Intent opSched = new Intent(view.getContext(), Rider_Order_Activity.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
     }

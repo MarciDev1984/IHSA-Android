@@ -6,6 +6,14 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+/*
+ * This is AboutPage
+ * You can click the info button on the app bar
+ * and it will take you here
+ *
+ * Author: Ayush
+ */
+
 public class AboutPage extends AppCompatActivity {
 
     TextView link;

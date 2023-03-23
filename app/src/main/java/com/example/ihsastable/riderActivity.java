@@ -6,19 +6,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.URL;
 
 public class riderActivity extends AppCompatActivity {
 
-    private showAdapter orderRV;
+    private RecyclerViewAdapter orderRV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("SUPER AMAZING TEMP", "yeah its rider activity");
+
         setContentView(R.layout.activity_rider);
         
         String pos = getIntent().getStringExtra("POS");
@@ -26,7 +33,7 @@ public class riderActivity extends AppCompatActivity {
         TextView schedHead = findViewById(R.id.classTV);
         schedHead.setText("Class " + pos + " Order");
 
-        orderRV = new showAdapter(2);
+        orderRV = new RecyclerViewAdapter("rider_order_rv");
         RecyclerView riderRecycler = findViewById(R.id.orderRV);
         riderRecycler.setAdapter(orderRV);
 
@@ -48,6 +55,21 @@ public class riderActivity extends AppCompatActivity {
         startActivity(opSched);
     }
 
+    public void openPDF(View v) {
+        URL pdfLink;
+        Uri pdfURI;
+        try {
+            pdfLink = new URL("https://assets.website-files.com/603d0d2db8ec32ba7d44fffe/603d0e327eb2748c8ab1053f_loremipsum.pdf");
+            pdfURI = Uri.parse(pdfLink.toURI().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Unknown Error Occurred!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Log.d("URI", String.valueOf(pdfURI));
+        startActivity(new Intent(Intent.ACTION_VIEW, pdfURI));
+    }
+
     //This is almost directly Jacob Pickman's implementation
     //-----
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
@@ -62,7 +84,7 @@ public class riderActivity extends AppCompatActivity {
             {
                 RecyclerView.ViewHolder holder = orderRV.getChildViewHolder(view);
 
-                if (holder instanceof showAdapter.showViewHolder)
+                if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
                     int position = holder.getAdapterPosition();
                     Log.d("click", "single tap clicked on item " + position);

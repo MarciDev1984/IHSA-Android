@@ -2,24 +2,30 @@ package com.example.ihsastable;
 
 import java.util.ArrayList;
 
-public class showModel
+/*
+ * This is Show_Schedule_Model
+ *
+ * Author: Jacob Pinkman
+ */
+
+public class Show_Schedule_Model
 {
     public static class Show
     {
-        private String showname;
-        public Show(String showname)
+        private final String showName;
+        public Show(String showName)
         {
-            this.showname = showname;
+            this.showName = showName;
         }
         public String getShow()
         {
-            return showname;
+            return showName;
         }
     }
 
     private ArrayList<Show> showList;
 
-    private showModel ()
+    private Show_Schedule_Model()
     {
         showList = new ArrayList<Show>();
         loadInitialTasks();
@@ -63,12 +69,12 @@ public class showModel
         return showList;
     }
 
-    public static showModel theModel = null;
-    public static showModel getSingleton()
+    public static Show_Schedule_Model theModel = null;
+    public static Show_Schedule_Model getSingleton()
     {
         if(theModel == null)
         {
-            theModel = new showModel();
+            theModel = new Show_Schedule_Model();
         }
         return theModel;
     }

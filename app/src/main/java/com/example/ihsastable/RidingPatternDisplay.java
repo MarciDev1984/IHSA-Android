@@ -33,7 +33,7 @@ public class RidingPatternDisplay extends AppCompatActivity {
                     PdfRenderer pdfRenderer = new PdfRenderer(downloadManager.openDownloadedFile(downloadID));
                     PdfRenderer.Page patternPage = pdfRenderer.openPage(0);
 
-                    Bitmap pdfBitmap = Bitmap.createBitmap(pdfDisplay.getMaxWidth(), pdfDisplay.getMaxHeight(), Bitmap.Config.ARGB_4444);
+                    Bitmap pdfBitmap = Bitmap.createBitmap(pdfDisplay.getWidth(), pdfDisplay.getHeight(), Bitmap.Config.ARGB_4444);
 
                     patternPage.render(pdfBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
 

@@ -57,6 +57,16 @@ public class riderActivity extends AppCompatActivity {
                 return detect.onTouchEvent(e);
             }
         });
+
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri pdfURI = Uri.parse("https://drive.google.com/uc?export=download&id=1GG6jGkVEKIK0nZNZGZ1mrH2ToK2egc_J");
+
+        this.registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
+        DownloadManager.Request downloadRequest = new DownloadManager.Request(pdfURI);
+        downloadRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        downloadID = downloadManager.enqueue(downloadRequest);
+
     }
 
     public void openSingleRider(int pos){
@@ -66,21 +76,13 @@ public class riderActivity extends AppCompatActivity {
     }
 
     public void openPDF(View v) {
-        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri pdfURI = Uri.parse("https://assets.website-files.com/603d0d2db8ec32ba7d44fffe/603d0e327eb2748c8ab1053f_loremipsum.pdf");
 
-        this.registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-
-        DownloadManager.Request downloadRequest = new DownloadManager.Request(pdfURI);
-        downloadRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
-        downloadID = downloadManager.enqueue(downloadRequest);
-
-        Toast.makeText(getApplicationContext(), "Downloading riding pattern, please wait on this screen until it loads.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Congrats, you hit the button! This will open an activity in the future", Toast.LENGTH_SHORT).show();
 
         //startActivity(new Intent(Intent.ACTION_VIEW, pdfURI));
     }
 
-    BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+    protected BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();

@@ -76,10 +76,9 @@ public class riderActivity extends AppCompatActivity {
     }
 
     public void openPDF(View v) {
-
-        Toast.makeText(getApplicationContext(), "Congrats, you hit the button! This will open an activity in the future", Toast.LENGTH_SHORT).show();
-
-        //startActivity(new Intent(Intent.ACTION_VIEW, pdfURI));
+        Intent pdfView = new Intent(this, RidingPatternDisplay.class);
+        pdfView.putExtra("downloadID", downloadID);
+        startActivity(pdfView);
     }
 
     protected BroadcastReceiver downloadReceiver = new BroadcastReceiver() {

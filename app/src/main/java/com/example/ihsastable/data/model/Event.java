@@ -6,6 +6,7 @@ import com.google.type.DateTime;
 import java.util.List;
 
 public class Event {
+    // not sure what to use for string location, but it would make sense to use the school.
     private String Location;
     //Firebase uses Timestamp to store dates, like from Date()
     private Timestamp EventTime;

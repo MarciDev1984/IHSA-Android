@@ -131,3 +131,4 @@ render.experimental.xml
 # Keystore files
 *.jks
 *.keystore
+local.properties.txt

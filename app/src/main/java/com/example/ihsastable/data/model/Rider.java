@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rider extends User {
+    private int riderId;
     private boolean isHeightWeightRider;
     private double height;
     private double weight;
 
-    public Rider(String Username, String FirstName, String LastName, boolean isHeightWeightRider, double height, double weight, List<Coach> managedBy, String playsFor) {
+    public Rider(String Username, String FirstName, String LastName, int riderId, boolean isHeightWeightRider, double height, double weight, List<Coach> managedBy, String playsFor) {
         super(Username, FirstName, LastName);
+        this.riderId = riderId;
         this.isHeightWeightRider = isHeightWeightRider;
         this.height = height;
         this.weight = weight;

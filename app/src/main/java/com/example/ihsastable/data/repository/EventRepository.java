@@ -46,4 +46,7 @@ public class EventRepository {
         });
         return events;
     }
+    public void createTestCollection(){
+
+    }
 }

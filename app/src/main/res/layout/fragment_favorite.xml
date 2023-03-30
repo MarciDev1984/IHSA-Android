@@ -13,35 +13,26 @@
         android:id="@+id/idInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
+        android:text="Input member ID"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="3dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="576dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="107dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/idInput"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:text="Follow"
+        tools:layout_editor_absoluteX="329dp"
+        tools:layout_editor_absoluteY="3dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ridershowTV"
         android:layout_width="409dp"
         android:layout_height="574dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="5dp" />
+        android:layout_marginTop="156dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

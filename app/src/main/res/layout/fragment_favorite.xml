@@ -18,12 +18,12 @@
             android:layout_marginEnd="61dp"
             android:layout_marginBottom="73dp"
             android:text="Follow"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/followRV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/followRV"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:layout_marginBottom="10dp"
@@ -39,7 +39,7 @@
             android:ems="10"
             android:hint="Enter Rider Pin"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/followRV"
             app:layout_constraintEnd_toStartOf="@+id/followBTN"
             app:layout_constraintHorizontal_bias="0.313"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,6 +14,15 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
+/*
+* This is MainActivity
+* This is where we keep the functionality for the tabbed layout
+* and the stuff for the custom appbar.
+* It is preferred that no more code than necessary be placed here.
+*
+* Author: Kooper Young
+*/
+
 public class MainActivity extends AppCompatActivity
 {
     //Vars for ViewPager
@@ -78,5 +87,10 @@ public class MainActivity extends AppCompatActivity
     public void openAbout(){
         Intent opAbout = new Intent(this, AboutPage.class);
         startActivity(opAbout);
+    }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        return;
     }
 }

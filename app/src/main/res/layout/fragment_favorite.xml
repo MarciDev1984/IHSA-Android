@@ -14,16 +14,14 @@
             android:id="@+id/followBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="61dp"
-            android:layout_marginBottom="73dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
             android:text="Follow"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/followRV"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:layout_marginBottom="10dp"
@@ -36,15 +34,17 @@
             android:id="@+id/followTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="80dp"
+            android:clickable="true"
             android:ems="10"
             android:hint="Enter Rider Pin"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            android:maxLength="3"
             app:layout_constraintEnd_toStartOf="@+id/followBTN"
-            app:layout_constraintHorizontal_bias="0.313"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.585" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

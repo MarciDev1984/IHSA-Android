@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 /*
  * This is Fragment_Favorite
  * This is where the riders you have chose to follow will be displayed
@@ -24,6 +26,9 @@ import android.widget.TextView;
 public class Fragment_Favorite extends Fragment
 {
     public Fragment_Favorite() {}
+
+    HashMap<String, String> userFavorites = new HashMap<String, String>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -66,5 +71,27 @@ public class Fragment_Favorite extends Fragment
         });
 
         return view;
+    }
+
+    public void favoriteValidation(String id){
+        if(id.equals("001")){
+            userFavorites.put("001", "Fisher Reese");
+        }
+        else if(id.equals("002")){
+            userFavorites.put("002", "Kooper Young");
+        }
+        else if(id.equals("003")){
+            userFavorites.put("003", "Gabriel Mura");
+        }
+        else if(id.equals("004")){
+            userFavorites.put("004", "Jacob Pickman");
+        }
+        else if(id.equals("005")){
+            userFavorites.put("005", "Kevin Harris");
+        }
+    }
+
+    public void favoriteDelete(String id){
+        userFavorites.remove(id);
     }
 }

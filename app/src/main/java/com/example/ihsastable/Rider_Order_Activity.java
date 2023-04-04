@@ -29,6 +29,16 @@ public class Rider_Order_Activity extends AppCompatActivity
 
         TextView schedHead = findViewById(R.id.scheduleHeaderTV);
         System.out.println(pos);
+
+        //Very Important, DO NOT DELETE!
+        //if(pos.equals("1") )
+        //{
+        //    schedHead.setText("Butler Equestrian");
+        //}
+        //else{
+        //    schedHead.setText("Show " + pos + " Schedule");
+        //}
+
         if(pos.equals("1") )
         {
             schedHead.setText("Butler Equestrian");

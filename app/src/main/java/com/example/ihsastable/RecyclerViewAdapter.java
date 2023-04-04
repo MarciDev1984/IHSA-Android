@@ -96,7 +96,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             showTV.setText(modelRider.getOrderArray().get(position).getOrder());
             dateTV.setText(modelRider.getOrderArray().get(position).getHorse());
         }
-        else if (key.equals("followRV")) {
+        else if(key.equals("favorites_rv"))
+        {
             showTV.setText(show_favorites_model.getTaskArray().get(position).getFavorites());
         }
     }
@@ -117,7 +118,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             return modelRider.getOrderArray().size();
         }
-        else if (key.equals("followRV"))
+        else if(key.equals("favorites_rv"))
         {
             return show_favorites_model.getTaskArray().size();
         }

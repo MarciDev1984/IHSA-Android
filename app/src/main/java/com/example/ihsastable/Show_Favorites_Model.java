@@ -28,8 +28,10 @@ public class Show_Favorites_Model
 
     public void loadInitialTasks()
     {
-    Favorites rider1 = new Favorites("001", "Fisher Reese");
+        Favorites rider1 = new Favorites("001", "Fisher Reese");
+        favoritesList.add(rider1);
     }
+
 
     public ArrayList<Show_Favorites_Model.Favorites> getTaskArray()
     {

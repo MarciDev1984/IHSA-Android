@@ -105,6 +105,15 @@ public class Fragment_Favorite extends Fragment
         TextView followTV = view.findViewById(R.id.followTV);
         Button followBTN = view.findViewById(R.id.followBTN);
         followBTN.setEnabled(false);
+        //Author: Jacob Pickman
+        //Make the view actually load properly
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
+
+        TextView followTV = view.findViewById(R.id.followTV);
+        Button followBTN = view.findViewById(R.id.followBTN);
+        followBTN.setEnabled(false);
+        RecyclerView followRV = view.findViewById(R.id.followRV);
 
         //Check if EditText meets pin requirements, if it is don't let the user press the button
         //Otherwise, RecyclerView will turn into a gift from the Unabomber.

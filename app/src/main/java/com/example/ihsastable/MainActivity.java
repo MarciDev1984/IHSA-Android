@@ -88,4 +88,9 @@ public class MainActivity extends AppCompatActivity
         Intent opAbout = new Intent(this, AboutPage.class);
         startActivity(opAbout);
     }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        return;
+    }
 }

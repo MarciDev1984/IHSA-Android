@@ -31,6 +31,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private classModel modelClass = classModel.getSingleton();
     private Rider_Schedule_Model modelRider = Rider_Schedule_Model.getSingleton();
 
+    private Show_Favorites_Model show_favorites_model = Show_Favorites_Model.getSingleton();
+
     //TODO - Rework how this key/identification system works
     //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
     public RecyclerViewAdapter(String id)
@@ -94,6 +96,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             showTV.setText(modelRider.getOrderArray().get(position).getOrder());
             dateTV.setText(modelRider.getOrderArray().get(position).getHorse());
         }
+        else if(key.equals("favorites_rv"))
+        {
+            showTV.setText(show_favorites_model.getTaskArray().get(position).getFavorites());
+        }
     }
 
     @Override
@@ -111,6 +117,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         else if (key.equals("idkyet"))
         {
             return modelRider.getOrderArray().size();
+        }
+        else if(key.equals("favorites_rv"))
+        {
+            return show_favorites_model.getTaskArray().size();
         }
         else
         {

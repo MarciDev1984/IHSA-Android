@@ -33,7 +33,7 @@ public class Fragment_Favorite extends Fragment
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
 
-        TextView followTV = view.findViewById(R.id.followTV);
+        TextView followTV = view.findViewById(R.id.followET);
         Button followBTN = view.findViewById(R.id.followBTN);
         followBTN.setEnabled(false);
         RecyclerView followRV = view.findViewById(R.id.followRV);

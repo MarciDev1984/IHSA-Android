@@ -4,43 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rider extends User {
-    private int riderId;
-    private boolean isHeightWeightRider;
-    private double height;
-    private double weight;
+    private int RiderId;
+    private int Points;
+    private int Position;
+    private double AveragePointsPerRide;
+    // private int ManagedBy; //Uses CoachId
+    // private int Class;  // Uses Class id
+    private int PlaysFor; // Uses SchoolId
 
-    public Rider(String Username, String FirstName, String LastName, int riderId, boolean isHeightWeightRider, double height, double weight, List<Coach> managedBy, String playsFor) {
-        super(Username, FirstName, LastName);
-        this.riderId = riderId;
-        this.isHeightWeightRider = isHeightWeightRider;
-        this.height = height;
-        this.weight = weight;
-        this.managedBy = managedBy;
-        this.playsFor = playsFor;
+    public Rider() {
     }
 
-    //Firebase needs a List object, cannot handle ArrayList
-    private List<Coach> managedBy = new ArrayList<>();
-    private String playsFor;
-    public Rider(){}
-
-    public boolean isHeightWeightRider() {
-        return isHeightWeightRider;
+    public Rider(int Id, String Username, String FirstName, String LastName, int riderId, int points, int position, double averagePointsPerRide, int playsFor) {
+        super(Id, Username, FirstName, LastName);
+        RiderId = riderId;
+        Points = points;
+        Position = position;
+        AveragePointsPerRide = averagePointsPerRide;
+        PlaysFor = playsFor;
     }
 
-    public double getHeight() {
-        return height;
+    public int getRiderId() {
+        return RiderId;
     }
 
-    public double getWeight() {
-        return weight;
+    public int getPoints() {
+        return Points;
     }
 
-    public List<Coach> getManagedBy() {
-        return managedBy;
+    public int getPosition() {
+        return Position;
     }
 
-    public String getPlaysFor() {
-        return playsFor;
+    public double getAveragePointsPerRide() {
+        return AveragePointsPerRide;
+    }
+
+
+    public int getPlaysFor() {
+        return PlaysFor;
     }
 }

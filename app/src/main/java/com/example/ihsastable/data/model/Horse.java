@@ -1,58 +1,36 @@
 package com.example.ihsastable.data.model;
 
 public class Horse {
-    private String HorseName;
-    private int Age;
-    private double Height;
-    private double Weight;
-    private String Color;
+    private int id;
+    private String Name;
     private String Description;
-    // spur options are: Optional Rowel, Optional, (need to check for the rest)
-    private String Spurs;
-    private int MinimumWeight;
+    private String Provider;
 
-    public Horse(){}
+    public Horse() {
+    }
 
-    public Horse(String horseName, int age, double height, double weight, String color, String description, String spurs, int minimumWeight) {
-        HorseName = horseName;
-        Age = age;
-        Height = height;
-        Weight = weight;
-        Color = color;
+    public Horse(int id, String name, String description, String provider) {
+        this.id = id;
+        Name = name;
         Description = description;
-        Spurs = spurs;
-        MinimumWeight = minimumWeight;
+        Provider = provider;
     }
 
-    public String getHorseName() {
-        return HorseName;
+    public int getId() {
+        return id;
     }
 
-    public int getAge() {
-        return Age;
-    }
-
-    public double getHeight() {
-        return Height;
-    }
-
-    public double getWeight() {
-        return Weight;
-    }
-
-    public String getColor() {
-        return Color;
+    public String getName() {
+        return Name;
     }
 
     public String getDescription() {
         return Description;
     }
 
-    public String getSpurs() {
-        return Spurs;
+    public String getProvider() {
+        return Provider;
     }
 
-    public int getMinimumWeight() {
-        return MinimumWeight;
-    }
+
 }

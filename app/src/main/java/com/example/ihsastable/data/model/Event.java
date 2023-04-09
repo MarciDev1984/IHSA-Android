@@ -5,51 +5,40 @@ import com.google.firebase.Timestamp;
 import java.util.List;
 
 public class Event {
-    // not sure what to use for string location, but it would make sense to use the school.
+    private int Id;
     private String Location;
-    //Firebase uses Timestamp to store dates, like from Date()
     private Timestamp EventTime;
-    private List<Rider> Riders;
+    private List<Integer> Riders;   //contains rider id's
     private int Zone;
 
-    public Event(){}
+    public Event() {
+    }
 
-    public Event(String location, Timestamp eventTime, List<Rider> riders, int zone) {
+    public Event(int id, String location, Timestamp eventTime, List<Integer> riders, int zone) {
+        Id = id;
         Location = location;
         EventTime = eventTime;
         Riders = riders;
         Zone = zone;
+    }
+
+    public int getId() {
+        return Id;
     }
 
     public String getLocation() {
         return Location;
     }
 
-    public void setLocation(String location) {
-        Location = location;
-    }
-
     public Timestamp getEventTime() {
         return EventTime;
     }
 
-    public void setEventTime(Timestamp eventTime) {
-        EventTime = eventTime;
-    }
-
-    public List<Rider> getRiders() {
+    public List<Integer> getRiders() {
         return Riders;
-    }
-
-    public void setRiders(List<Rider> riders) {
-        Riders = riders;
     }
 
     public int getZone() {
         return Zone;
-    }
-
-    public void setZone(int zone) {
-        Zone = zone;
     }
 }

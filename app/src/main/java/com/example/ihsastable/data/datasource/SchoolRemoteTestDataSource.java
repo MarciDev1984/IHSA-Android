@@ -8,7 +8,7 @@ public class SchoolRemoteTestDataSource {
     private CollectionReference schoolReference;
     public SchoolRemoteTestDataSource(){
         this.db = FirebaseFirestore.getInstance();
-        this.schoolReference = db.collection("Events");
+        this.schoolReference = db.collection("School");
     }
 
     public CollectionReference getSchoolReference() {

@@ -8,7 +8,7 @@ public class AnnouncementRemoteDataSource {
     private CollectionReference announcementReference;
     public AnnouncementRemoteDataSource(){
         this.db = FirebaseFirestore.getInstance();
-        this.announcementReference = db.collection("Announcements");
+        this.announcementReference = db.collection("Announcement");
     }
 
     public CollectionReference getAnnouncementReference() {

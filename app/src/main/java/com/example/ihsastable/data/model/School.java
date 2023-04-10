@@ -1,6 +1,7 @@
 package com.example.ihsastable.data.model;
 
 public class School {
+    private int Id;
     private String SchoolName;
     private String StateCode;
     private double Latitude;
@@ -12,7 +13,8 @@ public class School {
 
     public School(){}
 
-    public School(String schoolName, String stateCode, double latitude, double longitude, int region, int zone, int numRiders, boolean anchorSchool) {
+    public School(int Id, String schoolName, String stateCode, double latitude, double longitude, int region, int zone, int numRiders, boolean anchorSchool) {
+        this.Id = Id;
         SchoolName = schoolName;
         StateCode = stateCode;
         Latitude = latitude;
@@ -53,5 +55,9 @@ public class School {
 
     public boolean isAnchorSchool() {
         return AnchorSchool;
+    }
+
+    public int getId() {
+        return Id;
     }
 }

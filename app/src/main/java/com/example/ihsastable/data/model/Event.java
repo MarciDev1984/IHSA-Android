@@ -8,17 +8,21 @@ public class Event {
     private int Id;
     private String Location;
     private Timestamp EventTime;
-    private List<Integer> Riders;   //contains rider id's, this can be used to get the riders for the event
+    private List<Integer> Classes;
     private int Zone;
 
     public Event() {
     }
 
-    public Event(int id, String location, Timestamp eventTime, List<Integer> riders, int zone) {
+    public List<Integer> getClasses() {
+        return Classes;
+    }
+
+    public Event(int id, String location, Timestamp eventTime, List<Integer> classes, int zone) {
         Id = id;
         Location = location;
         EventTime = eventTime;
-        Riders = riders;
+        Classes = classes;
         Zone = zone;
     }
 
@@ -34,9 +38,6 @@ public class Event {
         return EventTime;
     }
 
-    public List<Integer> getRiders() {
-        return Riders;
-    }
 
     public int getZone() {
         return Zone;

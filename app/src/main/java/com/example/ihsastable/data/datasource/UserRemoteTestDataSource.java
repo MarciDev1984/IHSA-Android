@@ -8,7 +8,7 @@ public class UserRemoteTestDataSource {
     private CollectionReference userReference;
     public UserRemoteTestDataSource(){
         this.db = FirebaseFirestore.getInstance();
-        this.userReference = db.collection("Events");
+        this.userReference = db.collection("User");
     }
 
     public CollectionReference getUserReference() {

@@ -8,7 +8,7 @@ public class CoachRemoteTestDataSource {
     private CollectionReference coachesReference;
     public CoachRemoteTestDataSource(){
         this.db = FirebaseFirestore.getInstance();
-        this.coachesReference = db.collection("Coaches");
+        this.coachesReference = db.collection("Coach");
     }
 
     public CollectionReference getCoachesReference() {

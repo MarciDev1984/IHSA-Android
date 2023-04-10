@@ -5,7 +5,6 @@ public class Horse {
     private String Name;
     private String Description;
     private String Provider;
-
     public Horse() {
     }
 

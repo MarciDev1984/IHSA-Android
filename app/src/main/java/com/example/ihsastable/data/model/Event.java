@@ -8,7 +8,7 @@ public class Event {
     private int Id;
     private String Location;
     private Timestamp EventTime;
-    private List<Integer> Riders;   //contains rider id's
+    private List<Integer> Riders;   //contains rider id's, this can be used to get the riders for the event
     private int Zone;
 
     public Event() {

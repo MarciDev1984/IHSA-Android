@@ -31,7 +31,6 @@ public class EventRepository {
 //            }
 //        });
     }
-
     public ArrayList<Event> getEventsAfterDate(Date date){
         if (events == null){
             events = new ArrayList<>();

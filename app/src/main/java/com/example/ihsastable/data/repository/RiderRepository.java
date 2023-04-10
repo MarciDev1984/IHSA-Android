@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -22,12 +23,13 @@ public class RiderRepository {
         this.remoteCR = ds.getRiderReference() ;
     }
     private Rider getRiderFromId(int id){
-        DocumentReference docRef = this.remoteCR.document("id");
+        Task<QuerySnapshot> taskRef = this.remoteCR.whereEqualTo("id", id).get();
         final Rider[] rider = new Rider[1];
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Task<QuerySnapshot> querySnapshotTask = taskRef.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                rider[0] = task.getResult().toObject(Rider.class);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                rider[0] = task.getResult().getDocuments().get(0).toObject(Rider.class);
             }
         });
         return rider[0];

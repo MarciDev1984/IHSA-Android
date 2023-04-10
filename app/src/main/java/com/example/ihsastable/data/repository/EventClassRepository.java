@@ -7,6 +7,7 @@ import com.example.ihsastable.data.datasource.EventRemoteTestDataSource;
 import com.example.ihsastable.data.model.Event;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Events;
+import com.example.ihsastable.data.model.Horse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,15 +27,16 @@ public class EventClassRepository {
         this.remoteCR = ds.getEventClassReference();
     }
     private EventClass getEventClassFromId(int id){
-        DocumentReference docRef = this.remoteCR.document("id");
-        final EventClass[] event = new EventClass[1];
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Task<QuerySnapshot> taskRef = this.remoteCR.whereEqualTo("id", id).get();
+        final EventClass[] eventClass = new EventClass[1];
+        Task<QuerySnapshot> querySnapshotTask = taskRef.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                event[0] = task.getResult().toObject(EventClass.class);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                eventClass[0] = task.getResult().getDocuments().get(0).toObject(EventClass.class);
             }
         });
-        return event[0];
+        return eventClass[0];
     }
     public List<EventClass> getEventClassesFromEvent(Event e){
         List<EventClass> eventClasses = new ArrayList<>();

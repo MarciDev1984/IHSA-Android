@@ -6,7 +6,9 @@ import com.example.ihsastable.data.datasource.HorseRemoteTestDataSource;
 import com.example.ihsastable.data.datasource.RiderRemoteTestDataSource;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Horse;
+import com.example.ihsastable.data.model.Horses;
 import com.example.ihsastable.data.model.Rider;
+import com.example.ihsastable.data.model.Riders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -22,23 +24,20 @@ public class RiderRepository {
         RiderRemoteTestDataSource ds = new RiderRemoteTestDataSource();
         this.remoteCR = ds.getRiderReference() ;
     }
-    private Rider getRiderFromId(int id){
-        Task<QuerySnapshot> taskRef = this.remoteCR.whereEqualTo("id", id).get();
-        final Rider[] rider = new Rider[1];
-        Task<QuerySnapshot> querySnapshotTask = taskRef.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
 
+    public void fetchRidersFromEventClass(EventClass ec) {
+        ArrayList<Rider> riders = new ArrayList<>();
+        this.remoteCR.whereIn("Id", ec.getRiders()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                rider[0] = task.getResult().getDocuments().get(0).toObject(Rider.class);
+                for (DocumentSnapshot ds : task.getResult()) {
+                    riders.add(ds.toObject(Rider.class));
+                }
+                Riders.getModel().riders = riders;
             }
         });
-        return rider[0];
     }
-    public ArrayList<Rider> getRidersFromEventClass(EventClass ec){
-        ArrayList<Rider> riders = new ArrayList<>();
-        for(int riderId : ec.getRiders()){
-            riders.add(getRiderFromId(riderId));
-        }
-        return riders;
+    public ArrayList<Rider> getRiders(){
+        return Riders.getModel().riders;
     }
 }

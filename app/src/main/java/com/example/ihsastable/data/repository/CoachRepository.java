@@ -15,25 +15,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Date;
 
+//Currently not being used
 public class CoachRepository {
     private CollectionReference remoteCR;
     private ArrayList<Coach> coaches;
     public CoachRepository(CoachRemoteTestDataSource ds){
         this.remoteCR = ds.getCoachesReference();
-    }
-
-    public ArrayList<Coach> getCoaches(){
-        if (coaches == null){
-            coaches = new ArrayList<>();
-        }
-        this.remoteCR.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for(QueryDocumentSnapshot doc : task.getResult()){
-                    coaches.add(doc.toObject(Coach.class));
-                }
-            }
-        });
-        return coaches;
     }
 }

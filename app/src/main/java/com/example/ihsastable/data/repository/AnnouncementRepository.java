@@ -14,25 +14,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Date;
 
+//Currently not being used
 public class AnnouncementRepository {
     private CollectionReference remoteCR;
     private ArrayList<Announcement> Announcements;
     public AnnouncementRepository(AnnouncementRemoteDataSource remote){
         this.remoteCR = remote.getAnnouncementReference();
-    }
-
-    public ArrayList<Announcement> getAnnouncementsAfterDate(Timestamp timestamp){
-        if (Announcements == null){
-            Announcements = new ArrayList<>();
-        }
-        this.remoteCR.whereGreaterThan("TimePublished", timestamp).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {Announcements = new ArrayList<>();
-                for(QueryDocumentSnapshot doc : task.getResult()){
-                    Announcements.add(doc.toObject(Announcement.class));
-                }
-            }
-        });
-        return Announcements;
     }
 }

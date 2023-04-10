@@ -6,7 +6,9 @@ import com.example.ihsastable.data.datasource.HorseRemoteTestDataSource;
 import com.example.ihsastable.data.datasource.SchoolRemoteTestDataSource;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Horse;
+import com.example.ihsastable.data.model.Horses;
 import com.example.ihsastable.data.model.School;
+import com.example.ihsastable.data.model.SchoolSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -22,17 +24,16 @@ public class SchoolRepository {
         SchoolRemoteTestDataSource ds = new SchoolRemoteTestDataSource();
         this.remoteCR = ds.getSchoolReference() ;
     }
-    public School getSchoolFromId(int id){
-        Task<QuerySnapshot> taskRef = this.remoteCR.whereEqualTo("id", id).get();
-        final School[] school = new School[1];
-        Task<QuerySnapshot> querySnapshotTask = taskRef.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
-
+    public void fetchSchoolFromId(int id) {
+        this.remoteCR.whereEqualTo("Id", id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                school[0] = task.getResult().getDocuments().get(0).toObject(School.class);
+                School school = task.getResult().getDocuments().get(0).toObject(School.class);
+                SchoolSingleton.getModel().school = school;
             }
         });
-        return school[0];
     }
-
+    public School getSchool(){
+        return SchoolSingleton.getModel().school;
+    }
 }

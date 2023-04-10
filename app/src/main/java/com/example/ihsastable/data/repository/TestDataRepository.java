@@ -97,7 +97,6 @@ public class TestDataRepository {
                     HorseRepository hr = new HorseRepository();
                     EventClass testEC = new EventClass(1, "butts", "Pattern2", Arrays.asList(1, 4, 7), Arrays.asList(1,2, 3));
                     hr.fetchHorsesFromEventClass(testEC);
-                    Log.e("error", "Am here now");
                 }
             }
         });
@@ -188,13 +187,13 @@ public class TestDataRepository {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             EventClassRepository ecr = new EventClassRepository();
-                            ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
+                            //ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
                         }
                     });
                 }
                 else{
                     EventClassRepository ecr = new EventClassRepository();
-                    ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
+                    //ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
                 }
             }
         });

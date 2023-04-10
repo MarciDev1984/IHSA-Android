@@ -34,9 +34,6 @@ public class EventClassRepository {
                     eventClasses.add(ds.toObject(EventClass.class));
                 }
                 EventClasses.getModel().eventClasses = eventClasses;
-                for(EventClass ec : EventClasses.getModel().eventClasses){
-                    Log.d("tests", ec.getClassName() + ec.getHorses() + ec.getPattern() + ec.getId());
-                }
             }
         });
     }

@@ -45,6 +45,7 @@
         android:ems="10"
         android:hint="Enter Rider Pin"
         android:inputType="number"
+        android:maxLength="3"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

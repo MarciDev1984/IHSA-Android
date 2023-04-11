@@ -19,41 +19,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.072" />
-
-    <TextView
-        android:id="@+id/rankTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rider Class 5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileTV"
-        app:layout_constraintVertical_bias="0.109" />
-
-    <CheckBox
-        android:id="@+id/followCB"
-        android:layout_width="119dp"
-        android:layout_height="61dp"
-        android:text="Follow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.756"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.252" />
-
-    <TextView
-        android:id="@+id/infoTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Maryville, MO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

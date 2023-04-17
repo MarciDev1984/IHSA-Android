@@ -1,12 +1,14 @@
 package com.example.ihsastable;
 
 import android.os.Bundle;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
+
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,7 +31,7 @@ import java.util.Map;
  * This is Fragment_Favorite
  * This is where the riders you have chose to follow will be displayed
  *
- * Author: Kooper Young
+ * Author: Kooper Young, Fisher Reese
  */
 
 public class Fragment_Favorite extends Fragment {
@@ -182,6 +184,5 @@ public class Fragment_Favorite extends Fragment {
         int length = inputStream.read(buffer);
         String data = new String(buffer, 0, length);
         inputStream.close();
-
     }
 }

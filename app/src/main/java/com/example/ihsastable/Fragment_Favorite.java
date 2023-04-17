@@ -2,8 +2,12 @@ package com.example.ihsastable;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.GestureDetector;
 
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,12 +31,21 @@ import java.util.Map;
  * This is Fragment_Favorite
  * This is where the riders you have chose to follow will be displayed
  *
- * Author: Kooper Young
+ * Author: Kooper Young, Fisher Reese
  */
 
-public class Fragment_Favorite extends Fragment
-{
-    public Fragment_Favorite() {}
+public class Fragment_Favorite extends Fragment {
+    public Fragment_Favorite() {
+    }
+
+    private RecyclerView favorites_rv;
+    private Button followBTN;
+    private EditText followTV;
+    private View view;
+    private File file;
+
+    //Array to store user Favorite riders
+    Map<String, String> userFavorites = new HashMap<>();
 
     private RecyclerView favorites_rv;
     private Button followBTN;
@@ -56,7 +69,6 @@ public class Fragment_Favorite extends Fragment
 
         // Create a file in the root directory
         file = new File(rootDir, "cache.txt");
-
 
         //Create a listener for follow button
         followBTN.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +96,6 @@ public class Fragment_Favorite extends Fragment
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
-
 
         followBTN.setEnabled(false);
         //Author: Jacob Pickman

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     private ViewPager2 viewPager;
     private MaterialToolbar materialToolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -87,5 +88,10 @@ public class MainActivity extends AppCompatActivity
     public void openAbout(){
         Intent opAbout = new Intent(this, AboutPage.class);
         startActivity(opAbout);
+    }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        return;
     }
 }

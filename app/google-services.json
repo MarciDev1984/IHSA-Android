@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "654391719597",
+    "project_id": "horsedb-9a0e8",
+    "storage_bucket": "horsedb-9a0e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654391719597:android:6b678183856f7aa932f824",
+        "android_client_info": {
+          "package_name": "com.example.ihsastable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654391719597-ckqm32pflp8j35g7409fng5d3btf1r88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH4iKobrpp9DcIqyEPj1gziNmOZTp7WlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654391719597-ckqm32pflp8j35g7409fng5d3btf1r88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

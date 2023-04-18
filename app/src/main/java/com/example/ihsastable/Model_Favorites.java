@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Author: Fisher Reese
  */
 
-public class Favorites_Model
+public class Model_Favorites
 {
     private File file;
     private String riderID, riderName;
@@ -30,7 +30,7 @@ public class Favorites_Model
 
     private ArrayList<Favorites> favoritesList;
 
-    private Favorites_Model() throws IOException {
+    private Model_Favorites() throws IOException {
         favoritesList = new ArrayList<Favorites>();
         loadInitialTasks();
     }
@@ -63,16 +63,16 @@ public class Favorites_Model
         inputStream.close();
     }
 
-    public ArrayList<Favorites_Model.Favorites> getTaskArray()
+    public ArrayList<Model_Favorites.Favorites> getTaskArray()
     {
         return favoritesList;
     }
 
-    public static Favorites_Model theModel = null;
-    public static Favorites_Model getSingleton() throws IOException {
+    public static Model_Favorites theModel = null;
+    public static Model_Favorites getSingleton() throws IOException {
         if(theModel == null)
         {
-            theModel = new Favorites_Model();
+            theModel = new Model_Favorites();
         }
         return theModel;
     }

@@ -5,7 +5,7 @@
     android:id="@+id/scheduleCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Rider_Order_Activity">
+    tools:context=".Activity_Show_Details">
 
     <TextView
         android:id="@+id/scheduleHeaderTV"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.135" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rider_order_rv"
+        android:id="@+id/show_details_rv"
         android:layout_width="336dp"
         android:layout_height="528dp"
         app:layout_constraintBottom_toBottomOf="parent"

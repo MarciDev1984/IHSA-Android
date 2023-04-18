@@ -5,7 +5,7 @@
     android:id="@+id/riderProfileCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".riderProfile">
+    tools:context=".Activity_Rider_Profile">
 
     <TextView
         android:id="@+id/profileTV"

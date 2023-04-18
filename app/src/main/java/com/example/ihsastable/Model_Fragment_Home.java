@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Author: Jacob Pinkman
  */
 
-public class Show_Schedule_Model
+public class Model_Fragment_Home
 {
     public static class Show
     {
@@ -25,7 +25,7 @@ public class Show_Schedule_Model
 
     private ArrayList<Show> showList;
 
-    private Show_Schedule_Model()
+    private Model_Fragment_Home()
     {
         showList = new ArrayList<Show>();
         loadInitialTasks();
@@ -69,12 +69,12 @@ public class Show_Schedule_Model
         return showList;
     }
 
-    public static Show_Schedule_Model theModel = null;
-    public static Show_Schedule_Model getSingleton()
+    public static Model_Fragment_Home theModel = null;
+    public static Model_Fragment_Home getSingleton()
     {
         if(theModel == null)
         {
-            theModel = new Show_Schedule_Model();
+            theModel = new Model_Fragment_Home();
         }
         return theModel;
     }

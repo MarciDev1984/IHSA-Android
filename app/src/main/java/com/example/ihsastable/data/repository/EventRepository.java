@@ -35,6 +35,7 @@ public class EventRepository {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
         ArrayList<Event> events = new ArrayList<>();
+        Log.e("test", "fetching data using cal date: " + cal.getTime().toString());
         this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

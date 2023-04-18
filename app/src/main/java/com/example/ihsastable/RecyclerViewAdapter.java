@@ -46,6 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         super();
         key = id;
         Log.d("RV ADAPT", "RecyclerViewAdapter :: Key = " + key);
+        if(key == "show_schedule_rv"){eventRepository.fetchEventsAfterOneYear();}
+
     }
 
     //TODO - See what happens when I try passing this different XML's
@@ -88,12 +90,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("RV ADAPT", "RecyclerViewAdapter --- onBindViewHolder");
         TextView showTV = holder.itemView.findViewById(R.id.showTV);
         TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
-        eventRepository.fetchEventsAfterOneYear();
 
         if(key.equals("show_schedule_rv"))
         {
-            showTV.setText(eventRepository.getEvents().get(position).getEventName());
-            dateTV.setText(eventRepository.getEvents().get(position).getEventTime().toString());
+            try {
+                showTV.setText(eventRepository.getEvents().get(position).getEventName());
+                dateTV.setText(eventRepository.getEvents().get(position).getEventTime().toString());
+            }
+            catch(Exception e){
+                Log.d("test", eventRepository.getEvents().size() + "");
+            }
         }
         else if(key.equals("rider_order_rv"))
         {
@@ -112,7 +118,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("RV ADAPT", "RecyclerViewAdapter --- getItemCount");
         if(key.equals("show_schedule_rv"))
         {
-            return show_schedule_model.getTaskArray().size();
+            return eventRepository.getEvents().size();
         }
         else if(key.equals("rider_order_rv"))
         {

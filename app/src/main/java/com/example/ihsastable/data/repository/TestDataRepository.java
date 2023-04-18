@@ -17,6 +17,7 @@ import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -106,12 +107,14 @@ public class TestDataRepository {
         cr.whereEqualTo("Id", 1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Calendar cal = Calendar.getInstance();
                 if(task.getResult().isEmpty()){
                     Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 1);
                     docData.put("Location", "Missouri");
                     docData.put("EventName", "Charleston ton");
-                    docData.put("EventTime", new Date());
+                    cal.set(2022, 12, 24);
+                    docData.put("EventTime", cal.getTime());
                     docData.put("Zone", 1);
                     docData.put("EventClasses", Arrays.asList(1,4,3,9));
 
@@ -119,7 +122,8 @@ public class TestDataRepository {
                     docData1.put("Id", 2);
                     docData1.put("Location", "Missouri2");
                     docData1.put("EventName", "Charlyboob");
-                    docData1.put("EventTime", new Date());
+                    cal.set(2023, 6, 21);
+                    docData1.put("EventTime", cal.getTime());
                     docData1.put("Zone", 1);
                     docData1.put("EventClasses", Arrays.asList(1,9,8,8,7));
 
@@ -127,7 +131,8 @@ public class TestDataRepository {
                     docData2.put("Id", 3);
                     docData2.put("Location", "Missouri3");
                     docData2.put("EventName", "Charb Blarb");
-                    docData2.put("EventTime", new Date());
+                    cal.set(2024, 8, 21);
+                    docData2.put("EventTime", cal.getTime());
                     docData2.put("Zone", 2);
                     docData2.put("EventClasses", Arrays.asList(1,4,7,2));
 
@@ -140,13 +145,13 @@ public class TestDataRepository {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             EventRepository er = new EventRepository();
-                            er.fetchEventsAfterDate(new Date(-700000));
+                            er.fetchEventsAfterOneYear();
                         }
                     });
                 }
                 else{
                     EventRepository er = new EventRepository();
-                    er.fetchEventsAfterDate(new Date(-700000));
+                    er.fetchEventsAfterOneYear();
                 }
             }
         });

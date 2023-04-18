@@ -14,13 +14,13 @@ import android.widget.TextView;
  * Author: Ayush
  */
 
-public class AboutPage extends AppCompatActivity {
+public class Activity_About extends AppCompatActivity {
 
     TextView link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_page);
+        setContentView(R.layout.activity_about);
         link = findViewById(R.id.textView3);
         link.setMovementMethod(LinkMovementMethod.getInstance());
         link.setLinkTextColor(Color.BLUE);

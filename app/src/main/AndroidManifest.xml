@@ -17,16 +17,16 @@
             android:name=".RidingPatternDisplay"
             android:exported="false" />
         <activity
-            android:name=".riderProfile"
+            android:name=".Activity_Rider_Profile"
             android:exported="false" />
         <activity
-            android:name=".riderActivity"
+            android:name=".Activity_Class_Order"
             android:exported="false" />
         <activity
-            android:name=".AboutPage"
+            android:name=".Activity_About"
             android:exported="false" />
         <activity
-            android:name=".Rider_Order_Activity"
+            android:name=".Activity_Show_Details"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false" />
         <activity

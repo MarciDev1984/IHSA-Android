@@ -5,7 +5,7 @@
     android:id="@+id/riderCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".riderActivity">
+    tools:context=".Activity_Class_Order">
 
     <TextView
         android:id="@+id/classTV"

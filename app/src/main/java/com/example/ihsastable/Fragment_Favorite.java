@@ -47,15 +47,6 @@ public class Fragment_Favorite extends Fragment {
     //Array to store user Favorite riders
     Map<String, String> userFavorites = new HashMap<>();
 
-    private RecyclerView favorites_rv;
-    private Button followBTN;
-    private EditText followTV;
-    private View view;
-    private File file;
-
-    //Array to store user Favorite riders
-    Map<String, String> userFavorites = new HashMap<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite, container, false);

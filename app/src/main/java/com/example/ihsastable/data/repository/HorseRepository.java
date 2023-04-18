@@ -35,6 +35,7 @@ public class HorseRepository {
 
     public void fetchHorsesFromEventClass(EventClass ec){
         ArrayList<Horse> horses = new ArrayList<>();
+        // getHorses returns a list of Horse id's
         this.remoteCR.whereIn("Id", ec.getHorses()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

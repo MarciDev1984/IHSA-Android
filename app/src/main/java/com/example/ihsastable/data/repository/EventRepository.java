@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EventRepository {
@@ -30,9 +31,11 @@ public class EventRepository {
         EventRemoteTestDataSource ds = new EventRemoteTestDataSource();
         this.remoteCR = ds.getEventReference();
     }
-    public void fetchEventsAfterDate(Date date){
+    public void fetchEventsAfterOneYear(){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
         ArrayList<Event> events = new ArrayList<>();
-        this.remoteCR.whereGreaterThan("EventTime", date).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.getResult().isEmpty()){

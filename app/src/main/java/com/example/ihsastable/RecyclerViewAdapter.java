@@ -9,6 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ihsastable.data.model.Event;
+import com.example.ihsastable.data.model.Events;
+import com.example.ihsastable.data.repository.EventRepository;
+
+import java.util.ArrayList;
+
 /*
  * This is RecyclerViewAdapter
  * This is a shared class between every instance of our RecyclerViews
@@ -28,6 +34,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 {
     private String key;
     private Show_Schedule_Model show_schedule_model = Show_Schedule_Model.getSingleton();
+    private EventRepository eventRepository = new EventRepository();
+    private ArrayList<Event> events = new ArrayList<>();
     private classModel modelClass = classModel.getSingleton();
     private Rider_Schedule_Model modelRider = Rider_Schedule_Model.getSingleton();
 
@@ -80,10 +88,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("RV ADAPT", "RecyclerViewAdapter --- onBindViewHolder");
         TextView showTV = holder.itemView.findViewById(R.id.showTV);
         TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
+        eventRepository.fetchEventsAfterOneYear();
 
         if(key.equals("show_schedule_rv"))
         {
-            showTV.setText(show_schedule_model.getTaskArray().get(position).getShow());
+            showTV.setText(eventRepository.getEvents().get(position).getEventName());
+            dateTV.setText(eventRepository.getEvents().get(position).getEventTime().toString());
         }
         else if(key.equals("rider_order_rv"))
         {

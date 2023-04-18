@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /*
  * Keys per class
  * show_schedule_rv is for the RV in Fragment_Home
- *
+ * favorites_rv is for the RV in Fragment_Favorite
  */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>
@@ -100,22 +100,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount()
     {
         Log.d("RV ADAPT", "RecyclerViewAdapter --- getItemCount");
-        if(key.equals("show_schedule_rv"))
-        {
-            return show_schedule_model.getTaskArray().size();
-        }
-        else if(key.equals("rider_order_rv"))
-        {
-            return modelClass.getSchedArray().size();
-        }
-        else if (key.equals("idkyet"))
-        {
-            return modelRider.getOrderArray().size();
-        }
-        else
-        {
-            //TODO - make this return something a little more useful. This will just crash
-            return 0;
+        switch (key) {
+            case "show_schedule_rv":
+                return show_schedule_model.getTaskArray().size();
+            case "rider_order_rv":
+                return modelClass.getSchedArray().size();
+            case "idkyet":
+                return modelRider.getOrderArray().size();
+            case "favorites_rv":
+                return 0;
+            default:
+                //TODO - make this return something a little more useful. This will just crash
+                return 0;
         }
     }
 }

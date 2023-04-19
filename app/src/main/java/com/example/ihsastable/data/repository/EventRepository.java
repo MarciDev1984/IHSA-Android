@@ -35,15 +35,20 @@ public class EventRepository {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
         ArrayList<Event> events = new ArrayList<>();
-        Log.e("test", "fetching data using cal date: " + cal.getTime().toString());
-        this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Log.d("EventRepository", "fetching data using cal date: " + cal.getTime().toString());
+
+        this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).addSnapshotListener(new EventListener<QuerySnapshot>()
+        {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.getResult().isEmpty()){
-                    Log.e("tests", "there should be stuff here");
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error != null)
+                {
+                    Log.e("tests", "listening to snapshot failed");
                 }
-                else {
-                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                else
+                {
+                    for (QueryDocumentSnapshot doc : value)
+                    {
                         events.add(doc.toObject(Event.class));
                     }
                     Events.getModel().events = events;

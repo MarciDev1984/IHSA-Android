@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     }
     //Leads to info page
     public void openAbout(){
-        Intent opAbout = new Intent(this, AboutPage.class);
+        Intent opAbout = new Intent(this, Activity_About.class);
         startActivity(opAbout);
     }
     @Override

@@ -25,7 +25,7 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class riderActivity extends AppCompatActivity {
+public class Activity_Class_Order extends AppCompatActivity {
 
     private RecyclerViewAdapter orderRV;
     private long downloadID;
@@ -36,7 +36,7 @@ public class riderActivity extends AppCompatActivity {
 
         Log.d("SUPER AMAZING TEMP", "yeah its rider activity");
 
-        setContentView(R.layout.activity_rider);
+        setContentView(R.layout.activity_class_order);
         
         String pos = getIntent().getStringExtra("POS");
 
@@ -50,7 +50,7 @@ public class riderActivity extends AppCompatActivity {
         LinearLayoutManager thisManager = new LinearLayoutManager(this);
         riderRecycler.setLayoutManager(thisManager);
 
-        GestureDetectorCompat detect = new GestureDetectorCompat(this, new riderActivity.RecyclerViewOnGestureListener());
+        GestureDetectorCompat detect = new GestureDetectorCompat(this, new Activity_Class_Order.RecyclerViewOnGestureListener());
         riderRecycler.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener(){
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e){
@@ -70,7 +70,7 @@ public class riderActivity extends AppCompatActivity {
     }
 
     public void openSingleRider(int pos){
-        Intent opSched = new Intent(this, riderProfile.class);
+        Intent opSched = new Intent(this, Activity_Rider_Profile.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
     }

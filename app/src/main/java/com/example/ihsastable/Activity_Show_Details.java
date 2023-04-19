@@ -14,15 +14,22 @@ import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Rider_Order_Activity extends AppCompatActivity
+/*
+ * This is Rider_Order_Activity
+ * This is where you are directed upon clicking an item in Fragment_Home
+ *
+ * Author: Kooper Young, Fisher Reese
+ */
+
+public class Activity_Show_Details extends AppCompatActivity
 {
-    RecyclerView rider_order_rv;
+    RecyclerView show_details_rv;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rider_order);
+        setContentView(R.layout.activity_show_details);
 
         //Get the bundle from the previous activity
         String pos = getIntent().getStringExtra("POS");
@@ -37,28 +44,19 @@ public class Rider_Order_Activity extends AppCompatActivity
             schedHead.setText("Show " + pos + " Schedule");
         }
 
-        //Bind the RV object to the XML
-        rider_order_rv = findViewById(R.id.rider_order_rv);
+        show_details_rv = findViewById(R.id.show_details_rv);
 
-        //Create a new adapter instance with a key as an identifier
-        RecyclerViewAdapter rider_order_rv_adapter = new RecyclerViewAdapter("rider_order_rv");
-
-        //Create a LLM // was getActivity()
+        RecyclerViewAdapter show_details_rv_adapter = new RecyclerViewAdapter("show_details_rv");
         LinearLayoutManager LLM = new LinearLayoutManager(this);
-
-        //Create a gestureDetector
         GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new RecyclerViewOnGestureListener());
 
-        //Set the adapter, LLM, and gestureDetector
-        rider_order_rv.setAdapter(rider_order_rv_adapter);
-        rider_order_rv.setLayoutManager(LLM);
-        rider_order_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
+        show_details_rv.setAdapter(show_details_rv_adapter);
+        show_details_rv.setLayoutManager(LLM);
+        show_details_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
-            //This is the first thing called on a tap, it passes it to the RecyclerViewOnGestureListener
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent)
             {
-                Log.d("RV GESTURE", "Rider_Order_Activity --- onCreateView -- onInterceptTouchEvent");
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
@@ -68,21 +66,13 @@ public class Rider_Order_Activity extends AppCompatActivity
     {
         public boolean onSingleTapConfirmed(MotionEvent e)
         {
-            Log.d("RV GESTURE", "Rider_Order_Activity --- RecyclerViewOnGestureListener -- onSingleTapConfirmed");
-            //Gets the coords of the tap and looks for a child at those coords
-            View view = rider_order_rv.findChildViewUnder(e.getX(), e.getY());
-
-            //If there was a child
+            View view = show_details_rv.findChildViewUnder(e.getX(), e.getY());
             if (view != null)
             {
-                Log.d("RV GESTURE", "Rider_Order_Activity --- RecyclerViewOnGestureListener -- onSingleTapConfirmed * child confirmed");
-                RecyclerView.ViewHolder holder = rider_order_rv.getChildViewHolder(view);
+                RecyclerView.ViewHolder holder = show_details_rv.getChildViewHolder(view);
 
-                //If the child was the right type
                 if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
-                    Log.d("RV GESTURE", "Rider_Order_Activity --- RecyclerViewOnGestureListener -- " +
-                            "onSingleTapConfirmed * child confirmed * correct type at position: " + holder.getAdapterPosition());
                     openRider(holder.getAdapterPosition());
                     return true;
                 }
@@ -93,7 +83,7 @@ public class Rider_Order_Activity extends AppCompatActivity
 
     public void openRider(int pos)
     {
-        Intent opSched = new Intent(this, riderActivity.class);
+        Intent opSched = new Intent(this, Activity_Class_Order.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
     }

@@ -12,67 +12,57 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ihsastable.data.model.Event;
-<<<<<<< Updated upstream
-import com.example.ihsastable.data.model.Events;
-=======
->>>>>>> Stashed changes
+//import com.example.ihsastable.data.model.Events;
 import com.example.ihsastable.data.repository.EventRepository;
 import com.example.ihsastable.viewmodel.EventViewModel;
-
-import java.util.ArrayList;
 
 /*
  * This is RecyclerViewAdapter
  * This is a shared class between every instance of our RecyclerViews
  * Not the most elegant solution, but we are working on it
- * TODO - Work on a more elegant solution to this dumpster fire
  *
  * Author: Kooper Young
  */
 
 /*
- * Keys per class
- * show_schedule_rv is for the RV in Fragment_Home
- * favorites_rv is for the RV in Fragment_Favorite
+ * Keys are the class name the RV resides in
+ * The RV in Fragment_Home is fragment_home_rv
+ * The RV in Activity_Show_Details is show_details_rv
  */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>
 {
-<<<<<<< Updated upstream
-    private String key;
-    private Show_Schedule_Model show_schedule_model = Show_Schedule_Model.getSingleton();
-    private EventRepository eventRepository = new EventRepository();
-    private ArrayList<Event> events = new ArrayList<>();
-    private classModel modelClass = classModel.getSingleton();
-    private Rider_Schedule_Model modelRider = Rider_Schedule_Model.getSingleton();
-=======
-    private final String key;
-    private final EventRepository eventRepository = new EventRepository();
-
->>>>>>> Stashed changes
-
-    //TODO - Rework how this key/identification system works
-    //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
+   private final String key;
+   private ArrayList<Event> events = new ArrayList<>();
+   
+   private final Model_Fragment_Home _modelShowSchedule = Model_Fragment_Home.getSingleton();
+   private final Model_Show_Class modelClass = Model_Show_Class.getSingleton();
+   private final Model_Class_Order modelRider = Model_Class_Order.getSingleton();
+   
+   private final EventRepository eventRepository = new EventRepository();
+   
+   //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
     public RecyclerViewAdapter(String id)
     {
         super();
         key = id;
-        Log.d("RV ADAPT", "RecyclerViewAdapter :: Key = " + key);
-        if(key == "show_schedule_rv"){eventRepository.fetchEventsAfterOneYear();}
+
+        switch(key) {
+            case "fragment_home_rv":
+                eventRepository.fetchEventsAfterOneYear();
+                break;
+        }
 
     }
 
-    //TODO - See what happens when I try passing this different XML's
     @NonNull @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        Log.d("RV ADAPT", "RecyclerViewAdapter --- onCreateViewHolder");
-
         RecyclerViewHolder RVH;
         View view;
 
         //For now, this is how we are going to pass different layout files in the adapter
-        if(key.equals("show_schedule_rv"))
+        if(key.equals("fragment_home_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell, parent, false);
             RVH = new RecyclerViewHolder(view);
@@ -104,13 +94,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
         EventViewModel eventViewModel = new EventViewModel();
 
-        if(key.equals("show_schedule_rv"))
+        if(key.equals("fragment_home_rv"))
         {
-<<<<<<< Updated upstream
-            try {
-                showTV.setText(eventRepository.getEvents().get(position).getEventName());
-                dateTV.setText(eventRepository.getEvents().get(position).getEventTime().toString());
-=======
             try
             {
                 eventViewModel.eventMutableLiveData.setValue(eventRepository.getEvents().get(position));
@@ -121,10 +106,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         dateTV.setText(event.getEventTime().toString());
                     }
                 });
-
->>>>>>> Stashed changes
             }
-            catch(Exception e){
+            catch(Exception e)
+            {
                 Log.d("test", eventRepository.getEvents().size() + "");
             }
         }
@@ -144,8 +128,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     {
         Log.d("RV ADAPT", "RecyclerViewAdapter --- getItemCount");
         switch (key) {
-            case "show_schedule_rv":
-                return show_schedule_model.getTaskArray().size();
+            case "fragment_home_rv":
+                //return _modelShowSchedule.getTaskArray().size();
+                Log.d("EVENTREPO", "" + eventRepository.getEvents().size() );
+                return eventRepository.getEvents().size();
             case "rider_order_rv":
                 //return modelClass.getSchedArray().size();
             case "idkyet":

@@ -1,5 +1,6 @@
 package com.example.ihsastable;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -37,6 +38,7 @@ public class Fragment_Home extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        MainActivity activity = (MainActivity) getContext();
         //getActivity() or getContext() don't work in fragments.
         //This is the work-around
         //You can do view.getContext() if you need that
@@ -46,6 +48,7 @@ public class Fragment_Home extends Fragment
         fragment_home_rv = view.findViewById(R.id.fragment_home_rv);
 
         //Create a new adapter instance with a key as an identifier
+        //RecyclerViewAdapter fragment_home_rv_adapter = activity.recyclerViewAdapter;
         RecyclerViewAdapter fragment_home_rv_adapter = new RecyclerViewAdapter("fragment_home_rv");
 
         //Create a LLM

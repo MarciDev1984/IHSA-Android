@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private MaterialToolbar materialToolbar;
+    public RecyclerViewAdapter recyclerViewAdapter;
 
 
     @Override
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-
         viewPager.setAdapter(viewPagerAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter("fragment_home_rv");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {

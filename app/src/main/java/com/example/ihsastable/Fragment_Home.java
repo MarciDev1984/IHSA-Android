@@ -1,5 +1,6 @@
 package com.example.ihsastable;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -36,6 +37,7 @@ public class Fragment_Home extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        MainActivity activity = (MainActivity) getContext();
         //getActivity() or getContext() don't work in fragments.
         //This is the work-around
         //You can do view.getContext() if you need that
@@ -45,7 +47,11 @@ public class Fragment_Home extends Fragment
         show_schedule_rv = view.findViewById(R.id.show_schedule_rv);
 
         //Create a new adapter instance with a key as an identifier
+<<<<<<< Updated upstream
         RecyclerViewAdapter show_schedule_rv_adapter = new RecyclerViewAdapter("show_schedule_rv");
+=======
+        RecyclerViewAdapter fragment_home_rv_adapter = activity.recyclerViewAdapter;
+>>>>>>> Stashed changes
 
         //Create a LLM // was getActivity()
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
@@ -99,8 +105,14 @@ public class Fragment_Home extends Fragment
 
     public void openSchedule(int pos)
     {
+<<<<<<< Updated upstream
         Intent opSched = new Intent(view.getContext(), Rider_Order_Activity.class);
         opSched.putExtra("POS", String.valueOf(pos + 1));
         startActivity(opSched);
+=======
+//        Intent opSched = new Intent(view.getContext(), Activity_Show_Details.class);
+//        opSched.putExtra("POS", String.valueOf(pos + 1));
+//        startActivity(opSched);
+>>>>>>> Stashed changes
     }
 }

@@ -12,12 +12,12 @@ public class RidersViewModel extends ViewModel {
     public MutableLiveData<ArrayList<Rider>> riders;
     private static RidersViewModel theModel;
     public static RidersViewModel getModel(){
-        if (theModel == null){
-            theModel = new RidersViewModel();
+        if (RidersViewModel.theModel == null){
+            RidersViewModel.theModel = new RidersViewModel();
         }
-        return theModel;
+        return RidersViewModel.theModel;
     }
     private RidersViewModel(){
-        this.riders = new MutableLiveData<>();
+        riders = new MutableLiveData<>();
     }
 }

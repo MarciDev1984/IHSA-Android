@@ -17,27 +17,27 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class HorseRepository {
-    private CollectionReference remoteCR;
+    private final CollectionReference remoteCR;
     ListenerRegistration listenerRegistration;
     public HorseRepository(){
-        HorseRemoteTestDataSource ds = new HorseRemoteTestDataSource();
-        this.remoteCR = ds.getHorseReference() ;
+        final HorseRemoteTestDataSource ds = new HorseRemoteTestDataSource();
+        remoteCR = ds.getHorseReference() ;
     }
 
-    public void fetchHorsesFromHorseIds(ArrayList horseIds){
-        ArrayList<Horse> horses = new ArrayList<>();
+    public void fetchHorsesFromHorseIds(final ArrayList horseIds){
+        final ArrayList<Horse> horses = new ArrayList<>();
         // getHorses returns a list of Horse id's
-        listenerRegistration = this.remoteCR.whereIn("Id", horseIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+        this.listenerRegistration = remoteCR.whereIn("Id", horseIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (QueryDocumentSnapshot doc : value)
+                    for (final QueryDocumentSnapshot doc : value)
                     {
                         horses.add(doc.toObject(Horse.class));
                     }
@@ -50,7 +50,7 @@ public class HorseRepository {
         return HorsesViewModel.getModel().horses.getValue();
     }
     public void unsubFirebase(){
-        listenerRegistration.remove();
+        this.listenerRegistration.remove();
     }
 }
 //for testing

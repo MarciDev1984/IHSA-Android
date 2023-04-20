@@ -48,51 +48,51 @@ public class Fragment_Home extends Fragment
     public Fragment_Home() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState)
     {
-        MainActivity activity = (MainActivity) getContext();
+        final MainActivity activity = (MainActivity) this.getContext();
         //getActivity() or getContext() don't work in fragments.
         //This is the work-around
         //You can do view.getContext() if you need that
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        this.view = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Bind the RV object to the XML
-        fragment_home_rv = view.findViewById(R.id.fragment_home_rv);
+        this.fragment_home_rv = this.view.findViewById(R.id.fragment_home_rv);
 
         //Create a new adapter instance with a key as an identifier
         //RecyclerViewAdapter fragment_home_rv_adapter = activity.recyclerViewAdapter;
-        fragment_home_rv_adapter = new RecyclerViewAdapter("fragment_home_rv");
+        this.fragment_home_rv_adapter = new RecyclerViewAdapter("fragment_home_rv");
 
         //Create a LLM
-        LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
+        final LinearLayoutManager LLM = new LinearLayoutManager(this.view.getContext());
 
         //Create a gestureDetector
-        GestureDetectorCompat gestureDetector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this.view.getContext(), new RecyclerViewOnGestureListener());
 
         //Set the adapter, LLM, and gestureDetector
-        fragment_home_rv.setAdapter(fragment_home_rv_adapter);
-        fragment_home_rv.setLayoutManager(LLM);
-        eventRepository = new EventRepository();
+        this.fragment_home_rv.setAdapter(this.fragment_home_rv_adapter);
+        this.fragment_home_rv.setLayoutManager(LLM);
+        this.eventRepository = new EventRepository();
 
-        fragment_home_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
+        this.fragment_home_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
             //This is the first thing called on a tap, it passes it to the RecyclerViewOnGestureListener
             @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent)
+            public boolean onInterceptTouchEvent(@NonNull final RecyclerView recyclerView, @NonNull final MotionEvent motionEvent)
             {
                 Log.d("RV GESTURE", "Fragment_Home --- onCreateView -- onInterceptTouchEvent");
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
 
-        view.findViewById(R.id.refreshBTN).setOnClickListener(view -> fragment_home_rv_adapter.notifyDataSetChanged());
+        this.view.findViewById(R.id.refreshBTN).setOnClickListener(view -> this.fragment_home_rv_adapter.notifyDataSetChanged());
 
-        return view;
+        return this.view;
     }
     Observer<ArrayList<Event>> eventListUpdateObserver = new Observer<ArrayList<Event>>() {
         @Override
-        public void onChanged(ArrayList<Event> events) {
-            fragment_home_rv_adapter.updateEvents();
+        public void onChanged(final ArrayList<Event> events) {
+            Fragment_Home.this.fragment_home_rv_adapter.updateEvents();
         }
     };
 
@@ -100,34 +100,34 @@ public class Fragment_Home extends Fragment
     public void onStart() {
         super.onStart();
         //setup the recycler to use the EventModelClass. Hinted from here https://medium.com/@atifmukhtar/recycler-view-with-mvvm-livedata-a1fd062d2280
-        eventRepository.fetchEventsAfterOneYear();
-        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventListUpdateObserver);
+        this.eventRepository.fetchEventsAfterOneYear();
+        EventViewModel.getModel().eventMutableLiveData.observe(this.getViewLifecycleOwner(), this.eventListUpdateObserver);
     }
     public void onStop(){
         super.onStop();
-        eventRepository.unsubFirebase();
+        this.eventRepository.unsubFirebase();
     }
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
-        public boolean onSingleTapConfirmed(MotionEvent e)
+        public boolean onSingleTapConfirmed(final MotionEvent e)
         {
             Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- onSingleTapConfirmed");
             //Gets the coords of the tap and looks for a child at those coords
-            View view = fragment_home_rv.findChildViewUnder(e.getX(), e.getY());
+            final View view = Fragment_Home.this.fragment_home_rv.findChildViewUnder(e.getX(), e.getY());
 
             //If there was a child
             if (view != null)
             {
                 Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- onSingleTapConfirmed * child confirmed");
-                RecyclerView.ViewHolder holder = fragment_home_rv.getChildViewHolder(view);
+                final RecyclerView.ViewHolder holder = Fragment_Home.this.fragment_home_rv.getChildViewHolder(view);
 
                 //If the child was the right type
                 if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
                     Log.d("RV GESTURE", "Fragment_Home --- RecyclerViewOnGestureListener -- " +
                             "onSingleTapConfirmed * child confirmed * correct type at position: " + holder.getAdapterPosition());
-                    openShowDetails(holder.getAdapterPosition());
+                    Fragment_Home.this.openShowDetails(holder.getAdapterPosition());
                     return true;
                 }
             }
@@ -135,11 +135,11 @@ public class Fragment_Home extends Fragment
         }
     }
 
-    public void openShowDetails(int pos)
+    public void openShowDetails(final int pos)
     {
-        Intent opSched = new Intent(view.getContext(), Activity_Show_Details.class);
+        final Intent opSched = new Intent(this.view.getContext(), Activity_Show_Details.class);
         opSched.putExtra("pos", pos);
         opSched.putIntegerArrayListExtra("eventClassIds", EventViewModel.getModel().eventMutableLiveData.getValue().get(pos).getEventClasses());
-        startActivity(opSched);
+        this.startActivity(opSched);
     }
 }

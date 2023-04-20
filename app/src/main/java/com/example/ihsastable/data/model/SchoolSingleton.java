@@ -6,12 +6,12 @@ public class SchoolSingleton {
     public School school;
     private static SchoolSingleton theModel;
     public static SchoolSingleton getModel(){
-        if (theModel == null){
-            theModel = new SchoolSingleton();
+        if (SchoolSingleton.theModel == null){
+            SchoolSingleton.theModel = new SchoolSingleton();
         }
-        return theModel;
+        return SchoolSingleton.theModel;
     }
     private SchoolSingleton(){
-        this.school = new School();
+        school = new School();
     }
 }

@@ -4,14 +4,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SchoolRemoteTestDataSource {
-    private FirebaseFirestore db;
-    private CollectionReference schoolReference;
+    private final FirebaseFirestore db;
+    private final CollectionReference schoolReference;
     public SchoolRemoteTestDataSource(){
-        this.db = FirebaseFirestore.getInstance();
-        this.schoolReference = db.collection("School");
+        db = FirebaseFirestore.getInstance();
+        schoolReference = this.db.collection("School");
     }
 
     public CollectionReference getSchoolReference() {
-        return schoolReference;
+        return this.schoolReference;
     }
 }

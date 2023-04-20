@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public class TestDataRepository {
-    private FirebaseFirestore db;
+    private final FirebaseFirestore db;
     public TestDataRepository(){
-        this.db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     public void addTestHorses(){
@@ -39,13 +39,13 @@ public class TestDataRepository {
 //        CarryingHeight: Float
 //        Carrying Weight: Float
 //        IsSpur: Boolean
-        CollectionReference cr = db.collection("Horse");
+        final CollectionReference cr = this.db.collection("Horse");
 
         cr.whereEqualTo("Id", 1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if(task.getResult().isEmpty()){
-                    Map<String, Object> docData = new HashMap<>();
+                    final Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 1);
                     docData.put("Name", "Butterschotch");
                     docData.put("Description", "A very good horse");
@@ -55,7 +55,7 @@ public class TestDataRepository {
                     docData.put("CarryingWeight", 7.0);
                     docData.put("IsSpur", false);
 
-                    Map<String, Object> docData1 = new HashMap<>();
+                    final Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
                     docData1.put("Name", "Butter");
                     docData1.put("Description", "A very horse");
@@ -65,7 +65,7 @@ public class TestDataRepository {
                     docData1.put("CarryingWeight", 77.0);
                     docData1.put("IsSpur", true);
 
-                    Map<String, Object> docData2 = new HashMap<>();
+                    final Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
                     docData2.put("Name", "Mumphler");
                     docData2.put("Description", "A very horsey horse");
@@ -75,7 +75,7 @@ public class TestDataRepository {
                     docData2.put("CarryingWeight", 79);
                     docData2.put("IsSpur", true);
 
-                    WriteBatch batch = db.batch();
+                    final WriteBatch batch = TestDataRepository.this.db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
@@ -86,13 +86,13 @@ public class TestDataRepository {
         });
     }
     public void addTestEvents(){
-        CollectionReference cr = this.db.collection("Event");
+        final CollectionReference cr = db.collection("Event");
         cr.whereEqualTo("Id", 1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Calendar cal = Calendar.getInstance();
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                final Calendar cal = Calendar.getInstance();
                 if(task.getResult().isEmpty()) {
-                    Map<String, Object> docData = new HashMap<>();
+                    final Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 1);
                     docData.put("Location", "Missouri");
                     docData.put("EventName", "Charleston ton");
@@ -101,7 +101,7 @@ public class TestDataRepository {
                     docData.put("Zone", 1);
                     docData.put("EventClassesViewModel", Arrays.asList(1, 4, 3, 9));
 
-                    Map<String, Object> docData1 = new HashMap<>();
+                    final Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
                     docData1.put("Location", "Missouri2");
                     docData1.put("EventName", "Charlyboob");
@@ -110,7 +110,7 @@ public class TestDataRepository {
                     docData1.put("Zone", 1);
                     docData1.put("EventClassesViewModel", Arrays.asList(1, 9, 8, 8, 7));
 
-                    Map<String, Object> docData2 = new HashMap<>();
+                    final Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
                     docData2.put("Location", "Missouri3");
                     docData2.put("EventName", "Charb Blarb");
@@ -119,7 +119,7 @@ public class TestDataRepository {
                     docData2.put("Zone", 2);
                     docData2.put("EventClassesViewModel", Arrays.asList(1, 4, 7, 2));
 
-                    WriteBatch batch = db.batch();
+                    final WriteBatch batch = TestDataRepository.this.db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
@@ -130,33 +130,33 @@ public class TestDataRepository {
         });
     }
     public void addTestEventClasses(){
-        CollectionReference cr = this.db.collection("EventClass");
+        final CollectionReference cr = db.collection("EventClass");
         cr.whereEqualTo("Id", 1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if(task.getResult().isEmpty()){
-                    Map<String, Object> docData = new HashMap<>();
+                    final Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 1);
                     docData.put("ClassName", "Class 1");
                     docData.put("Pattern", "Pattern2");
                     docData.put("Riders", Arrays.asList(111,3333, 8, 9, 4));
                     docData.put("Horses", Arrays.asList(1,2,3, 7, 2, 7));
 
-                    Map<String, Object> docData1 = new HashMap<>();
+                    final Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
                     docData1.put("ClassName", "Class 2");
                     docData1.put("Pattern", "Pattern4");
                     docData1.put("Riders", Arrays.asList(1,222,3, 8, 5));
                     docData1.put("Horses", Arrays.asList(1,2,3, 6));
 
-                    Map<String, Object> docData2 = new HashMap<>();
+                    final Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
                     docData2.put("ClassName", "Class 3");
                     docData2.put("Pattern", "Pattern6");
                     docData2.put("Riders", Arrays.asList(111,2,3));
                     docData2.put("Horses", Arrays.asList(1,2,3));
 
-                    WriteBatch batch = db.batch();
+                    final WriteBatch batch = TestDataRepository.this.db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
@@ -167,12 +167,12 @@ public class TestDataRepository {
         });
     }
     public void addTestRiders(){
-        CollectionReference cr = this.db.collection("Rider");
+        final CollectionReference cr = db.collection("Rider");
         cr.whereEqualTo("Id", 111).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if(task.getResult().isEmpty()){
-                    Map<String, Object> docData = new HashMap<>();
+                    final Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 111);
                     docData.put("UserName", "TheRider");
                     docData.put("FirstName", "Limbo");
@@ -192,7 +192,7 @@ public class TestDataRepository {
                     docData.put("IsHeightRider", false);
 
 
-                    Map<String, Object> docData1 = new HashMap<>();
+                    final Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 222);
                     docData1.put("UserName", "TheBigGuy");
                     docData1.put("FirstName", "John");
@@ -212,7 +212,7 @@ public class TestDataRepository {
                     docData1.put("IsHeightRider", false);
 
 
-                    Map<String, Object> docData2 = new HashMap<>();
+                    final Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 333);
                     docData2.put("UserName", "Ghosty");
                     docData2.put("FirstName", "Jack");
@@ -232,7 +232,7 @@ public class TestDataRepository {
                     docData2.put("IsHeightRider", true);
 
 
-                    Map<String, Object> docData4 = new HashMap<>();
+                    final Map<String, Object> docData4 = new HashMap<>();
                     docData4.put("Id", 444);
                     docData4.put("UserName", "StarPlatnum");
                     docData4.put("FirstName", "George");
@@ -252,7 +252,7 @@ public class TestDataRepository {
                     docData4.put("IsHeightRider", false);
 
 
-                    WriteBatch batch = db.batch();
+                    final WriteBatch batch = TestDataRepository.this.db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);

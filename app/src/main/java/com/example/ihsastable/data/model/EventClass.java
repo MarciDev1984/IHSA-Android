@@ -12,32 +12,32 @@ public class EventClass{
     private ArrayList<Integer> Riders;
     private ArrayList<Integer> Horses;
 
-    public EventClass(int id, String className, String pattern, ArrayList<Integer> riders, ArrayList<Integer> horses) {
-        Id = id;
-        ClassName = className;
-        Pattern = pattern;
-        Riders = riders;
-        Horses = horses;
+    public EventClass(final int id, final String className, final String pattern, final ArrayList<Integer> riders, final ArrayList<Integer> horses) {
+        this.Id = id;
+        this.ClassName = className;
+        this.Pattern = pattern;
+        this.Riders = riders;
+        this.Horses = horses;
     }
 
     public int getId() {
-        return Id;
+        return this.Id;
     }
 
     public String getClassName() {
-        return ClassName;
+        return this.ClassName;
     }
 
     public String getPattern() {
-        return Pattern;
+        return this.Pattern;
     }
 
     public ArrayList<Integer> getRiders() {
-        return Riders;
+        return this.Riders;
     }
 
     public ArrayList<Integer> getHorses() {
-        return Horses;
+        return this.Horses;
     }
 
 

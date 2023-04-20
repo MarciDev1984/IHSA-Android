@@ -15,14 +15,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 public class ViewPagerAdapter extends FragmentStateAdapter
 {
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity)
+    public ViewPagerAdapter(@NonNull final FragmentActivity fragmentActivity)
     {
         super(fragmentActivity);
     }
 
     @NonNull
     @Override
-    public Fragment createFragment(int position)
+    public Fragment createFragment(final int position)
     {
         switch (position)
         {

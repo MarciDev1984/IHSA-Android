@@ -7,25 +7,25 @@ public class User {
     private String LastName;
 
     public User(){}
-    public User(int Id, String Username, String FirstName, String LastName){
+    public User(final int Id, final String Username, final String FirstName, final String LastName){
         this.Id = Id;
         this.Username = Username;
         this.FirstName = FirstName;
         this.LastName = LastName;
     }
     public String getUsername() {
-        return Username;
+        return this.Username;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return this.FirstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return this.LastName;
     }
 
     public int getId() {
-        return Id;
+        return this.Id;
     }
 }

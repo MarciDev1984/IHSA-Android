@@ -41,24 +41,24 @@ public class Activity_Show_Details extends AppCompatActivity
     private Event event;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_details);
+        this.setContentView(R.layout.activity_show_details);
         //Get the bundle from the previous activity
-        eventClassIds = getIntent().getIntegerArrayListExtra("eventClassIds");
-        eventClassRepository = new EventClassRepository();
-        show_details_rv = findViewById(R.id.show_details_rv);
-        show_details_rv_adapter = new RecyclerViewAdapter("show_details_rv");
-        LinearLayoutManager LLM = new LinearLayoutManager(this);
-        GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new RecyclerViewOnGestureListener());
+        this.eventClassIds = this.getIntent().getIntegerArrayListExtra("eventClassIds");
+        this.eventClassRepository = new EventClassRepository();
+        this.show_details_rv = this.findViewById(R.id.show_details_rv);
+        this.show_details_rv_adapter = new RecyclerViewAdapter("show_details_rv");
+        final LinearLayoutManager LLM = new LinearLayoutManager(this);
+        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new RecyclerViewOnGestureListener());
 
-        show_details_rv.setAdapter(show_details_rv_adapter);
-        show_details_rv.setLayoutManager(LLM);
-        show_details_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
+        this.show_details_rv.setAdapter(this.show_details_rv_adapter);
+        this.show_details_rv.setLayoutManager(LLM);
+        this.show_details_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
             @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent)
+            public boolean onInterceptTouchEvent(@NonNull final RecyclerView recyclerView, @NonNull final MotionEvent motionEvent)
             {
                 return gestureDetector.onTouchEvent(motionEvent);
             }
@@ -67,22 +67,22 @@ public class Activity_Show_Details extends AppCompatActivity
 
     Observer<ArrayList<EventClass>> eventClassListUpdateObserver = new Observer<ArrayList<EventClass>>() {
         @Override
-        public void onChanged(ArrayList<EventClass> eventClasses) {
-            show_details_rv_adapter.updateEventClasses();
+        public void onChanged(final ArrayList<EventClass> eventClasses) {
+            Activity_Show_Details.this.show_details_rv_adapter.updateEventClasses();
         }
     };
     @Override
     protected void onStart() {
         super.onStart();
-        Integer pos = getIntent().getIntExtra("pos",  0);
-        Event e = EventViewModel.getModel().eventMutableLiveData.getValue().get(pos);
-        eventClassRepository.FetchEventClassesFromEvent(e.getEventClasses());
-        EventClassesViewModel.getModel().eventClasses.observe(this, eventClassListUpdateObserver);
+        final Integer pos = this.getIntent().getIntExtra("pos",  0);
+        final Event e = EventViewModel.getModel().eventMutableLiveData.getValue().get(pos);
+        this.eventClassRepository.FetchEventClassesFromEvent(e.getEventClasses());
+        EventClassesViewModel.getModel().eventClasses.observe(this, this.eventClassListUpdateObserver);
 
-        TextView schedHead = findViewById(R.id.scheduleHeaderTV);
-        TextView zone = findViewById(R.id.zoneRegion);
-        TextView location = findViewById(R.id.showLocation);
-        TextView date = findViewById(R.id.showDateTime);
+        final TextView schedHead = this.findViewById(R.id.scheduleHeaderTV);
+        final TextView zone = this.findViewById(R.id.zoneRegion);
+        final TextView location = this.findViewById(R.id.showLocation);
+        final TextView date = this.findViewById(R.id.showDateTime);
 
         schedHead.setText(e.getEventName());
         zone.setText(e.getZone() + "");
@@ -93,21 +93,21 @@ public class Activity_Show_Details extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
-        eventClassRepository.unsubFirebase();
+        this.eventClassRepository.unsubFirebase();
     }
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
-        public boolean onSingleTapConfirmed(MotionEvent e)
+        public boolean onSingleTapConfirmed(final MotionEvent e)
         {
-            View view = show_details_rv.findChildViewUnder(e.getX(), e.getY());
+            final View view = Activity_Show_Details.this.show_details_rv.findChildViewUnder(e.getX(), e.getY());
             if (view != null)
             {
-                RecyclerView.ViewHolder holder = show_details_rv.getChildViewHolder(view);
+                final RecyclerView.ViewHolder holder = Activity_Show_Details.this.show_details_rv.getChildViewHolder(view);
 
                 if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
                 {
-                    openRider(holder.getAdapterPosition());
+                    Activity_Show_Details.this.openRider(holder.getAdapterPosition());
                     return true;
                 }
             }
@@ -115,12 +115,12 @@ public class Activity_Show_Details extends AppCompatActivity
         }
     }
 
-    public void openRider(int pos)
+    public void openRider(final int pos)
     {
-        Intent opSched = new Intent(this, Activity_Class_Order.class);
+        final Intent opSched = new Intent(this, Activity_Class_Order.class);
         opSched.putExtra("pos", pos);
         opSched.putIntegerArrayListExtra("riderIds", EventClassesViewModel.getModel().eventClasses
                 .getValue().get(pos).getRiders());
-        startActivity(opSched);
+        this.startActivity(opSched);
     }
 }

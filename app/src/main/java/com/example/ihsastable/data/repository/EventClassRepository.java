@@ -23,25 +23,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class EventClassRepository {
-    private CollectionReference remoteCR;
+    private final CollectionReference remoteCR;
     private ListenerRegistration listenerRegistration;
     public EventClassRepository(){
-        EventClassRemoteTestDataSource ds = new EventClassRemoteTestDataSource();
-        this.remoteCR = ds.getEventClassReference();
+        final EventClassRemoteTestDataSource ds = new EventClassRemoteTestDataSource();
+        remoteCR = ds.getEventClassReference();
     }
-    public void FetchEventClassesFromEvent(ArrayList<Integer> classIds){
-        ArrayList<EventClass> eventClasses = new ArrayList<>();
-        listenerRegistration = this.remoteCR.whereIn("Id", classIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+    public void FetchEventClassesFromEvent(final ArrayList<Integer> classIds){
+        final ArrayList<EventClass> eventClasses = new ArrayList<>();
+        this.listenerRegistration = remoteCR.whereIn("Id", classIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (QueryDocumentSnapshot doc : value)
+                    for (final QueryDocumentSnapshot doc : value)
                     {
                         eventClasses.add(doc.toObject(EventClass.class));
                     }
@@ -54,7 +54,7 @@ public class EventClassRepository {
         return EventClassesViewModel.getModel().eventClasses.getValue();
     }
     public void unsubFirebase(){
-        listenerRegistration.remove();
+        this.listenerRegistration.remove();
     }
 
 }

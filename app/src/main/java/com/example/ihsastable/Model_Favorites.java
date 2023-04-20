@@ -23,58 +23,58 @@ public class Model_Favorites
     {
         private final String riderID, riderName;
 
-        public Favorites(String riderID, String riderName) {this.riderID = riderID; this.riderName = riderName;}
+        public Favorites(final String riderID, final String riderName) {this.riderID = riderID; this.riderName = riderName;}
 
-        public String getFavorites() {return riderID;}
+        public String getFavorites() {return this.riderID;}
     }
 
-    private ArrayList<Favorites> favoritesList;
+    private final ArrayList<Favorites> favoritesList;
 
     private Model_Favorites() throws IOException {
-        favoritesList = new ArrayList<Favorites>();
-        loadInitialTasks();
+        this.favoritesList = new ArrayList<Favorites>();
+        this.loadInitialTasks();
     }
 
     public void loadInitialTasks() throws IOException {
-        if(file.exists())
+        if(this.file.exists())
         {
             Log.d("FILE", "File did exist");
         }
         else
         {
             Log.d("FILE", "File did not exist");
-            file = new File(Environment.getExternalStorageDirectory(), "cache.txt");
+            this.file = new File(Environment.getExternalStorageDirectory(), "cache.txt");
         }
 
 
-        Favorites rider1 = new Favorites("001", "Fisher Reese");
-        favoritesList.add(rider1);
+        final Favorites rider1 = new Favorites("001", "Fisher Reese");
+        this.favoritesList.add(rider1);
 
         // Write data to the file
-        FileOutputStream outputStream = new FileOutputStream(file);
-        outputStream.write(riderName.getBytes());
+        final FileOutputStream outputStream = new FileOutputStream(this.file);
+        outputStream.write(this.riderName.getBytes());
         outputStream.close();
 
         // Read data from the file
-        FileInputStream inputStream = new FileInputStream(file);
-        byte[] buffer = new byte[1024];
-        int length = inputStream.read(buffer);
-        String data = new String(buffer, 0, length);
+        final FileInputStream inputStream = new FileInputStream(this.file);
+        final byte[] buffer = new byte[1024];
+        final int length = inputStream.read(buffer);
+        final String data = new String(buffer, 0, length);
         inputStream.close();
     }
 
     public ArrayList<Model_Favorites.Favorites> getTaskArray()
     {
-        return favoritesList;
+        return this.favoritesList;
     }
 
-    public static Model_Favorites theModel = null;
+    public static Model_Favorites theModel;
     public static Model_Favorites getSingleton() throws IOException {
-        if(theModel == null)
+        if(Model_Favorites.theModel == null)
         {
-            theModel = new Model_Favorites();
+            Model_Favorites.theModel = new Model_Favorites();
         }
-        return theModel;
+        return Model_Favorites.theModel;
     }
 
 }

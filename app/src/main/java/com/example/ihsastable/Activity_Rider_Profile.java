@@ -8,13 +8,13 @@ import android.widget.TextView;
 public class Activity_Rider_Profile extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rider_profile);
+        this.setContentView(R.layout.activity_rider_profile);
 
-        String pos = getIntent().getStringExtra("POS");
+        final String pos = this.getIntent().getStringExtra("POS");
 
-        TextView profHead = findViewById(R.id.profileTV);
+        final TextView profHead = this.findViewById(R.id.profileTV);
         profHead.setText("Rider " + pos);
     }
 }

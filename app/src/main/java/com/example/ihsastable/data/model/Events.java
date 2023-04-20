@@ -7,12 +7,12 @@ public class Events {
     public ArrayList<Event> events;
     private static Events theModel;
     public static Events getModel(){
-        if (theModel == null){
-            theModel = new Events();
+        if (Events.theModel == null){
+            Events.theModel = new Events();
         }
-        return theModel;
+        return Events.theModel;
     }
     private Events(){
-        this.events = new ArrayList<>();
+        events = new ArrayList<>();
     }
 }

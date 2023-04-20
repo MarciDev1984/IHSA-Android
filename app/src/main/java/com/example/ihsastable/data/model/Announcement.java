@@ -7,16 +7,16 @@ public class Announcement {
     private Timestamp TimePublished;
     public Announcement(){}
 
-    public Announcement(String message, Timestamp timePublished) {
-        Message = message;
-        TimePublished = timePublished;
+    public Announcement(final String message, final Timestamp timePublished) {
+        this.Message = message;
+        this.TimePublished = timePublished;
     }
 
     public String getMessage() {
-        return Message;
+        return this.Message;
     }
 
     public Timestamp getTimePublished() {
-        return TimePublished;
+        return this.TimePublished;
     }
 }

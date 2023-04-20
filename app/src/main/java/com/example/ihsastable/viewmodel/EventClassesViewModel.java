@@ -10,12 +10,12 @@ public class EventClassesViewModel {
     public MutableLiveData<ArrayList<EventClass>> eventClasses = new MutableLiveData<>();
     private static EventClassesViewModel theModel;
     public static EventClassesViewModel getModel(){
-        if (theModel == null){
-            theModel = new EventClassesViewModel();
+        if (EventClassesViewModel.theModel == null){
+            EventClassesViewModel.theModel = new EventClassesViewModel();
         }
-        return theModel;
+        return EventClassesViewModel.theModel;
     }
     private EventClassesViewModel(){
-        this.eventClasses.setValue(new ArrayList<>());
+        eventClasses.setValue(new ArrayList<>());
     }
 }

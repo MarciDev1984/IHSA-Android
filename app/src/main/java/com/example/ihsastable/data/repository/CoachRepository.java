@@ -17,9 +17,9 @@ import java.util.Date;
 
 //Currently not being used
 public class CoachRepository {
-    private CollectionReference remoteCR;
+    private final CollectionReference remoteCR;
     private ArrayList<Coach> coaches;
-    public CoachRepository(CoachRemoteTestDataSource ds){
-        this.remoteCR = ds.getCoachesReference();
+    public CoachRepository(final CoachRemoteTestDataSource ds){
+        remoteCR = ds.getCoachesReference();
     }
 }

@@ -6,12 +6,12 @@ public class Coaches {
     public ArrayList<Coach> coaches;
     private static Coaches theModel;
     public static Coaches getModel(){
-        if (theModel == null){
-            theModel = new Coaches();
+        if (Coaches.theModel == null){
+            Coaches.theModel = new Coaches();
         }
-        return theModel;
+        return Coaches.theModel;
     }
     private Coaches(){
-        this.coaches = new ArrayList<>();
+        coaches = new ArrayList<>();
     }
 }

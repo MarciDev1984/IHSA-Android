@@ -4,45 +4,45 @@ import java.util.ArrayList;
 
 public class Model_Show_Class {
 
-    private ArrayList<Schedule> scheduleList;
+    private final ArrayList<Schedule> scheduleList;
 
     public static class Schedule{
-        private String thisClass;
+        private final String thisClass;
 
-        public Schedule(String someClass){
-            this.thisClass = someClass;
+        public Schedule(final String someClass){
+            thisClass = someClass;
         }
         public String getClassModel(){
-            return thisClass;
+            return this.thisClass;
         }
     }
 
     private Model_Show_Class(){
-        scheduleList = new ArrayList<Schedule>();
-        loadSched();
+        this.scheduleList = new ArrayList<Schedule>();
+        this.loadSched();
     }
 
     public void loadSched(){
-        scheduleList.add(new Schedule("Show Class 1 Rider Class 8"));
-        scheduleList.add(new Schedule("Show Class 2 Rider Class 6"));
-        scheduleList.add(new Schedule("Show Class 3 Rider Class 4"));
-        scheduleList.add(new Schedule("Show Class 4 Rider Class 4"));
-        scheduleList.add(new Schedule("Show Class 5 Rider Class 7"));
-        scheduleList.add(new Schedule("Show Class 6 Rider Class 5"));
-        scheduleList.add(new Schedule("Show Class 7 Rider Class 3"));
-        scheduleList.add(new Schedule("Show Class 8 Rider Class 2B"));
+        this.scheduleList.add(new Schedule("Show Class 1 Rider Class 8"));
+        this.scheduleList.add(new Schedule("Show Class 2 Rider Class 6"));
+        this.scheduleList.add(new Schedule("Show Class 3 Rider Class 4"));
+        this.scheduleList.add(new Schedule("Show Class 4 Rider Class 4"));
+        this.scheduleList.add(new Schedule("Show Class 5 Rider Class 7"));
+        this.scheduleList.add(new Schedule("Show Class 6 Rider Class 5"));
+        this.scheduleList.add(new Schedule("Show Class 7 Rider Class 3"));
+        this.scheduleList.add(new Schedule("Show Class 8 Rider Class 2B"));
     }
 
     public ArrayList<Schedule> getSchedArray(){
-        return scheduleList;
+        return this.scheduleList;
     }
 
-    public static Model_Show_Class theModel = null;
+    public static Model_Show_Class theModel;
 
     public static Model_Show_Class getSingleton(){
-        if(theModel == null){
-            theModel = new Model_Show_Class();
+        if(Model_Show_Class.theModel == null){
+            Model_Show_Class.theModel = new Model_Show_Class();
         }
-        return theModel;
+        return Model_Show_Class.theModel;
     }
 }

@@ -10,12 +10,12 @@ public class HorsesViewModel {
     public MutableLiveData<ArrayList<Horse>> horses;
     private static HorsesViewModel theModel;
     public static HorsesViewModel getModel(){
-        if (theModel == null){
-            theModel = new HorsesViewModel();
+        if (HorsesViewModel.theModel == null){
+            HorsesViewModel.theModel = new HorsesViewModel();
         }
-        return theModel;
+        return HorsesViewModel.theModel;
     }
     private HorsesViewModel(){
-        this.horses = new MutableLiveData<>();
+        horses = new MutableLiveData<>();
     }
 }

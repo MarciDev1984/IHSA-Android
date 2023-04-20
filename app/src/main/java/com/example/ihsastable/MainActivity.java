@@ -34,61 +34,61 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.setContentView(R.layout.activity_main);
 
         //View pager code (Only slightly fragile)
         //https://www.youtube.com/watch?v=pIKdHeOjYNw for references
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPager.setAdapter(viewPagerAdapter);
+        this.tabLayout = this.findViewById(R.id.tabLayout);
+        this.viewPager = this.findViewById(R.id.viewPager);
+        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        this.viewPager.setAdapter(viewPagerAdapter);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        this.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
             @Override
-            public void onTabSelected(TabLayout.Tab tab)
+            public void onTabSelected(final TabLayout.Tab tab)
             {
-                viewPager.setCurrentItem(tab.getPosition());
+                MainActivity.this.viewPager.setCurrentItem(tab.getPosition());
             }
 
             //Not using these, but afraid to delete
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(final TabLayout.Tab tab) {}
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
+            public void onTabReselected(final TabLayout.Tab tab) {}
         });
 
         //This part is what updates the tabLayout when you swipe, so it knows to animate it
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback()
+        this.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback()
         {
             @Override
-            public void onPageSelected(int position)
+            public void onPageSelected(final int position)
             {
                 super.onPageSelected(position);
-                tabLayout.getTabAt(position).select();
+                MainActivity.this.tabLayout.getTabAt(position).select();
             }
         });
 
         //AppBarLayout code
-        materialToolbar = findViewById(R.id.mt);
-        materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
+        this.materialToolbar = this.findViewById(R.id.mt);
+        this.materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
             @Override
-            public boolean onMenuItemClick(MenuItem item)
+            public boolean onMenuItemClick(final MenuItem item)
             {
                 Log.d("TAG", "DATA");
-                openAbout();
+                MainActivity.this.openAbout();
                 return false;
             }
         });
     }
     //Leads to info page
     public void openAbout(){
-        Intent opAbout = new Intent(this, Activity_About.class);
-        startActivity(opAbout);
+        final Intent opAbout = new Intent(this, Activity_About.class);
+        this.startActivity(opAbout);
     }
     @Override
     public void onBackPressed() {

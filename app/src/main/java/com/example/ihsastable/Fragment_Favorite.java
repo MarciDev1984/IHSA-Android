@@ -48,122 +48,119 @@ public class Fragment_Favorite extends Fragment {
     Map<String, String> userFavorites = new HashMap<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_favorite, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        this.view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
-        favorites_rv = view.findViewById(R.id.favorites_rv);
-        followBTN = view.findViewById(R.id.followBTN);
-        followTV = view.findViewById(R.id.followET);
+        this.favorites_rv = this.view.findViewById(R.id.favorites_rv);
+        this.followBTN = this.view.findViewById(R.id.followBTN);
+        this.followTV = this.view.findViewById(R.id.followET);
 
         // Get the root directory of your application's private storage
-        File rootDir = view.getContext().getFilesDir();
+        final File rootDir = this.view.getContext().getFilesDir();
 
         // Create a file in the root directory
-        file = new File(rootDir, "cache.txt");
+        this.file = new File(rootDir, "cache.txt");
 
         //Create a listener for follow button
-        followBTN.setOnClickListener(new View.OnClickListener() {
+        this.followBTN.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String riderInput = followTV.getText().toString();
+            public void onClick(final View v) {
+                final String riderInput = Fragment_Favorite.this.followTV.getText().toString();
                 try {
-                    favoriteValidation(riderInput);
-                } catch (IOException e) {
+                    Fragment_Favorite.this.favoriteValidation(riderInput);
+                } catch (final IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         });
 
-        RecyclerViewAdapter favorites_rv_adapter = new RecyclerViewAdapter("favorites_rv");
-        LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
-        GestureDetectorCompat gestureDetector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+        final RecyclerViewAdapter favorites_rv_adapter = new RecyclerViewAdapter("favorites_rv");
+        final LinearLayoutManager LLM = new LinearLayoutManager(this.view.getContext());
+        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this.view.getContext(), new RecyclerViewOnGestureListener());
 
-        favorites_rv.setAdapter(favorites_rv_adapter);
-        favorites_rv.setLayoutManager(LLM);
-        favorites_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+        this.favorites_rv.setAdapter(favorites_rv_adapter);
+        this.favorites_rv.setLayoutManager(LLM);
+        this.favorites_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
             //This is the first thing called on a tap, it passes it to the RecyclerViewOnGestureListener
             @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+            public boolean onInterceptTouchEvent(@NonNull final RecyclerView recyclerView, @NonNull final MotionEvent motionEvent) {
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
 
-        followBTN.setEnabled(false);
+        this.followBTN.setEnabled(false);
         //Author: Jacob Pickman
 
         //Check if EditText meets pin requirements, if it is don't let the user press the button
         //Otherwise, RecyclerView will turn into a gift from the .
-        followTV.addTextChangedListener(new TextWatcher() {
+        this.followTV.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
+            public void onTextChanged(final CharSequence s, final int start, final int before,
+                                      final int count) {
                 // TODO Auto-generated method stub
                 //Working Theory: Pin consists of three numbers
                 //EditText only allows up to three characters so we don't care about max size
-                followBTN.setEnabled(!s.toString().isEmpty() && s.toString().length() >= 3);
+                Fragment_Favorite.this.followBTN.setEnabled(!s.toString().isEmpty() && s.toString().length() >= 3);
             }
 
             @Override //Don't Touch
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(final CharSequence s, final int start, final int count,
+                                          final int after) {
             }
 
             @Override //Don't Touch
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(final Editable s) {
             }
         });
 
-        return view;
+        return this.view;
     }
 
-    public void favoriteValidation(String id) throws IOException {
+    public void favoriteValidation(final String id) throws IOException {
         if (id.equals("001")) {
-            userFavorites.put("001", "Fisher Reese");
-            cachedata("001 Fisher Reese");
+            this.userFavorites.put("001", "Fisher Reese");
+            this.cachedata("001 Fisher Reese");
         } else if (id.equals("002")) {
-            userFavorites.put("002", "Kooper Young");
+            this.userFavorites.put("002", "Kooper Young");
         } else if (id.equals("003")) {
-            userFavorites.put("003", "Gabriel Mura");
+            this.userFavorites.put("003", "Gabriel Mura");
         } else if (id.equals("004")) {
-            userFavorites.put("004", "Jacob Pickman");
+            this.userFavorites.put("004", "Jacob Pickman");
         } else if (id.equals("005")) {
-            userFavorites.put("005", "Kevin Harris");
+            this.userFavorites.put("005", "Kevin Harris");
         }
     }
 
-    public void cachedata(String riderName) throws IOException {
+    public void cachedata(final String riderName) throws IOException {
         // Write data to the file
-        FileOutputStream outputStream = new FileOutputStream(file);
+        final FileOutputStream outputStream = new FileOutputStream(this.file);
         outputStream.write(riderName.getBytes());
         outputStream.close();
 
         // Read data from the file
-        FileInputStream inputStream = new FileInputStream(file);
-        byte[] buffer = new byte[1024];
-        int length = inputStream.read(buffer);
-        String data = new String(buffer, 0, length);
+        final FileInputStream inputStream = new FileInputStream(this.file);
+        final byte[] buffer = new byte[1024];
+        final int length = inputStream.read(buffer);
+        final String data = new String(buffer, 0, length);
         inputStream.close();
     }
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
-        public boolean onSingleTapConfirmed(MotionEvent e)
+        public boolean onSingleTapConfirmed(final MotionEvent e)
         {
-            View view = favorites_rv.findChildViewUnder(e.getX(), e.getY());
+            final View view = Fragment_Favorite.this.favorites_rv.findChildViewUnder(e.getX(), e.getY());
 
             //If there was a child
             if (view != null)
             {
-                RecyclerView.ViewHolder holder = favorites_rv.getChildViewHolder(view);
+                final RecyclerView.ViewHolder holder = Fragment_Favorite.this.favorites_rv.getChildViewHolder(view);
 
                 //If the child was the right type
-                if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
-                {
-                    //TODO - Handle touch
-                    //openSchedule(holder.getAdapterPosition());
-                    return true;
-                }
+                //TODO - Handle touch
+                //openSchedule(holder.getAdapterPosition());
+                return holder instanceof RecyclerViewAdapter.RecyclerViewHolder;
             }
             return false;
         }

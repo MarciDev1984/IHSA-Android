@@ -28,28 +28,28 @@ public class EventRepository
     ListenerRegistration listenerRegistration;
     public EventRepository()
     {
-        EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
-        this.remoteCR = eventRemoteTestDataSource.getEventReference();
+        final EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
+        remoteCR = eventRemoteTestDataSource.getEventReference();
     }
     public void fetchEventsAfterOneYear()
     {
-        Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
 
-        ArrayList<Event> events = new ArrayList<>();
-        Log.d("test", "fetching data using cal date: " + cal.getTime().toString());
+        final ArrayList<Event> events = new ArrayList<>();
+        Log.d("test", "fetching data using cal date: " + cal.getTime());
 
-        listenerRegistration = this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+        this.listenerRegistration = remoteCR.whereGreaterThan("EventTime", cal.getTime()).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (QueryDocumentSnapshot doc : value)
+                    for (final QueryDocumentSnapshot doc : value)
                     {
                         events.add(doc.toObject(Event.class));
                     }
@@ -59,7 +59,7 @@ public class EventRepository
         });
     }
     public void unsubFirebase(){
-        listenerRegistration.remove();
+        this.listenerRegistration.remove();
     }
     public ArrayList<Event> getEvents(){return Events.getModel().events;}
 }

@@ -1,6 +1,5 @@
 package com.example.ihsastable;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,8 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,10 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.ihsastable.data.model.Event;
-import com.example.ihsastable.data.repository.EventRepository;
 import com.example.ihsastable.viewmodel.EventViewModel;
 
 import java.util.ArrayList;
@@ -41,8 +36,7 @@ public class Fragment_Home extends Fragment
     private View view;
     private RecyclerView fragment_home_rv;
     RecyclerViewAdapter fragment_home_rv_adapter;
-    EventRepository eventRepository;
-    ArrayList<Event> events;
+    private ArrayList<Event> events;
 
     //Required empty constructor for fragments
     public Fragment_Home() {}
@@ -50,7 +44,6 @@ public class Fragment_Home extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        MainActivity activity = (MainActivity) getContext();
         //getActivity() or getContext() don't work in fragments.
         //This is the work-around
         //You can do view.getContext() if you need that
@@ -75,7 +68,7 @@ public class Fragment_Home extends Fragment
 
         //setup the recycler to use the EventModelClass. Hinted from here https://medium.com/@atifmukhtar/recycler-view-with-mvvm-livedata-a1fd062d2280
         events = new ArrayList<>();
-        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventListUpdateObserver);
+        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventObserver);
 
         fragment_home_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
@@ -88,11 +81,9 @@ public class Fragment_Home extends Fragment
             }
         });
 
-        view.findViewById(R.id.refreshBTN).setOnClickListener(view -> fragment_home_rv_adapter.notifyDataSetChanged());
-
         return view;
     }
-    Observer<ArrayList<Event>> eventListUpdateObserver = new Observer<ArrayList<Event>>() {
+    Observer<ArrayList<Event>> eventObserver = new Observer<ArrayList<Event>>() {
         @Override
         public void onChanged(ArrayList<Event> events) {
             fragment_home_rv_adapter.updateEvents();

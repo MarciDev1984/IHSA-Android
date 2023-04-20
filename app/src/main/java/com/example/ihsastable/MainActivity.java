@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.ihsastable.data.repository.EventClassRepository;
 import com.example.ihsastable.data.repository.EventRepository;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private MaterialToolbar materialToolbar;
     public RecyclerViewAdapter recyclerViewAdapter;
     public EventRepository eventRepository;
+    public EventClassRepository eventClassRepository;
 
 
     @Override
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity
 
         eventRepository = new EventRepository();
         eventRepository.fetchEventsAfterOneYear();
+
+        eventClassRepository = new EventClassRepository();
+        //TODO - ASK KEV WHAT TO DO
+        //eventClassRepository.FetchEventClassesFromEvent();
+
         //View pager code (Only slightly fragile)
         //https://www.youtube.com/watch?v=pIKdHeOjYNw for references
         tabLayout = findViewById(R.id.tabLayout);

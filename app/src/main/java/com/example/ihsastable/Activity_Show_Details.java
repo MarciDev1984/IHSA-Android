@@ -11,8 +11,16 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ihsastable.data.model.Event;
+import com.example.ihsastable.data.model.EventClass;
+import com.example.ihsastable.viewmodel.EventClassViewModel;
+import com.example.ihsastable.viewmodel.EventViewModel;
+
+import java.util.ArrayList;
 
 /*
  * This is Rider_Order_Activity
@@ -23,7 +31,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Activity_Show_Details extends AppCompatActivity
 {
-    RecyclerView show_details_rv;
+    private RecyclerView show_details_rv;
+    private RecyclerViewAdapter show_details_rv_adapter;
+    private ArrayList<EventClass> eventClasses;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -46,7 +56,7 @@ public class Activity_Show_Details extends AppCompatActivity
 
         show_details_rv = findViewById(R.id.show_details_rv);
 
-        RecyclerViewAdapter show_details_rv_adapter = new RecyclerViewAdapter("show_details_rv");
+        show_details_rv_adapter = new RecyclerViewAdapter("show_details_rv");
         LinearLayoutManager LLM = new LinearLayoutManager(this);
         GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new RecyclerViewOnGestureListener());
 
@@ -60,7 +70,19 @@ public class Activity_Show_Details extends AppCompatActivity
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
+
+        eventClasses = new ArrayList<>();
+        //TODO - ASK KEV WHAT TO DO
+        //EventClassViewModel.getModel().eventClassMutableLiveData.observe(getViewLifecycleOwner(), eventClassObserver);
     }
+
+    Observer<ArrayList<EventClass>> eventClassObserver = new Observer<ArrayList<EventClass>>()
+    {
+        @Override
+        public void onChanged(ArrayList<EventClass> events) {
+            show_details_rv_adapter.updateEvents();
+        }
+    };
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {

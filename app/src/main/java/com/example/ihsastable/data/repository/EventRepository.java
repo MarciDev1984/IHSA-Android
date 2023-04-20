@@ -23,12 +23,12 @@ import java.util.Calendar;
 public class EventRepository
 {
     private final CollectionReference remoteCR;
-    private EventClassRepository eventClassRepository;
     public EventRepository()
     {
         EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
         this.remoteCR = eventRemoteTestDataSource.getEventReference();
     }
+
     public void fetchEventsAfterOneYear()
     {
         Calendar cal = Calendar.getInstance();

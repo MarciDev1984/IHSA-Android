@@ -13,51 +13,51 @@ public class School {
 
     public School(){}
 
-    public School(int Id, String schoolName, String stateCode, double latitude, double longitude, int region, int zone, int numRiders, boolean anchorSchool) {
+    public School(final int Id, final String schoolName, final String stateCode, final double latitude, final double longitude, final int region, final int zone, final int numRiders, final boolean anchorSchool) {
         this.Id = Id;
-        SchoolName = schoolName;
-        StateCode = stateCode;
-        Latitude = latitude;
-        Longitude = longitude;
-        Region = region;
-        Zone = zone;
-        NumRiders = numRiders;
-        AnchorSchool = anchorSchool;
+        this.SchoolName = schoolName;
+        this.StateCode = stateCode;
+        this.Latitude = latitude;
+        this.Longitude = longitude;
+        this.Region = region;
+        this.Zone = zone;
+        this.NumRiders = numRiders;
+        this.AnchorSchool = anchorSchool;
     }
 
     public String getSchoolName() {
-        return SchoolName;
+        return this.SchoolName;
     }
 
     public String getStateCode() {
-        return StateCode;
+        return this.StateCode;
     }
 
     public double getLatitude() {
-        return Latitude;
+        return this.Latitude;
     }
 
     public double getLongitude() {
-        return Longitude;
+        return this.Longitude;
     }
 
     public int getRegion() {
-        return Region;
+        return this.Region;
     }
 
     public int getZone() {
-        return Zone;
+        return this.Zone;
     }
 
     public int getNumRiders() {
-        return NumRiders;
+        return this.NumRiders;
     }
 
     public boolean isAnchorSchool() {
-        return AnchorSchool;
+        return this.AnchorSchool;
     }
 
     public int getId() {
-        return Id;
+        return this.Id;
     }
 }

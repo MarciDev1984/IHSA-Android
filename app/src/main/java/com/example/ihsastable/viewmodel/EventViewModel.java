@@ -17,12 +17,13 @@ public class EventViewModel extends ViewModel {
     private static EventViewModel theModel;
 
     public static EventViewModel getModel(){
-        if (theModel == null){
-            theModel = new EventViewModel();
+        if (EventViewModel.theModel == null){
+            EventViewModel.theModel = new EventViewModel();
         }
-        return theModel;
+        return EventViewModel.theModel;
     }
-    private EventViewModel(){this.eventMutableLiveData.setValue(new ArrayList<>());}
+    private EventViewModel(){
+        eventMutableLiveData.setValue(new ArrayList<>());}
 
 //    public LiveData<String> eventName = Transformations.map(eventMutableLiveData, (String) ->{
 //        return eventMutableLiveData.getValue().getEventName();

@@ -39,7 +39,7 @@ public class EventRepository
         ArrayList<Event> events = new ArrayList<>();
         Log.d("test", "fetching data using cal date: " + cal.getTime().toString());
 
-        listenerRegistration = this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).addSnapshotListener(new EventListener<QuerySnapshot>()
+        listenerRegistration = this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

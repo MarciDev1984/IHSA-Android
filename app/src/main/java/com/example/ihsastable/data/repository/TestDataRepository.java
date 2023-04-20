@@ -80,24 +80,7 @@ public class TestDataRepository {
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
 
-                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            HorseRepository hr = new HorseRepository();
-                            EventClass testEC = new EventClass(1, "butts", "Pattern2", Arrays.asList(1, 4, 7), Arrays.asList(1,2, 3));
-                            if(testEC != null){
-                                hr.fetchHorsesFromEventClass(testEC);
-                            }
-                            else{
-                                Log.e("error", "what");
-                            }
-                        }
-                    });
-                }
-                else{
-                    HorseRepository hr = new HorseRepository();
-                    EventClass testEC = new EventClass(1, "butts", "Pattern2", Arrays.asList(1, 4, 7), Arrays.asList(1,2, 3));
-                    hr.fetchHorsesFromEventClass(testEC);
+                    batch.commit();
                 }
             }
         });
@@ -108,7 +91,7 @@ public class TestDataRepository {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Calendar cal = Calendar.getInstance();
-                if(task.getResult().isEmpty()){
+                if(task.getResult().isEmpty()) {
                     Map<String, Object> docData = new HashMap<>();
                     docData.put("Id", 1);
                     docData.put("Location", "Missouri");
@@ -116,7 +99,7 @@ public class TestDataRepository {
                     cal.set(2022, 12, 24);
                     docData.put("EventTime", cal.getTime());
                     docData.put("Zone", 1);
-                    docData.put("EventClassesViewModel", Arrays.asList(1,4,3,9));
+                    docData.put("EventClassesViewModel", Arrays.asList(1, 4, 3, 9));
 
                     Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
@@ -125,7 +108,7 @@ public class TestDataRepository {
                     cal.set(2023, 6, 21);
                     docData1.put("EventTime", cal.getTime());
                     docData1.put("Zone", 1);
-                    docData1.put("EventClassesViewModel", Arrays.asList(1,9,8,8,7));
+                    docData1.put("EventClassesViewModel", Arrays.asList(1, 9, 8, 8, 7));
 
                     Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
@@ -134,24 +117,14 @@ public class TestDataRepository {
                     cal.set(2024, 8, 21);
                     docData2.put("EventTime", cal.getTime());
                     docData2.put("Zone", 2);
-                    docData2.put("EventClassesViewModel", Arrays.asList(1,4,7,2));
+                    docData2.put("EventClassesViewModel", Arrays.asList(1, 4, 7, 2));
 
                     WriteBatch batch = db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
 
-                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            EventRepository er = new EventRepository();
-                            er.fetchEventsAfterOneYear();
-                        }
-                    });
-                }
-                else{
-                    EventRepository er = new EventRepository();
-                    er.fetchEventsAfterOneYear();
+                    batch.commit();
                 }
             }
         });
@@ -188,17 +161,7 @@ public class TestDataRepository {
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
 
-                    batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            EventClassRepository ecr = new EventClassRepository();
-                            //ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
-                        }
-                    });
-                }
-                else{
-                    EventClassRepository ecr = new EventClassRepository();
-                    //ecr.FetchEventClassesFromEvent(new EventRepository().getEvents().get(0));
+                    batch.commit();
                 }
             }
         });

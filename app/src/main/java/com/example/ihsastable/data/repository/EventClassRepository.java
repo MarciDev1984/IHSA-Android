@@ -31,7 +31,7 @@ public class EventClassRepository {
     }
     public void FetchEventClassesFromEvent(ArrayList<Integer> classIds){
         ArrayList<EventClass> eventClasses = new ArrayList<>();
-        listenerRegistration = this.remoteCR.whereIn("Id", classIds).addSnapshotListener(new EventListener<QuerySnapshot>()
+        listenerRegistration = this.remoteCR.whereIn("Id", classIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

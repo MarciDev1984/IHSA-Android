@@ -1,6 +1,7 @@
 package com.example.ihsastable.data.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 // to be finished later...
@@ -8,10 +9,10 @@ public class EventClass{
     private int Id;
     private String ClassName;
     private String Pattern;
-    private List<Integer> Riders;
-    private List<Integer> Horses;
+    private ArrayList<Integer> Riders;
+    private ArrayList<Integer> Horses;
 
-    public EventClass(int id, String className, String pattern, List<Integer> riders, List<Integer> horses) {
+    public EventClass(int id, String className, String pattern, ArrayList<Integer> riders, ArrayList<Integer> horses) {
         Id = id;
         ClassName = className;
         Pattern = pattern;
@@ -31,11 +32,11 @@ public class EventClass{
         return Pattern;
     }
 
-    public List<Integer> getRiders() {
+    public ArrayList<Integer> getRiders() {
         return Riders;
     }
 
-    public List<Integer> getHorses() {
+    public ArrayList<Integer> getHorses() {
         return Horses;
     }
 

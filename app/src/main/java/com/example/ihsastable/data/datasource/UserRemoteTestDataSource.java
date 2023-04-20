@@ -7,11 +7,11 @@ public class UserRemoteTestDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference userReference;
     public UserRemoteTestDataSource(){
-        db = FirebaseFirestore.getInstance();
-        userReference = this.db.collection("User");
+        this.db = FirebaseFirestore.getInstance();
+        this.userReference = db.collection("User");
     }
 
     public CollectionReference getUserReference() {
-        return this.userReference;
+        return userReference;
     }
 }

@@ -20,22 +20,22 @@ public class EventClassRepository {
     private final CollectionReference remoteCR;
     private ListenerRegistration listenerRegistration;
     public EventClassRepository(){
-        final EventClassRemoteTestDataSource ds = new EventClassRemoteTestDataSource();
-        remoteCR = ds.getEventClassReference();
+        EventClassRemoteTestDataSource ds = new EventClassRemoteTestDataSource();
+        this.remoteCR = ds.getEventClassReference();
     }
-    public void FetchEventClassesFromEvent(final ArrayList<Integer> classIds){
-        final ArrayList<EventClass> eventClasses = new ArrayList<>();
-        this.listenerRegistration = remoteCR.whereIn("Id", classIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+    public void FetchEventClassesFromEvent(ArrayList<Integer> classIds){
+        ArrayList<EventClass> eventClasses = new ArrayList<>();
+        listenerRegistration = this.remoteCR.whereIn("Id", classIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (final QueryDocumentSnapshot doc : value)
+                    for (QueryDocumentSnapshot doc : value)
                     {
                         eventClasses.add(doc.toObject(EventClass.class));
                     }
@@ -48,7 +48,7 @@ public class EventClassRepository {
         return EventClassesViewModel.getModel().eventClasses.getValue();
     }
     public void unsubFirebase(){
-        this.listenerRegistration.remove();
+        listenerRegistration.remove();
     }
 
 }

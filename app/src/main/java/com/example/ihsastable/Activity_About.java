@@ -18,12 +18,12 @@ public class Activity_About extends AppCompatActivity {
 
     TextView link;
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_about);
-        this.link = this.findViewById(R.id.textView3);
-        this.link.setMovementMethod(LinkMovementMethod.getInstance());
-        this.link.setLinkTextColor(Color.BLUE);
+        setContentView(R.layout.activity_about);
+        link = findViewById(R.id.textView3);
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+        link.setLinkTextColor(Color.BLUE);
 
 //        link = findViewById(R.id.link);
 //        link.setText("Click here to open IHSA General information");

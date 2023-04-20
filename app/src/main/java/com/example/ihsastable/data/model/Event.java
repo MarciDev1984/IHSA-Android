@@ -18,36 +18,36 @@ public class Event {
     }
 
     public ArrayList<Integer> getEventClasses() {
-        return this.EventClasses;
+        return EventClasses;
     }
 
-    public Event(final int id, final String eventName, final String location, final Date eventTime, final ArrayList<Integer> eventClasses, final int zone) {
-        this.Id = id;
-        this.EventName = eventName;
-        this.Location = location;
-        this.EventTime = eventTime;
-        this.EventClasses = eventClasses;
-        this.Zone = zone;
+    public Event(int id, String eventName, String location, Date eventTime, ArrayList<Integer> eventClasses, int zone) {
+        Id = id;
+        EventName = eventName;
+        Location = location;
+        EventTime = eventTime;
+        EventClasses = eventClasses;
+        Zone = zone;
     }
 
     public int getId() {
-        return this.Id;
+        return Id;
     }
 
     public String getLocation() {
-        return this.Location;
+        return Location;
     }
 
     public Date getEventTime() {
-        return this.EventTime;
+        return EventTime;
     }
 
 
     public int getZone() {
-        return this.Zone;
+        return Zone;
     }
 
     public String getEventName() {
-        return this.EventName;
+        return EventName;
     }
 }

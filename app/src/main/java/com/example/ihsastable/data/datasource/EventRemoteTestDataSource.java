@@ -7,11 +7,11 @@ public class EventRemoteTestDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference eventReference;
     public EventRemoteTestDataSource(){
-        db = FirebaseFirestore.getInstance();
-        eventReference = this.db.collection("Event");
+        this.db = FirebaseFirestore.getInstance();
+        this.eventReference = db.collection("Event");
     }
 
     public CollectionReference getEventReference() {
-        return this.eventReference;
+        return eventReference;
     }
 }

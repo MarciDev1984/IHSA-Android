@@ -8,27 +8,27 @@ public class Horse {
     public Horse() {
     }
 
-    public Horse(final int id, final String name, final String description, final String provider) {
-        Id = id;
-        this.Name = name;
-        this.Description = description;
-        this.Provider = provider;
+    public Horse(int id, String name, String description, String provider) {
+        this.Id = id;
+        Name = name;
+        Description = description;
+        Provider = provider;
     }
 
     public int getId() {
-        return this.Id;
+        return Id;
     }
 
     public String getName() {
-        return this.Name;
+        return Name;
     }
 
     public String getDescription() {
-        return this.Description;
+        return Description;
     }
 
     public String getProvider() {
-        return this.Provider;
+        return Provider;
     }
 
 

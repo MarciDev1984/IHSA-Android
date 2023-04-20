@@ -24,28 +24,28 @@ public class EventRepository
     ListenerRegistration listenerRegistration;
     public EventRepository()
     {
-        final EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
-        remoteCR = eventRemoteTestDataSource.getEventReference();
+        EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
+        this.remoteCR = eventRemoteTestDataSource.getEventReference();
     }
     public void fetchEventsAfterOneYear()
     {
-        final Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
 
-        final ArrayList<Event> events = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
         Log.d("test", "fetching data using cal date: " + cal.getTime());
 
-        this.listenerRegistration = remoteCR.whereGreaterThan("EventTime", cal.getTime()).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+        listenerRegistration = this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (final QueryDocumentSnapshot doc : value)
+                    for (QueryDocumentSnapshot doc : value)
                     {
                         events.add(doc.toObject(Event.class));
                     }
@@ -55,7 +55,7 @@ public class EventRepository
         });
     }
     public void unsubFirebase(){
-        this.listenerRegistration.remove();
+        listenerRegistration.remove();
     }
     public ArrayList<Event> getEvents(){return EventsViewModel.getModel().eventMutableLiveData.getValue();}
 }

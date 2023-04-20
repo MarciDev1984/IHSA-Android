@@ -44,38 +44,38 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
    private final EventRepository eventRepository = new EventRepository();
    
    //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
-    public RecyclerViewAdapter(final String id)
+    public RecyclerViewAdapter(String id)
     {
-        this.key = id;
+        key = id;
 
-        switch(this.key) {
+        switch(key) {
             case "fragment_home_rv":
-                this.events = new ArrayList<>();
+                events = new ArrayList<>();
                 break;
         }
 
     }
 
     @NonNull @Override
-    public RecyclerViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType)
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        final RecyclerViewHolder RVH;
-        final View view;
+        RecyclerViewHolder RVH;
+        View view;
 
         //For now, this is how we are going to pass different layout files in the adapter
-        if(this.key.equals("fragment_home_rv"))
+        if(key.equals("fragment_home_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell_holder, parent, false);
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
-        else if (this.key.equals("show_details_rv"))
+        else if (key.equals("show_details_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_class_holder, parent, false);
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
-        else if (this.key.equals("rider_order_rv"))
+        else if (key.equals("rider_order_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order_holder, parent, false);
             RVH = new RecyclerViewHolder(view);
@@ -92,84 +92,84 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //So you pass this a view from onCreateViewHolder
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder
     {
-        public RecyclerViewHolder(final View v)
+        public RecyclerViewHolder(View v)
         {
             super(v);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, final int position)
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position)
     {
         Log.d("RV ADAPT", "RecyclerViewAdapter --- onBindViewHolder");
 
 
-        if(this.key.equals("fragment_home_rv"))
+        if(key.equals("fragment_home_rv"))
         {
             try
             {
-                final TextView showTV = holder.itemView.findViewById(R.id.showTV);
-                final TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
-                showTV.setText(this.events.get(position).getEventName());
-                dateTV.setText(this.events.get(position).getEventTime().toString());
+                TextView showTV = holder.itemView.findViewById(R.id.showTV);
+                TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
+                showTV.setText(events.get(position).getEventName());
+                dateTV.setText(events.get(position).getEventTime().toString());
             }
-            catch(final Exception e)
+            catch(Exception e)
             {
-                Log.d("test", this.eventRepository.getEvents().size() + "");
+                Log.d("test", eventRepository.getEvents().size() + "");
             }
-        } else if (this.key.equals("show_details_rv")) {
-                final TextView className = holder.itemView.findViewById(R.id.classNameTV);
-                final TextView patternName = holder.itemView.findViewById(R.id.patternNameTV);
+        } else if (key.equals("show_details_rv")) {
+                TextView className = holder.itemView.findViewById(R.id.classNameTV);
+                TextView patternName = holder.itemView.findViewById(R.id.patternNameTV);
 
                 className.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getClassName());
                 patternName.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getPattern());
 
-        } else if(this.key.equals("rider_order_rv"))
+        } else if(key.equals("rider_order_rv"))
         {
-                final TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
-                final TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
-                final Rider rider =  RidersViewModel.getModel().riders.getValue().get(position);
+                TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
+                TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
+                Rider rider =  RidersViewModel.getModel().riders.getValue().get(position);
 
                 riderName.setText(rider.getFirstName() + " " + rider.getLastName());
                 // Should use RiderId not userId
                 riderId.setText(rider.getId() + "");
         }
-        else if(this.key.equals("idkyet")){
+        else if(key.equals("idkyet")){
             //showTV.setText(modelRider.getOrderArray().get(position).getOrder());
             //dateTV.setText(modelRider.getOrderArray().get(position).getHorse());
         }
     }
     public void updateEvents(){
-        this.events.clear();
-        this.events = EventsViewModel.getModel().eventMutableLiveData.getValue();
-        this.notifyDataSetChanged();
+        events.clear();
+        events = EventsViewModel.getModel().eventMutableLiveData.getValue();
+        notifyDataSetChanged();
     }
     public void updateEventClasses(){
-        this.eventClasses.clear();
-        this.eventClasses = EventClassesViewModel.getModel().eventClasses.getValue();
-        this.notifyDataSetChanged();
+        eventClasses.clear();
+        eventClasses = EventClassesViewModel.getModel().eventClasses.getValue();
+        notifyDataSetChanged();
     }
     public void updateRiders(){
-        this.riders.clear();
-        this.riders = RidersViewModel.getModel().riders.getValue();
+        riders.clear();
+        riders = RidersViewModel.getModel().riders.getValue();
         Log.d("test", "numRiders " + RidersViewModel.getModel().riders.getValue().size());
-        this.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount()
     {
         Log.d("RV ADAPT", "RecyclerViewAdapter --- getItemCount");
-        switch (this.key) {
+        switch (key) {
             case "fragment_home_rv":
                 //return _modelShowSchedule.getTaskArray().size();
                 //Log.d("EVENTREPO", "" + eventRepository.getEvents().size() );
-                return this.events.size();
+                return events.size();
             case "show_details_rv":
                 //return modelClass.getSchedArray().size();
-                return this.eventClasses.size();
+                return eventClasses.size();
             case "rider_order_rv":
-                return this.riders.size();
+                return riders.size();
             case "favorites_rv":
                 return 0;
             default:

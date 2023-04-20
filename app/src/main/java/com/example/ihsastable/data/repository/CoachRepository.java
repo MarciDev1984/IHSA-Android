@@ -19,7 +19,7 @@ import java.util.Date;
 public class CoachRepository {
     private final CollectionReference remoteCR;
     private ArrayList<Coach> coaches;
-    public CoachRepository(final CoachRemoteTestDataSource ds){
-        remoteCR = ds.getCoachesReference();
+    public CoachRepository(CoachRemoteTestDataSource ds){
+        this.remoteCR = ds.getCoachesReference();
     }
 }

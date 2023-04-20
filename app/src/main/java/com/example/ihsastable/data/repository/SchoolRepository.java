@@ -13,14 +13,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class SchoolRepository {
     private final CollectionReference remoteCR;
     public SchoolRepository(){
-        final SchoolRemoteTestDataSource ds = new SchoolRemoteTestDataSource();
-        remoteCR = ds.getSchoolReference() ;
+        SchoolRemoteTestDataSource ds = new SchoolRemoteTestDataSource();
+        this.remoteCR = ds.getSchoolReference() ;
     }
-    public void fetchSchoolFromId(final int id) {
-        remoteCR.whereEqualTo("Id", id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void fetchSchoolFromId(int id) {
+        this.remoteCR.whereEqualTo("Id", id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                final School school = task.getResult().getDocuments().get(0).toObject(School.class);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                School school = task.getResult().getDocuments().get(0).toObject(School.class);
                 SchoolSingleton.getModel().school = school;
             }
         });

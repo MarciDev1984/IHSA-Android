@@ -22,23 +22,23 @@ public class RiderRepository {
     private final CollectionReference remoteCR;
     ListenerRegistration listenerRegistration;
     public RiderRepository(){
-        final RiderRemoteTestDataSource ds = new RiderRemoteTestDataSource();
-        remoteCR = ds.getRiderReference() ;
+        RiderRemoteTestDataSource ds = new RiderRemoteTestDataSource();
+        this.remoteCR = ds.getRiderReference() ;
     }
 
-    public void fetchRidersFromRiderIds(final ArrayList<Integer> riderIds) {
-        final ArrayList<Rider> riders = new ArrayList<>();
-        this.listenerRegistration = remoteCR.whereIn("Id", riderIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+    public void fetchRidersFromRiderIds(ArrayList<Integer> riderIds) {
+        ArrayList<Rider> riders = new ArrayList<>();
+        listenerRegistration = this.remoteCR.whereIn("Id", riderIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
-            public void onEvent(@Nullable final QuerySnapshot value, @Nullable final FirebaseFirestoreException error) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error != null)
                 {
                     Log.e("tests", "listening to snapshot failed");
                 }
                 else
                 {
-                    for (final QueryDocumentSnapshot doc : value)
+                    for (QueryDocumentSnapshot doc : value)
                     {
                         riders.add(doc.toObject(Rider.class));
                     }
@@ -51,6 +51,6 @@ public class RiderRepository {
         return RidersViewModel.getModel().riders.getValue();
     }
     public void unsubFirebase(){
-        this.listenerRegistration.remove();
+        listenerRegistration.remove();
     }
 }

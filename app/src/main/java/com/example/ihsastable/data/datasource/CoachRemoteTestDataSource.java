@@ -7,12 +7,12 @@ public class CoachRemoteTestDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference coachesReference;
     public CoachRemoteTestDataSource(){
-        db = FirebaseFirestore.getInstance();
-        coachesReference = this.db.collection("Coach");
+        this.db = FirebaseFirestore.getInstance();
+        this.coachesReference = db.collection("Coach");
     }
 
     public CollectionReference getCoachesReference() {
-        return this.coachesReference;
+        return coachesReference;
     }
 
 }

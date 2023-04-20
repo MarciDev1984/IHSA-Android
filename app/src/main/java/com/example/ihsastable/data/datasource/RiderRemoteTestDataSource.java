@@ -7,11 +7,11 @@ public class RiderRemoteTestDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference riderReference;
     public RiderRemoteTestDataSource(){
-        db = FirebaseFirestore.getInstance();
-        riderReference = this.db.collection("Rider");
+        this.db = FirebaseFirestore.getInstance();
+        this.riderReference = db.collection("Rider");
     }
 
     public CollectionReference getRiderReference() {
-        return this.riderReference;
+        return riderReference;
     }
 }

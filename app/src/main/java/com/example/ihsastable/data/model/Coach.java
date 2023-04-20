@@ -8,12 +8,12 @@ public class Coach extends User {
 
     public Coach(){}
 
-    public Coach(final int Id, final String Username, final String FirstName, final String LastName, final int schoolId) {
+    public Coach(int Id, String Username, String FirstName, String LastName, int schoolId) {
         super(Id, Username, FirstName, LastName);
-        this.SchoolId = schoolId;
+        SchoolId = schoolId;
     }
 
     public int getSchoolId() {
-        return this.SchoolId;
+        return SchoolId;
     }
 }

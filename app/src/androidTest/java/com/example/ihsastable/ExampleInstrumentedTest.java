@@ -20,7 +20,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        final Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.ihsastable", appContext.getPackageName());
     }
 }

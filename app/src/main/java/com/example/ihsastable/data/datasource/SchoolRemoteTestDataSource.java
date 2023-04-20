@@ -7,11 +7,11 @@ public class SchoolRemoteTestDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference schoolReference;
     public SchoolRemoteTestDataSource(){
-        db = FirebaseFirestore.getInstance();
-        schoolReference = this.db.collection("School");
+        this.db = FirebaseFirestore.getInstance();
+        this.schoolReference = db.collection("School");
     }
 
     public CollectionReference getSchoolReference() {
-        return this.schoolReference;
+        return schoolReference;
     }
 }

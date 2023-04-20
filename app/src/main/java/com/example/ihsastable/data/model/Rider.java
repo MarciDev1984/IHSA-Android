@@ -15,33 +15,33 @@ public class Rider extends User {
     public Rider() {
     }
 
-    public Rider(final int Id, final String Username, final String FirstName, final String LastName, final int riderId, final int points, final int position, final double averagePointsPerRide, final int playsFor) {
+    public Rider(int Id, String Username, String FirstName, String LastName, int riderId, int points, int position, double averagePointsPerRide, int playsFor) {
         super(Id, Username, FirstName, LastName);
-        this.RiderId = riderId;
-        this.Points = points;
-        this.Position = position;
-        this.AveragePointsPerRide = averagePointsPerRide;
-        this.PlaysFor = playsFor;
+        RiderId = riderId;
+        Points = points;
+        Position = position;
+        AveragePointsPerRide = averagePointsPerRide;
+        PlaysFor = playsFor;
     }
 
     public int getRiderId() {
-        return this.RiderId;
+        return RiderId;
     }
 
     public int getPoints() {
-        return this.Points;
+        return Points;
     }
 
     public int getPosition() {
-        return this.Position;
+        return Position;
     }
 
     public double getAveragePointsPerRide() {
-        return this.AveragePointsPerRide;
+        return AveragePointsPerRide;
     }
 
 
     public int getPlaysFor() {
-        return this.PlaysFor;
+        return PlaysFor;
     }
 }

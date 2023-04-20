@@ -21,7 +21,7 @@ public class Fragment_Notification extends Fragment
     public Fragment_Notification() {}
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.fragment_notification, container, false);
     }

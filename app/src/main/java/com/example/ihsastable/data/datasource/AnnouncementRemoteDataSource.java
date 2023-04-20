@@ -7,11 +7,11 @@ public class AnnouncementRemoteDataSource {
     private final FirebaseFirestore db;
     private final CollectionReference announcementReference;
     public AnnouncementRemoteDataSource(){
-        db = FirebaseFirestore.getInstance();
-        announcementReference = this.db.collection("Announcement");
+        this.db = FirebaseFirestore.getInstance();
+        this.announcementReference = db.collection("Announcement");
     }
 
     public CollectionReference getAnnouncementReference() {
-        return this.announcementReference;
+        return announcementReference;
     }
 }

@@ -2,12 +2,12 @@ package com.example.ihsastable;
 
 import java.util.ArrayList;
 
-public class classModel {
+public class Model_Show_Class {
 
-    private ArrayList<Schedule> scheduleList;
+    private final ArrayList<Schedule> scheduleList;
 
     public static class Schedule{
-        private String thisClass;
+        private final String thisClass;
 
         public Schedule(String someClass){
             this.thisClass = someClass;
@@ -17,7 +17,7 @@ public class classModel {
         }
     }
 
-    private classModel(){
+    private Model_Show_Class(){
         scheduleList = new ArrayList<Schedule>();
         loadSched();
     }
@@ -37,11 +37,11 @@ public class classModel {
         return scheduleList;
     }
 
-    public static classModel theModel = null;
+    public static Model_Show_Class theModel;
 
-    public static classModel getSingleton(){
+    public static Model_Show_Class getSingleton(){
         if(theModel == null){
-            theModel = new classModel();
+            theModel = new Model_Show_Class();
         }
         return theModel;
     }

@@ -2,13 +2,13 @@ package com.example.ihsastable;
 
 import java.util.ArrayList;
 
-public class Rider_Schedule_Model {
+public class Model_Class_Order {
 
-    private ArrayList<Order> orderList;
+    private final ArrayList<Order> orderList;
 
     public static class Order{
-        private String thisOrder;
-        private String thisHorse;
+        private final String thisOrder;
+        private final String thisHorse;
 
         public Order(String someOrder, String someHorse){
             this.thisOrder = someOrder;
@@ -22,7 +22,7 @@ public class Rider_Schedule_Model {
         }
     }
 
-    private Rider_Schedule_Model(){
+    private Model_Class_Order(){
         orderList = new ArrayList<Order>();
         loadOrder();
     }
@@ -44,11 +44,11 @@ public class Rider_Schedule_Model {
         return orderList;
     }
 
-    public static Rider_Schedule_Model theModel = null;
+    public static Model_Class_Order theModel;
 
-    public static Rider_Schedule_Model getSingleton(){
+    public static Model_Class_Order getSingleton(){
         if(theModel == null){
-            theModel = new Rider_Schedule_Model();
+            theModel = new Model_Class_Order();
         }
         return theModel;
     }

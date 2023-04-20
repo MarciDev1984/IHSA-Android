@@ -139,27 +139,124 @@ public class TestDataRepository {
                     docData.put("Id", 1);
                     docData.put("ClassName", "Class 1");
                     docData.put("Pattern", "Pattern2");
-                    docData.put("Riders", Arrays.asList(1,3, 8, 9, 4));
+                    docData.put("Riders", Arrays.asList(111,3333, 8, 9, 4));
                     docData.put("Horses", Arrays.asList(1,2,3, 7, 2, 7));
 
                     Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
                     docData1.put("ClassName", "Class 2");
                     docData1.put("Pattern", "Pattern4");
-                    docData1.put("Riders", Arrays.asList(1,2,3, 8, 5));
+                    docData1.put("Riders", Arrays.asList(1,222,3, 8, 5));
                     docData1.put("Horses", Arrays.asList(1,2,3, 6));
 
                     Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
                     docData2.put("ClassName", "Class 3");
                     docData2.put("Pattern", "Pattern6");
-                    docData2.put("Riders", Arrays.asList(1,2,3));
+                    docData2.put("Riders", Arrays.asList(111,2,3));
                     docData2.put("Horses", Arrays.asList(1,2,3));
 
                     WriteBatch batch = db.batch();
                     batch.set(cr.document(), docData);
                     batch.set(cr.document(), docData1);
                     batch.set(cr.document(), docData2);
+
+                    batch.commit();
+                }
+            }
+        });
+    }
+    public void addTestRiders(){
+        CollectionReference cr = this.db.collection("Rider");
+        cr.whereEqualTo("Id", 111).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.getResult().isEmpty()){
+                    Map<String, Object> docData = new HashMap<>();
+                    docData.put("Id", 111);
+                    docData.put("UserName", "TheRider");
+                    docData.put("FirstName", "Limbo");
+                    docData.put("LastName", "Jimbo");
+                    docData.put("Role", "rider");
+                    docData.put("RoleId", 2);
+
+                    docData.put("Height", 5.8);
+                    docData.put("Weight", 120);
+                    docData.put("Points", 20);
+                    docData.put("Position", 1);
+                    docData.put("AvgPointsPerRide", 50);
+                    docData.put("ManagedBy", 1);
+                    docData.put("Class", "Unknown");
+                    docData.put("PlaysFor", 7);
+                    docData.put("IsWeightRider", true);
+                    docData.put("IsHeightRider", false);
+
+
+                    Map<String, Object> docData1 = new HashMap<>();
+                    docData1.put("Id", 222);
+                    docData1.put("UserName", "TheBigGuy");
+                    docData1.put("FirstName", "John");
+                    docData1.put("LastName", "Handlebar");
+                    docData1.put("Role", "rider");
+                    docData1.put("RoleId", 2);
+
+                    docData1.put("Height", 9.8);
+                    docData1.put("Weight", 120);
+                    docData1.put("Points", 37);
+                    docData1.put("Position", 3);
+                    docData1.put("AvgPointsPerRide", 200);
+                    docData1.put("ManagedBy", 1);
+                    docData1.put("Class", "Unknown");
+                    docData1.put("PlaysFor", 7);
+                    docData1.put("IsWeightRider", true);
+                    docData1.put("IsHeightRider", false);
+
+
+                    Map<String, Object> docData2 = new HashMap<>();
+                    docData2.put("Id", 333);
+                    docData2.put("UserName", "Ghosty");
+                    docData2.put("FirstName", "Jack");
+                    docData2.put("LastName", "Black");
+                    docData2.put("Role", "rider");
+                    docData2.put("RoleId", 2);
+
+                    docData2.put("Height", 4.8);
+                    docData2.put("Weight", 110);
+                    docData2.put("Points", 14);
+                    docData2.put("Position", 9);
+                    docData2.put("AvgPointsPerRide", 30);
+                    docData2.put("ManagedBy", 2);
+                    docData2.put("Class", "Unknown");
+                    docData2.put("PlaysFor", 7);
+                    docData2.put("IsWeightRider", true);
+                    docData2.put("IsHeightRider", true);
+
+
+                    Map<String, Object> docData4 = new HashMap<>();
+                    docData4.put("Id", 444);
+                    docData4.put("UserName", "StarPlatnum");
+                    docData4.put("FirstName", "George");
+                    docData4.put("LastName", "Butler");
+                    docData4.put("Role", "rider");
+                    docData4.put("RoleId", 2);
+
+                    docData4.put("Height", 5.9);
+                    docData4.put("Weight", 129);
+                    docData4.put("Points", 10);
+                    docData4.put("Position", 6);
+                    docData4.put("AvgPointsPerRide", 25);
+                    docData4.put("ManagedBy", 7);
+                    docData4.put("Class", "Unknown");
+                    docData4.put("PlaysFor", 9);
+                    docData4.put("IsWeightRider", false);
+                    docData4.put("IsHeightRider", false);
+
+
+                    WriteBatch batch = db.batch();
+                    batch.set(cr.document(), docData);
+                    batch.set(cr.document(), docData1);
+                    batch.set(cr.document(), docData2);
+                    batch.set(cr.document(), docData4);
 
                     batch.commit();
                 }

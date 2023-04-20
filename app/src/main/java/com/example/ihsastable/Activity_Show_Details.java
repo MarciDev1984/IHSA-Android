@@ -118,7 +118,7 @@ public class Activity_Show_Details extends AppCompatActivity
     public void openRider(int pos)
     {
         Intent opSched = new Intent(this, Activity_Class_Order.class);
-        opSched.putExtra("pos", String.valueOf(pos));
+        opSched.putExtra("pos", pos);
         opSched.putIntegerArrayListExtra("riderIds", EventClassesViewModel.getModel().eventClasses
                 .getValue().get(pos).getRiders());
         startActivity(opSched);

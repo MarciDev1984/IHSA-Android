@@ -1,43 +1,56 @@
 package com.example.ihsastable.data.repository;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
 
-import com.example.ihsastable.data.datasource.HorseRemoteTestDataSource;
+import androidx.annotation.Nullable;
+
 import com.example.ihsastable.data.datasource.RiderRemoteTestDataSource;
 import com.example.ihsastable.data.model.EventClass;
-import com.example.ihsastable.data.model.Horse;
-import com.example.ihsastable.data.model.Horses;
 import com.example.ihsastable.data.model.Rider;
-import com.example.ihsastable.data.model.Riders;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.ihsastable.viewmodel.EventClassesViewModel;
+import com.example.ihsastable.viewmodel.RidersViewModel;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class RiderRepository {
     private CollectionReference remoteCR;
+    ListenerRegistration listenerRegistration;
     public RiderRepository(){
         RiderRemoteTestDataSource ds = new RiderRemoteTestDataSource();
         this.remoteCR = ds.getRiderReference() ;
     }
 
-    public void fetchRidersFromEventClass(EventClass ec) {
+    public void fetchRidersFromRiderIds(ArrayList<Integer> riderIds) {
         ArrayList<Rider> riders = new ArrayList<>();
-        this.remoteCR.whereIn("Id", ec.getRiders()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        listenerRegistration = this.remoteCR.whereIn("Id", riderIds).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>()
+        {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (DocumentSnapshot ds : task.getResult()) {
-                    riders.add(ds.toObject(Rider.class));
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error != null)
+                {
+                    Log.e("tests", "listening to snapshot failed");
                 }
-                Riders.getModel().riders = riders;
+                else
+                {
+                    for (QueryDocumentSnapshot doc : value)
+                    {
+                        riders.add(doc.toObject(Rider.class));
+                    }
+                    RidersViewModel.getModel().riders.setValue(riders);
+                }
             }
         });
     }
     public ArrayList<Rider> getRiders(){
-        return Riders.getModel().riders;
+        return RidersViewModel.getModel().riders.getValue();
+    }
+    public void unsubFirebase(){
+        listenerRegistration.remove();
     }
 }

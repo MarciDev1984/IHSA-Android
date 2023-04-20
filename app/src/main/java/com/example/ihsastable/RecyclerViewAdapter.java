@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ihsastable.data.model.Event;
 //import com.example.ihsastable.data.model.Events;
 import com.example.ihsastable.data.model.EventClass;
+import com.example.ihsastable.data.model.Rider;
 import com.example.ihsastable.data.repository.EventRepository;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.EventViewModel;
+import com.example.ihsastable.viewmodel.RidersViewModel;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
    private final String key;
    public ArrayList<Event> events = new ArrayList<>();
    public ArrayList<EventClass> eventClasses = new ArrayList<>();
+   public ArrayList<Rider> riders = new ArrayList<>();
    
    private final Model_Fragment_Home _modelShowSchedule = Model_Fragment_Home.getSingleton();
    private final Model_Show_Class modelClass = Model_Show_Class.getSingleton();
@@ -74,6 +77,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         else if (key.equals("show_details_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_class, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        else if (key.equals("rider_order_rv"))
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order, parent, false);
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
@@ -122,8 +131,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         } else if(key.equals("rider_order_rv"))
         {
-            //showTV.setText(modelClass.getSchedArray().get(position).getClassModel());
-            //
+                TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
+                TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
+                Rider rider =  RidersViewModel.getModel().riders.getValue().get(position);
+
+                riderName.setText(rider.getFirstName() + " " + rider.getLastName());
+                // Should use RiderId not userId
+                riderId.setText(rider.getId() + "");
         }
         else if(key.equals("idkyet")){
             //showTV.setText(modelRider.getOrderArray().get(position).getOrder());
@@ -140,6 +154,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         eventClasses = EventClassesViewModel.getModel().eventClasses.getValue();
         notifyDataSetChanged();
     }
+    public void updateRiders(){
+        riders.clear();
+        riders = RidersViewModel.getModel().riders.getValue();
+        Log.d("test", "numRiders " + RidersViewModel.getModel().riders.getValue().size());
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount()
@@ -153,8 +173,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             case "show_details_rv":
                 //return modelClass.getSchedArray().size();
                 return eventClasses.size();
-            case "idkyet":
-                //return modelRider.getOrderArray().size();
+            case "rider_order_rv":
+                return riders.size();
             case "favorites_rv":
                 return 0;
             default:

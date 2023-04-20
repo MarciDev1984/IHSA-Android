@@ -2,6 +2,7 @@ package com.example.ihsastable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,26 +23,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ihsastable.data.model.Event;
+import com.example.ihsastable.data.model.EventClass;
+import com.example.ihsastable.data.model.Rider;
+import com.example.ihsastable.data.repository.RiderRepository;
+import com.example.ihsastable.viewmodel.EventClassesViewModel;
+import com.example.ihsastable.viewmodel.EventViewModel;
+import com.example.ihsastable.viewmodel.RidersViewModel;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Activity_Class_Order extends AppCompatActivity {
 
     private RecyclerViewAdapter orderRV;
     private long downloadID;
     DownloadManager downloadManager;
+    EventClass eventClass;
+    RiderRepository riderRepository;
+    int pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.d("SUPER AMAZING TEMP", "yeah its rider activity");
-
         setContentView(R.layout.activity_class_order);
-        
-        String pos = getIntent().getStringExtra("POS");
-
-        TextView schedHead = findViewById(R.id.classTV);
-        schedHead.setText("Class " + pos + " Order");
+        pos = getIntent().getIntExtra("pos", 0);
 
         orderRV = new RecyclerViewAdapter("rider_order_rv");
         RecyclerView riderRecycler = findViewById(R.id.orderRV);
@@ -57,7 +65,7 @@ public class Activity_Class_Order extends AppCompatActivity {
                 return detect.onTouchEvent(e);
             }
         });
-
+        riderRepository = new RiderRepository();
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         Uri pdfURI = Uri.parse("https://drive.google.com/uc?export=download&id=1GG6jGkVEKIK0nZNZGZ1mrH2ToK2egc_J");
 
@@ -69,9 +77,27 @@ public class Activity_Class_Order extends AppCompatActivity {
 
     }
 
+    Observer<ArrayList<Rider>> riderUpdateObserver = new Observer<ArrayList<Rider>>() {
+        @Override
+        public void onChanged(ArrayList<Rider> riders) {
+            orderRV.updateRiders();
+        }
+    };
+    public void onStart() {
+        super.onStart();
+        TextView schedHead = findViewById(R.id.classTV);
+        eventClass = EventClassesViewModel.getModel().eventClasses.getValue().get(pos);
+        riderRepository.fetchRidersFromRiderIds(eventClass.getRiders());
+        schedHead.setText(eventClass.getClassName());
+        RidersViewModel.getModel().riders.observe(this, riderUpdateObserver);
+    }
+    public void onStop(){
+        super.onStop();
+        riderRepository.unsubFirebase();
+    }
     public void openSingleRider(int pos){
         Intent opSched = new Intent(this, Activity_Rider_Profile.class);
-        opSched.putExtra("POS", String.valueOf(pos + 1));
+        opSched.putExtra("pos", String.valueOf(pos + 1));
         startActivity(opSched);
     }
 

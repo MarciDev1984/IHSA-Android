@@ -23,12 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ihsastable.data.model.Event;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
 import com.example.ihsastable.data.repository.RiderRepository;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
-import com.example.ihsastable.viewmodel.EventViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
 
 import java.io.FileNotFoundException;

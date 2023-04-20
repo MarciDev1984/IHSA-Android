@@ -1,28 +1,24 @@
 package com.example.ihsastable.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.example.ihsastable.data.model.Event;
-import com.example.ihsastable.data.model.Events;
-import com.example.ihsastable.data.repository.EventRepository;
 
 import java.util.ArrayList;
 
-public class EventViewModel extends ViewModel {
+public class EventsViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Event>> eventMutableLiveData = new MutableLiveData<>();
-    private static EventViewModel theModel;
+    private static EventsViewModel theModel;
 
-    public static EventViewModel getModel(){
-        if (EventViewModel.theModel == null){
-            EventViewModel.theModel = new EventViewModel();
+    public static EventsViewModel getModel(){
+        if (EventsViewModel.theModel == null){
+            EventsViewModel.theModel = new EventsViewModel();
         }
-        return EventViewModel.theModel;
+        return EventsViewModel.theModel;
     }
-    private EventViewModel(){
+    private EventsViewModel(){
         eventMutableLiveData.setValue(new ArrayList<>());}
 
 //    public LiveData<String> eventName = Transformations.map(eventMutableLiveData, (String) ->{

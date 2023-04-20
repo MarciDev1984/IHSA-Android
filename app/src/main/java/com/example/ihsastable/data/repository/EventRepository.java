@@ -2,15 +2,11 @@ package com.example.ihsastable.data.repository;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ihsastable.data.datasource.EventRemoteTestDataSource;
 import com.example.ihsastable.data.model.Event;
-import com.example.ihsastable.data.model.Events;
-import com.example.ihsastable.viewmodel.EventViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.ihsastable.viewmodel.EventsViewModel;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -53,7 +49,7 @@ public class EventRepository
                     {
                         events.add(doc.toObject(Event.class));
                     }
-                    EventViewModel.getModel().eventMutableLiveData.setValue(events);
+                    EventsViewModel.getModel().eventMutableLiveData.setValue(events);
                 }
             }
         });
@@ -61,5 +57,5 @@ public class EventRepository
     public void unsubFirebase(){
         this.listenerRegistration.remove();
     }
-    public ArrayList<Event> getEvents(){return Events.getModel().events;}
+    public ArrayList<Event> getEvents(){return EventsViewModel.getModel().eventMutableLiveData.getValue();}
 }

@@ -15,7 +15,7 @@ import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
 import com.example.ihsastable.data.repository.EventRepository;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
-import com.example.ihsastable.viewmodel.EventViewModel;
+import com.example.ihsastable.viewmodel.EventsViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
 
 import java.util.ArrayList;
@@ -141,7 +141,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
     public void updateEvents(){
         this.events.clear();
-        this.events = EventViewModel.getModel().eventMutableLiveData.getValue();
+        this.events = EventsViewModel.getModel().eventMutableLiveData.getValue();
         this.notifyDataSetChanged();
     }
     public void updateEventClasses(){

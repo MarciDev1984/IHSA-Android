@@ -2,7 +2,6 @@ package com.example.ihsastable;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.view.GestureDetector;
@@ -19,10 +18,9 @@ import com.example.ihsastable.data.model.Event;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.repository.EventClassRepository;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
-import com.example.ihsastable.viewmodel.EventViewModel;
+import com.example.ihsastable.viewmodel.EventsViewModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /*
  * This is Rider_Order_Activity
@@ -75,7 +73,7 @@ public class Activity_Show_Details extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         final Integer pos = this.getIntent().getIntExtra("pos",  0);
-        final Event e = EventViewModel.getModel().eventMutableLiveData.getValue().get(pos);
+        final Event e = EventsViewModel.getModel().eventMutableLiveData.getValue().get(pos);
         this.eventClassRepository.FetchEventClassesFromEvent(e.getEventClasses());
         EventClassesViewModel.getModel().eventClasses.observe(this, this.eventClassListUpdateObserver);
 

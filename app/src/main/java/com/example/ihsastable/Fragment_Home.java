@@ -7,6 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +20,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.ihsastable.data.model.Event;
+import com.example.ihsastable.data.repository.EventRepository;
+import com.example.ihsastable.viewmodel.EventViewModel;
+
+import java.util.ArrayList;
 
 /*
  * This is Fragment_Home
@@ -31,6 +40,9 @@ public class Fragment_Home extends Fragment
 {
     private View view;
     private RecyclerView fragment_home_rv;
+    RecyclerViewAdapter fragment_home_rv_adapter;
+    EventRepository eventRepository;
+    ArrayList<Event> events;
 
     //Required empty constructor for fragments
     public Fragment_Home() {}
@@ -49,7 +61,7 @@ public class Fragment_Home extends Fragment
 
         //Create a new adapter instance with a key as an identifier
         //RecyclerViewAdapter fragment_home_rv_adapter = activity.recyclerViewAdapter;
-        RecyclerViewAdapter fragment_home_rv_adapter = new RecyclerViewAdapter("fragment_home_rv");
+        fragment_home_rv_adapter = new RecyclerViewAdapter("fragment_home_rv");
 
         //Create a LLM
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
@@ -60,6 +72,11 @@ public class Fragment_Home extends Fragment
         //Set the adapter, LLM, and gestureDetector
         fragment_home_rv.setAdapter(fragment_home_rv_adapter);
         fragment_home_rv.setLayoutManager(LLM);
+
+        //setup the recycler to use the EventModelClass. Hinted from here https://medium.com/@atifmukhtar/recycler-view-with-mvvm-livedata-a1fd062d2280
+        events = new ArrayList<>();
+        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventListUpdateObserver);
+
         fragment_home_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
             //This is the first thing called on a tap, it passes it to the RecyclerViewOnGestureListener
@@ -75,6 +92,12 @@ public class Fragment_Home extends Fragment
 
         return view;
     }
+    Observer<ArrayList<Event>> eventListUpdateObserver = new Observer<ArrayList<Event>>() {
+        @Override
+        public void onChanged(ArrayList<Event> events) {
+            fragment_home_rv_adapter.updateEvents();
+        }
+    };
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {

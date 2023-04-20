@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.ihsastable.data.repository.EventRepository;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     private ViewPager2 viewPager;
     private MaterialToolbar materialToolbar;
     public RecyclerViewAdapter recyclerViewAdapter;
+    public EventRepository eventRepository;
 
 
     @Override
@@ -36,13 +38,14 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        eventRepository = new EventRepository();
+        eventRepository.fetchEventsAfterOneYear();
         //View pager code (Only slightly fragile)
         //https://www.youtube.com/watch?v=pIKdHeOjYNw for references
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
-        recyclerViewAdapter = new RecyclerViewAdapter("fragment_home_rv");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {

@@ -16,6 +16,8 @@ import com.example.ihsastable.data.model.Event;
 import com.example.ihsastable.data.repository.EventRepository;
 import com.example.ihsastable.viewmodel.EventViewModel;
 
+import java.util.ArrayList;
+
 /*
  * This is RecyclerViewAdapter
  * This is a shared class between every instance of our RecyclerViews
@@ -33,7 +35,7 @@ import com.example.ihsastable.viewmodel.EventViewModel;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>
 {
    private final String key;
-   private ArrayList<Event> events = new ArrayList<>();
+   public ArrayList<Event> events = new ArrayList<>();
    
    private final Model_Fragment_Home _modelShowSchedule = Model_Fragment_Home.getSingleton();
    private final Model_Show_Class modelClass = Model_Show_Class.getSingleton();
@@ -49,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         switch(key) {
             case "fragment_home_rv":
-                eventRepository.fetchEventsAfterOneYear();
+                events = new ArrayList<>();
                 break;
         }
 
@@ -92,20 +94,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("RV ADAPT", "RecyclerViewAdapter --- onBindViewHolder");
         TextView showTV = holder.itemView.findViewById(R.id.showTV);
         TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
-        EventViewModel eventViewModel = new EventViewModel();
 
         if(key.equals("fragment_home_rv"))
         {
             try
             {
-                eventViewModel.eventMutableLiveData.setValue(eventRepository.getEvents().get(position));
-                eventViewModel.eventMutableLiveData.observe(View, new Observer<Event>(){
-                    @Override
-                    public void onChanged(Event event) {
-                        showTV.setText(event.getEventName());
-                        dateTV.setText(event.getEventTime().toString());
-                    }
-                });
+                showTV.setText(events.get(position).getEventName());
+                dateTV.setText(events.get(position).getEventTime().toString());
             }
             catch(Exception e)
             {
@@ -122,6 +117,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //dateTV.setText(modelRider.getOrderArray().get(position).getHorse());
         }
     }
+    public void updateEvents(){
+        events.clear();
+        events = EventViewModel.getModel().eventMutableLiveData.getValue();
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount()
@@ -130,8 +130,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         switch (key) {
             case "fragment_home_rv":
                 //return _modelShowSchedule.getTaskArray().size();
-                Log.d("EVENTREPO", "" + eventRepository.getEvents().size() );
-                return eventRepository.getEvents().size();
+                //Log.d("EVENTREPO", "" + eventRepository.getEvents().size() );
+                return events.size();
             case "rider_order_rv":
                 //return modelClass.getSchedArray().size();
             case "idkyet":

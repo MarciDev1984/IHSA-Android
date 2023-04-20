@@ -2,6 +2,7 @@ package com.example.ihsastable.data.model;
 
 import com.google.firebase.Timestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,17 +11,17 @@ public class Event {
     private String EventName;
     private String Location;
     private Date EventTime;
-    private List<Integer> EventClasses;
+    private ArrayList<Integer> EventClasses;
     private int Zone;
 
     public Event() {
     }
 
-    public List<Integer> getEventClasses() {
+    public ArrayList<Integer> getEventClasses() {
         return EventClasses;
     }
 
-    public Event(int id, String eventName, String location, Date eventTime, List<Integer> eventClasses, int zone) {
+    public Event(int id, String eventName, String location, Date eventTime, ArrayList<Integer> eventClasses, int zone) {
         Id = id;
         EventName = eventName;
         Location = location;

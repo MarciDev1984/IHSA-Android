@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -24,6 +25,7 @@ public class EventRepository
 {
     private final CollectionReference remoteCR;
     private EventClassRepository eventClassRepository;
+    ListenerRegistration listenerRegistration;
     public EventRepository()
     {
         EventRemoteTestDataSource eventRemoteTestDataSource = new EventRemoteTestDataSource();
@@ -37,7 +39,7 @@ public class EventRepository
         ArrayList<Event> events = new ArrayList<>();
         Log.d("test", "fetching data using cal date: " + cal.getTime().toString());
 
-        this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).addSnapshotListener(new EventListener<QuerySnapshot>()
+        listenerRegistration = this.remoteCR.whereGreaterThan("EventTime", cal.getTime()).addSnapshotListener(new EventListener<QuerySnapshot>()
         {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -55,6 +57,9 @@ public class EventRepository
                 }
             }
         });
+    }
+    public void unsubFirebase(){
+        listenerRegistration.remove();
     }
     public ArrayList<Event> getEvents(){return Events.getModel().events;}
 }

@@ -72,10 +72,7 @@ public class Fragment_Home extends Fragment
         //Set the adapter, LLM, and gestureDetector
         fragment_home_rv.setAdapter(fragment_home_rv_adapter);
         fragment_home_rv.setLayoutManager(LLM);
-
-        //setup the recycler to use the EventModelClass. Hinted from here https://medium.com/@atifmukhtar/recycler-view-with-mvvm-livedata-a1fd062d2280
-        events = new ArrayList<>();
-        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventListUpdateObserver);
+        eventRepository = new EventRepository();
 
         fragment_home_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener()
         {
@@ -98,6 +95,18 @@ public class Fragment_Home extends Fragment
             fragment_home_rv_adapter.updateEvents();
         }
     };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //setup the recycler to use the EventModelClass. Hinted from here https://medium.com/@atifmukhtar/recycler-view-with-mvvm-livedata-a1fd062d2280
+        eventRepository.fetchEventsAfterOneYear();
+        EventViewModel.getModel().eventMutableLiveData.observe(getViewLifecycleOwner(), eventListUpdateObserver);
+    }
+    public void onStop(){
+        super.onStop();
+        eventRepository.unsubFirebase();
+    }
 
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
@@ -129,7 +138,8 @@ public class Fragment_Home extends Fragment
     public void openShowDetails(int pos)
     {
         Intent opSched = new Intent(view.getContext(), Activity_Show_Details.class);
-        opSched.putExtra("POS", String.valueOf(pos + 1));
+        opSched.putExtra("pos", pos);
+        opSched.putIntegerArrayListExtra("eventClassIds", EventViewModel.getModel().eventMutableLiveData.getValue().get(pos).getEventClasses());
         startActivity(opSched);
     }
 }

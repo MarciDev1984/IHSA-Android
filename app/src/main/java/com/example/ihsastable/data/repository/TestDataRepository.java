@@ -116,7 +116,7 @@ public class TestDataRepository {
                     cal.set(2022, 12, 24);
                     docData.put("EventTime", cal.getTime());
                     docData.put("Zone", 1);
-                    docData.put("EventClasses", Arrays.asList(1,4,3,9));
+                    docData.put("EventClassesViewModel", Arrays.asList(1,4,3,9));
 
                     Map<String, Object> docData1 = new HashMap<>();
                     docData1.put("Id", 2);
@@ -125,7 +125,7 @@ public class TestDataRepository {
                     cal.set(2023, 6, 21);
                     docData1.put("EventTime", cal.getTime());
                     docData1.put("Zone", 1);
-                    docData1.put("EventClasses", Arrays.asList(1,9,8,8,7));
+                    docData1.put("EventClassesViewModel", Arrays.asList(1,9,8,8,7));
 
                     Map<String, Object> docData2 = new HashMap<>();
                     docData2.put("Id", 3);
@@ -134,7 +134,7 @@ public class TestDataRepository {
                     cal.set(2024, 8, 21);
                     docData2.put("EventTime", cal.getTime());
                     docData2.put("Zone", 2);
-                    docData2.put("EventClasses", Arrays.asList(1,4,7,2));
+                    docData2.put("EventClassesViewModel", Arrays.asList(1,4,7,2));
 
                     WriteBatch batch = db.batch();
                     batch.set(cr.document(), docData);

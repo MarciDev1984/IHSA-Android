@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ihsastable.data.model.Event;
 //import com.example.ihsastable.data.model.Events;
+import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.repository.EventRepository;
+import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.EventViewModel;
 
 import java.util.ArrayList;
@@ -36,6 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 {
    private final String key;
    public ArrayList<Event> events = new ArrayList<>();
+   public ArrayList<EventClass> eventClasses = new ArrayList<>();
    
    private final Model_Fragment_Home _modelShowSchedule = Model_Fragment_Home.getSingleton();
    private final Model_Show_Class modelClass = Model_Show_Class.getSingleton();
@@ -70,9 +71,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
-        else
+        else if (key.equals("show_details_rv"))
         {
-            //TODO - Change this to return an error code and deal with it
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_class, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        //TODO - Change this to return an error code and deal with it
+        else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell, parent, false);
             RVH = new RecyclerViewHolder(view);
             return RVH;
@@ -92,13 +98,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position)
     {
         Log.d("RV ADAPT", "RecyclerViewAdapter --- onBindViewHolder");
-        TextView showTV = holder.itemView.findViewById(R.id.showTV);
-        TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
+
 
         if(key.equals("fragment_home_rv"))
         {
             try
             {
+                TextView showTV = holder.itemView.findViewById(R.id.showTV);
+                TextView dateTV = holder.itemView.findViewById(R.id.dateTV);
                 showTV.setText(events.get(position).getEventName());
                 dateTV.setText(events.get(position).getEventTime().toString());
             }
@@ -106,11 +113,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             {
                 Log.d("test", eventRepository.getEvents().size() + "");
             }
-        }
-        else if(key.equals("rider_order_rv"))
+        } else if (key.equals("show_details_rv")) {
+                TextView className = holder.itemView.findViewById(R.id.classNameTV);
+                TextView patternName = holder.itemView.findViewById(R.id.patternNameTV);
+
+                className.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getClassName());
+                patternName.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getPattern());
+
+        } else if(key.equals("rider_order_rv"))
         {
             //showTV.setText(modelClass.getSchedArray().get(position).getClassModel());
-            dateTV.setText("");
+            //
         }
         else if(key.equals("idkyet")){
             //showTV.setText(modelRider.getOrderArray().get(position).getOrder());
@@ -120,6 +133,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void updateEvents(){
         events.clear();
         events = EventViewModel.getModel().eventMutableLiveData.getValue();
+        notifyDataSetChanged();
+    }
+    public void updateEventClasses(){
+        eventClasses.clear();
+        eventClasses = EventClassesViewModel.getModel().eventClasses.getValue();
         notifyDataSetChanged();
     }
 
@@ -132,8 +150,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 //return _modelShowSchedule.getTaskArray().size();
                 //Log.d("EVENTREPO", "" + eventRepository.getEvents().size() );
                 return events.size();
-            case "rider_order_rv":
+            case "show_details_rv":
                 //return modelClass.getSchedArray().size();
+                return eventClasses.size();
             case "idkyet":
                 //return modelRider.getOrderArray().size();
             case "favorites_rv":

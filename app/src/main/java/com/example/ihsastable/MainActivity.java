@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        eventRepository = new EventRepository();
-        eventRepository.fetchEventsAfterOneYear();
         //View pager code (Only slightly fragile)
         //https://www.youtube.com/watch?v=pIKdHeOjYNw for references
         tabLayout = findViewById(R.id.tabLayout);

@@ -95,7 +95,11 @@ public class Activity_Class_Order extends AppCompatActivity {
     }
     public void openSingleRider(int pos){
         Intent opSched = new Intent(this, Activity_Rider_Profile.class);
-        opSched.putExtra("pos", String.valueOf(pos + 1));
+        Rider rider = RidersViewModel.getModel().riders.getValue().get(pos);
+        opSched.putExtra("riderName", rider.getFirstName() + " " + rider.getLastName());
+        opSched.putExtra("riderId", rider.getId());
+        opSched.putExtra("riderAvg", rider.getAveragePointsPerRide());
+        opSched.putExtra("riderPlaysFor", rider.getPlaysFor());
         startActivity(opSched);
     }
 

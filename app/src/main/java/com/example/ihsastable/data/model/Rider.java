@@ -7,7 +7,8 @@ public class Rider extends User {
     private int RiderId;
     private int Points;
     private int Position;
-    private double AveragePointsPerRide;
+    private int AvgPointsPerRide;
+
     // private int ManagedBy; //Uses CoachId
     // private int Class;  // Uses Class id
     private int PlaysFor; // Uses SchoolId
@@ -15,13 +16,13 @@ public class Rider extends User {
     public Rider() {
     }
 
-    public Rider(int Id, String Username, String FirstName, String LastName, int riderId, int points, int position, double averagePointsPerRide, int playsFor) {
+    public Rider(int Id, String Username, String FirstName, String LastName, int RiderId, int Points, int Position, int AvgPointsPerRide, int PlaysFor) {
         super(Id, Username, FirstName, LastName);
-        RiderId = riderId;
-        Points = points;
-        Position = position;
-        AveragePointsPerRide = averagePointsPerRide;
-        PlaysFor = playsFor;
+        this.RiderId = RiderId;
+        this.Points = Points;
+        this.Position = Position;
+        this.AvgPointsPerRide = AvgPointsPerRide;
+        this.PlaysFor = PlaysFor;
     }
 
     public int getRiderId() {
@@ -36,8 +37,8 @@ public class Rider extends User {
         return Position;
     }
 
-    public double getAveragePointsPerRide() {
-        return AveragePointsPerRide;
+    public int getAveragePointsPerRide() {
+        return AvgPointsPerRide;
     }
 
 

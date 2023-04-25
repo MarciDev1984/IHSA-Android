@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.ihsastable.data.repository.EventRepository;
+import com.example.ihsastable.data.repository.TestDataRepository;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private MaterialToolbar materialToolbar;
+    public RecyclerViewAdapter recyclerViewAdapter;
+    public EventRepository eventRepository;
 
 
     @Override
@@ -40,7 +44,6 @@ public class MainActivity extends AppCompatActivity
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()

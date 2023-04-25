@@ -23,7 +23,7 @@ public class Model_Fragment_Home
         }
     }
 
-    private ArrayList<Show> showList;
+    private final ArrayList<Show> showList;
 
     private Model_Fragment_Home()
     {
@@ -69,7 +69,7 @@ public class Model_Fragment_Home
         return showList;
     }
 
-    public static Model_Fragment_Home theModel = null;
+    public static Model_Fragment_Home theModel;
     public static Model_Fragment_Home getSingleton()
     {
         if(theModel == null)

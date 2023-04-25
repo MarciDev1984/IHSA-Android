@@ -16,7 +16,7 @@ import java.util.Date;
 
 //Currently not being used
 public class AnnouncementRepository {
-    private CollectionReference remoteCR;
+    private final CollectionReference remoteCR;
     private ArrayList<Announcement> Announcements;
     public AnnouncementRepository(AnnouncementRemoteDataSource remote){
         this.remoteCR = remote.getAnnouncementReference();

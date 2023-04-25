@@ -4,8 +4,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EventRemoteTestDataSource {
-    private FirebaseFirestore db;
-    private CollectionReference eventReference;
+    private final FirebaseFirestore db;
+    private final CollectionReference eventReference;
     public EventRemoteTestDataSource(){
         this.db = FirebaseFirestore.getInstance();
         this.eventReference = db.collection("Event");

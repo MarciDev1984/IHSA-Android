@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Model_Class_Order {
 
-    private ArrayList<Order> orderList;
+    private final ArrayList<Order> orderList;
 
     public static class Order{
-        private String thisOrder;
-        private String thisHorse;
+        private final String thisOrder;
+        private final String thisHorse;
 
         public Order(String someOrder, String someHorse){
             this.thisOrder = someOrder;
@@ -44,7 +44,7 @@ public class Model_Class_Order {
         return orderList;
     }
 
-    public static Model_Class_Order theModel = null;
+    public static Model_Class_Order theModel;
 
     public static Model_Class_Order getSingleton(){
         if(theModel == null){

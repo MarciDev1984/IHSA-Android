@@ -192,12 +192,9 @@ public class Fragment_Favorite extends Fragment
                 RecyclerView.ViewHolder holder = favorites_rv.getChildViewHolder(view);
 
                 //If the child was the right type
-                if (holder instanceof RecyclerViewAdapter.RecyclerViewHolder)
-                {
-                    //TODO - Handle touch
-                    //openSchedule(holder.getAdapterPosition());
-                    return true;
-                }
+                //TODO - Handle touch
+                //openSchedule(holder.getAdapterPosition());
+                return holder instanceof RecyclerViewAdapter.RecyclerViewHolder;
             }
             return false;
         }

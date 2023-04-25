@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Model_Show_Class {
 
-    private ArrayList<Schedule> scheduleList;
+    private final ArrayList<Schedule> scheduleList;
 
     public static class Schedule{
-        private String thisClass;
+        private final String thisClass;
 
         public Schedule(String someClass){
             this.thisClass = someClass;
@@ -37,7 +37,7 @@ public class Model_Show_Class {
         return scheduleList;
     }
 
-    public static Model_Show_Class theModel = null;
+    public static Model_Show_Class theModel;
 
     public static Model_Show_Class getSingleton(){
         if(theModel == null){

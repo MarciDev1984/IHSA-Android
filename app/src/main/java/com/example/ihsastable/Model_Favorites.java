@@ -28,7 +28,7 @@ public class Model_Favorites
         public String getFavorites() {return riderID;}
     }
 
-    private ArrayList<Favorites> favoritesList;
+    private final ArrayList<Favorites> favoritesList;
 
     private Model_Favorites() throws IOException {
         favoritesList = new ArrayList<Favorites>();
@@ -68,7 +68,7 @@ public class Model_Favorites
         return favoritesList;
     }
 
-    public static Model_Favorites theModel = null;
+    public static Model_Favorites theModel;
     public static Model_Favorites getSingleton() throws IOException {
         if(theModel == null)
         {

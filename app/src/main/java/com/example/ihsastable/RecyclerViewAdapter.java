@@ -81,6 +81,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
+        else if (key.equals("favorites_rv"))
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order_holder, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
         //TODO - Change this to return an error code and deal with it
         else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell_holder, parent, false);
@@ -124,7 +130,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 className.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getClassName());
                 patternName.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getPattern());
 
-        } else if(key.equals("rider_order_rv"))
+} else if(key.equals("rider_order_rv"))
         {
                 TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
                 TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
@@ -133,6 +139,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 riderName.setText(rider.getFirstName() + " " + rider.getLastName());
                 // Should use RiderId not userId
                 riderId.setText(rider.getId() + "");
+        }
+        else if(key.equals("favorites_rv"))
+        {
+            TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
+            TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
+            Rider rider =  RidersViewModel.getModel().riders.getValue().get(position);
+
+            riderName.setText(rider.getFirstName() + " " + rider.getLastName());
+            // Should use RiderId not userId
+            riderId.setText(rider.getId() + "");
         }
         else if(key.equals("idkyet")){
             //showTV.setText(modelRider.getOrderArray().get(position).getOrder());
@@ -171,7 +187,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             case "rider_order_rv":
                 return riders.size();
             case "favorites_rv":
-                return 0;
+                return riders.size();
             default:
                 //TODO - make this return something a little more useful. This will just crash
                 return 0;

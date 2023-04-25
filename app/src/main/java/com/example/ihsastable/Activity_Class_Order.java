@@ -135,7 +135,6 @@ public class Activity_Class_Order extends AppCompatActivity {
     };
 
     //This is almost directly Jacob Pickman's implementation
-    //-----
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener
     {
         public boolean onSingleTapConfirmed(MotionEvent e)
@@ -160,5 +159,4 @@ public class Activity_Class_Order extends AppCompatActivity {
             return false;
         }
     }
-    //----
 }

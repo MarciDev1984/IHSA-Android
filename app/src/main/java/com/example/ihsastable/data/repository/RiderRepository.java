@@ -2,6 +2,7 @@ package com.example.ihsastable.data.repository;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ihsastable.data.datasource.RiderRemoteTestDataSource;
@@ -9,6 +10,8 @@ import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -47,6 +50,7 @@ public class RiderRepository {
             }
         });
     }
+
     public ArrayList<Rider> getRiders(){
         return RidersViewModel.getModel().riders.getValue();
     }

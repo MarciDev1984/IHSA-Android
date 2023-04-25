@@ -68,8 +68,6 @@ public class Fragment_Home extends Fragment
             }
         });
 
-        view.findViewById(R.id.refreshBTN).setOnClickListener(view -> fragment_home_rv_adapter.notifyDataSetChanged());
-
         return view;
     }
 

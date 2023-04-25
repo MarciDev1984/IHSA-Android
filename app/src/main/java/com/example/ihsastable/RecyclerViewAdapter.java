@@ -65,8 +65,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         else
         {
+<<<<<<< Updated upstream
             //TODO - Change this to return an error code and deal with it
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell, parent, false);
+=======
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_class_holder, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        else if (key.equals("rider_order_rv"))
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order_holder, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        else if (key.equals("favorites_rv"))
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order_holder, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        //TODO - Change this to return an error code and deal with it
+        else{
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_cell_holder, parent, false);
+>>>>>>> Stashed changes
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
@@ -100,10 +122,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d("test", eventRepository.getEvents().size() + "");
             }
         }
+<<<<<<< Updated upstream
+=======
+        else if (key.equals("show_details_rv"))
+        {
+                TextView className = holder.itemView.findViewById(R.id.classNameTV);
+                TextView patternName = holder.itemView.findViewById(R.id.patternNameTV);
+
+                className.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getClassName());
+                patternName.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getPattern());
+
+        }
+>>>>>>> Stashed changes
         else if(key.equals("rider_order_rv"))
         {
             showTV.setText(modelClass.getSchedArray().get(position).getClassModel());
             dateTV.setText("");
+        }
+        else if(key.equals("favorites_rv"))
+        {
+            TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
+            TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
+            Rider rider =  RidersViewModel.getModel().riders.getValue().get(position);
+
+            riderName.setText(rider.getFirstName() + " " + rider.getLastName());
+            // Should use RiderId not userId
+            riderId.setText(rider.getId() + "");
         }
         else if(key.equals("idkyet")){
             showTV.setText(modelRider.getOrderArray().get(position).getOrder());
@@ -125,7 +169,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             case "idkyet":
                 return modelRider.getOrderArray().size();
             case "favorites_rv":
-                return 0;
+                return riders.size();
             default:
                 //TODO - make this return something a little more useful. This will just crash
                 return 0;

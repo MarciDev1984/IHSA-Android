@@ -17,13 +17,20 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ihsastable.data.model.Rider;
+import com.example.ihsastable.data.repository.RiderRepository;
+import com.example.ihsastable.viewmodel.EventsViewModel;
+import com.example.ihsastable.viewmodel.RidersViewModel;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,15 +41,17 @@ import java.util.Map;
  * Author: Kooper Young, Fisher Reese
  */
 
-public class Fragment_Favorite extends Fragment {
-    public Fragment_Favorite() {
-    }
+public class Fragment_Favorite extends Fragment
+{
+    public Fragment_Favorite() {}
 
     private RecyclerView favorites_rv;
     private Button followBTN;
     private EditText followTV;
     private View view;
     private File file;
+    private RiderRepository riderRepository;
+    private RecyclerViewAdapter favorites_rv_adapter;
 
     //Array to store user Favorite riders
     Map<String, String> userFavorites = new HashMap<>();
@@ -61,23 +70,12 @@ public class Fragment_Favorite extends Fragment {
         // Create a file in the root directory
         file = new File(rootDir, "cache.txt");
 
-        //Create a listener for follow button
-        followBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String riderInput = followTV.getText().toString();
-                try {
-                    favoriteValidation(riderInput);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
 
-        RecyclerViewAdapter favorites_rv_adapter = new RecyclerViewAdapter("favorites_rv");
+        favorites_rv_adapter = new RecyclerViewAdapter("favorites_rv");
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
         GestureDetectorCompat gestureDetector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
 
+        riderRepository = new RiderRepository();
         favorites_rv.setAdapter(favorites_rv_adapter);
         favorites_rv.setLayoutManager(LLM);
         favorites_rv.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
@@ -88,16 +86,34 @@ public class Fragment_Favorite extends Fragment {
             }
         });
 
-        followBTN.setEnabled(false);
         //Author: Jacob Pickman
+        //Create a listener for follow button
+        followBTN.setEnabled(false);
+
+        followBTN.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String riderInput = followTV.getText().toString();
+                try
+                {
+                    favoriteValidation(riderInput);
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         //Check if EditText meets pin requirements, if it is don't let the user press the button
         //Otherwise, RecyclerView will turn into a gift from the .
-        followTV.addTextChangedListener(new TextWatcher() {
-
+        followTV.addTextChangedListener(new TextWatcher()
+        {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
                 // TODO Auto-generated method stub
                 //Working Theory: Pin consists of three numbers
                 //EditText only allows up to three characters so we don't care about max size
@@ -105,16 +121,34 @@ public class Fragment_Favorite extends Fragment {
             }
 
             @Override //Don't Touch
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override //Don't Touch
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         return view;
+    }
+
+    Observer<ArrayList<Rider>> riderListUpdateObserver = new Observer<ArrayList<Rider>>() {
+        @Override
+        public void onChanged(ArrayList<Rider> riders) {favorites_rv_adapter.updateEvents();}
+    };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        ids.add(111);
+        ids.add(222);
+        ids.add(333);
+        ids.add(444);
+        riderRepository.fetchRidersFromRiderIds(ids);
+        RidersViewModel.getModel().riders.observe(getViewLifecycleOwner(), riderListUpdateObserver);
+    }
+    public void onStop(){
+        super.onStop();
+        riderRepository.unsubFirebase();
     }
 
     public void favoriteValidation(String id) throws IOException {

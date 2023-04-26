@@ -19,4 +19,8 @@ public class Announcement {
     public Timestamp getTimePublished() {
         return TimePublished;
     }
+
+    public String getTimePublishedStr(){
+        return String.valueOf(TimePublished);
+    }
 }

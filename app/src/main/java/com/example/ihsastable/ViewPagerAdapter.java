@@ -27,7 +27,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter
         switch (position)
         {
             case 1:
-                return new Fragment_Notification();
+                return new Fragment_Announcement();
             case 2:
                 return new Fragment_Favorite();
             default:

@@ -9,11 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ihsastable.data.model.Announcement;
 import com.example.ihsastable.data.model.Event;
 //import com.example.ihsastable.data.model.Events;
 import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
+import com.example.ihsastable.data.repository.AnnouncementRepository;
 import com.example.ihsastable.data.repository.EventRepository;
+import com.example.ihsastable.viewmodel.AnnouncementModel;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.EventsViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
@@ -40,7 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
    public ArrayList<Event> events = new ArrayList<>();
    public ArrayList<EventClass> eventClasses = new ArrayList<>();
    public ArrayList<Rider> riders = new ArrayList<>();
-   
+
+   public ArrayList<Announcement> announcements = new ArrayList<>();
+   private final AnnouncementRepository announcementRepository = new AnnouncementRepository();
    private final EventRepository eventRepository = new EventRepository();
    
    //This is called on a per-instance basis whenever you create a new RV and bind it to an adapter
@@ -51,6 +56,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         switch(key) {
             case "fragment_home_rv":
                 events = new ArrayList<>();
+                break;
+            case "announcement_rv":
+                announcements = new ArrayList<>();
                 break;
         }
 
@@ -84,6 +92,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         else if (key.equals("favorites_rv"))
         {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rider_order_holder, parent, false);
+            RVH = new RecyclerViewHolder(view);
+            return RVH;
+        }
+        else if (key.equals("announcement_rv"))
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcement_holder, parent, false);
             RVH = new RecyclerViewHolder(view);
             return RVH;
         }
@@ -129,8 +143,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 className.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getClassName());
                 patternName.setText(EventClassesViewModel.getModel().eventClasses.getValue().get(position).getPattern());
-
-} else if(key.equals("rider_order_rv"))
+        } else if(key.equals("rider_order_rv"))
         {
                 TextView riderName = holder.itemView.findViewById(R.id.riderNameTV);
                 TextView riderId = holder.itemView.findViewById(R.id.riderIdTV);
@@ -149,6 +162,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             riderName.setText(rider.getFirstName() + " " + rider.getLastName());
             // Should use RiderId not userId
             riderId.setText(rider.getId() + "");
+        }
+        else if(key.equals("announcement_rv"))
+        {
+            try {
+                TextView message = holder.itemView.findViewById(R.id.messageTV);
+                TextView pubTime = holder.itemView.findViewById(R.id.pubTimeTV);
+
+                message.setText(announcements.get(position).getMessage());
+                pubTime.setText(announcements.get(position).getTimePublishedStr());
+            } catch (Exception e){
+                Log.d("test", announcementRepository.getAnnouncements().size() + "");
+            }
         }
         else if(key.equals("idkyet")){
             //showTV.setText(modelRider.getOrderArray().get(position).getOrder());
@@ -171,6 +196,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("test", "numRiders " + RidersViewModel.getModel().riders.getValue().size());
         notifyDataSetChanged();
     }
+    public void updateAnnouncement(){
+        announcements.clear();
+        announcements = AnnouncementModel.getModel().announcementMutableLiveData.getValue();
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount()
@@ -185,9 +215,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 //return modelClass.getSchedArray().size();
                 return eventClasses.size();
             case "rider_order_rv":
-                return riders.size();
             case "favorites_rv":
                 return riders.size();
+            case "announcement_rv":
+                return announcements.size();
             default:
                 //TODO - make this return something a little more useful. This will just crash
                 return 0;

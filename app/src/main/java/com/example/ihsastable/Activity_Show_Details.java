@@ -69,6 +69,7 @@ public class Activity_Show_Details extends AppCompatActivity
             show_details_rv_adapter.updateEventClasses();
         }
     };
+
     @Override
     protected void onStart() {
         super.onStart();

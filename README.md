@@ -1,2 +1,3 @@
 # IHSA-Android
-App for horse girls
+An Android application for Intercollegiate Horse Show Association shows.
+

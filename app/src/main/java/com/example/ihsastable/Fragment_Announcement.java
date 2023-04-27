@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.ihsastable.data.model.Announcement;
 import com.example.ihsastable.data.repository.AnnouncementRepository;
-import com.example.ihsastable.viewmodel.AnnouncementModel;
+import com.example.ihsastable.viewmodel.AnnouncementViewModel;
 
 import java.util.ArrayList;
 
@@ -79,7 +79,7 @@ public class Fragment_Announcement extends Fragment
     public void onStart(){
         super.onStart();
         announcementRepository.FetchAnnouncement();
-        AnnouncementModel.getModel().announcementMutableLiveData.observe(getViewLifecycleOwner(), announcementListUpdateObserver);
+        AnnouncementViewModel.getModel().announcementMutableLiveData.observe(getViewLifecycleOwner(), announcementListUpdateObserver);
 
 
     }

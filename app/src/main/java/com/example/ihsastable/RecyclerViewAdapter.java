@@ -16,7 +16,7 @@ import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
 import com.example.ihsastable.data.repository.AnnouncementRepository;
 import com.example.ihsastable.data.repository.EventRepository;
-import com.example.ihsastable.viewmodel.AnnouncementModel;
+import com.example.ihsastable.viewmodel.AnnouncementViewModel;
 import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.EventsViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
@@ -198,7 +198,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
     public void updateAnnouncement(){
         announcements.clear();
-        announcements = AnnouncementModel.getModel().announcementMutableLiveData.getValue();
+        announcements = AnnouncementViewModel.getModel().announcementMutableLiveData.getValue();
         notifyDataSetChanged();
     }
 

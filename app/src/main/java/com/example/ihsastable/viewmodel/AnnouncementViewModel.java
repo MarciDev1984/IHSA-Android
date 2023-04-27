@@ -6,18 +6,18 @@ import com.example.ihsastable.data.model.Announcement;
 
 import java.util.ArrayList;
 
-public class AnnouncementModel {
+public class AnnouncementViewModel {
     public MutableLiveData<ArrayList<Announcement>> announcementMutableLiveData = new MutableLiveData<>();
-    private static AnnouncementModel theModel;
+    private static AnnouncementViewModel theModel;
 
-    public static AnnouncementModel getModel(){
+    public static AnnouncementViewModel getModel(){
         if (theModel == null){
-            theModel = new AnnouncementModel();
+            theModel = new AnnouncementViewModel();
         }
         return theModel;
     }
 
-    private AnnouncementModel(){
+    private AnnouncementViewModel(){
         this.announcementMutableLiveData.setValue(new ArrayList<>());
     }
 

@@ -8,11 +8,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.material.appbar.AppBarLayout;
+import com.example.ihsastable.data.repository.EventRepository;
+import com.example.ihsastable.data.repository.TestDataRepository;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
+
+/*
+* This is MainActivity
+* This is where we keep the functionality for the tabbed layout
+* and the stuff for the custom appbar.
+* It is preferred that no more code than necessary be placed here.
+*
+* Author: Kooper Young
+*/
 
 public class MainActivity extends AppCompatActivity
 {
@@ -20,6 +29,9 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private MaterialToolbar materialToolbar;
+    public RecyclerViewAdapter recyclerViewAdapter;
+    public EventRepository eventRepository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +44,6 @@ public class MainActivity extends AppCompatActivity
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
@@ -76,7 +87,12 @@ public class MainActivity extends AppCompatActivity
     }
     //Leads to info page
     public void openAbout(){
-        Intent opAbout = new Intent(this, AboutPage.class);
+        Intent opAbout = new Intent(this, Activity_About.class);
         startActivity(opAbout);
+    }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        return;
     }
 }

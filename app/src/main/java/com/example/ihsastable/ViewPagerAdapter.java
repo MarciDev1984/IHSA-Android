@@ -1,16 +1,19 @@
 package com.example.ihsastable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import java.util.ArrayList;
+/*
+ * This is ViewPageAdapter
+ * This is the class that gives the tabbed functionality to the ViewPager in MainActivity
+ *
+ * Author: Kooper Young
+ */
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class ViewPagerAdapter extends FragmentStateAdapter
+{
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity)
     {
@@ -23,14 +26,12 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     {
         switch (position)
         {
-            case 0:
-                return new fragment1();
             case 1:
-                return new fragment2();
+                return new Fragment_Announcement();
             case 2:
-                return new fragment3();
+                return new Fragment_Favorite();
             default:
-                return new fragment1();
+                return new Fragment_Home();
         }
     }
 

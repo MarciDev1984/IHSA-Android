@@ -21,8 +21,11 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ihsastable.data.model.EventClass;
 import com.example.ihsastable.data.model.Rider;
+import com.example.ihsastable.data.repository.FavoritesRepository;
 import com.example.ihsastable.data.repository.RiderRepository;
+import com.example.ihsastable.viewmodel.EventClassesViewModel;
 import com.example.ihsastable.viewmodel.EventsViewModel;
 import com.example.ihsastable.viewmodel.RidersViewModel;
 
@@ -50,6 +53,7 @@ public class Fragment_Favorite extends Fragment
     private EditText followTV;
     private View view;
     private File file;
+    private EventClass eventClass;
     private RiderRepository riderRepository;
     private RecyclerViewAdapter favorites_rv_adapter;
 
@@ -96,9 +100,12 @@ public class Fragment_Favorite extends Fragment
             public void onClick(View v)
             {
                 String riderInput = followTV.getText().toString();
+                FavoritesRepository favoritesRepository = new FavoritesRepository(view.getContext());
                 try
                 {
                     favoriteValidation(riderInput);
+                    favoritesRepository.addToFavorites(Integer.parseInt(riderInput));
+                    //favorites_rv_adapter.updateRiders();
                 }
                 catch (IOException e)
                 {
@@ -132,19 +139,19 @@ public class Fragment_Favorite extends Fragment
 
     Observer<ArrayList<Rider>> riderListUpdateObserver = new Observer<ArrayList<Rider>>() {
         @Override
-        public void onChanged(ArrayList<Rider> riders) {favorites_rv_adapter.updateEvents();}
+        public void onChanged(ArrayList<Rider> riders) {favorites_rv_adapter.updateRiders();}
     };
 
     @Override
     public void onStart() {
         super.onStart();
-        ArrayList<Integer> ids = new ArrayList<Integer>();
-        ids.add(111);
-        ids.add(222);
-        ids.add(333);
-        ids.add(444);
-        riderRepository.fetchRidersFromRiderIds(ids);
-        RidersViewModel.getModel().riders.observe(getViewLifecycleOwner(), riderListUpdateObserver);
+        ArrayList<Integer> id;
+        FavoritesRepository favoritesRepository = new FavoritesRepository(getContext());
+        id = favoritesRepository.getFavoriteIds();
+        if(id.size() > 0){
+            riderRepository.fetchRidersFromRiderIds(id);
+            RidersViewModel.getModel().riders.observe(this, riderListUpdateObserver);
+        }
     }
     public void onStop(){
         super.onStop();
